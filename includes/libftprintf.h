@@ -1,5 +1,5 @@
 void				flag_string(va_list valist);
 void				flag_int(va_list valist);
-int					flag_launcher(char flag);
-static char			*parse(const char *format);
+int					conversion_launcher(char flag);
+static char			*parse(const char *format, va_list valist);
 void				ft_printf(const char *format, ...);
