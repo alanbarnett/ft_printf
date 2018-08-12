@@ -8,11 +8,12 @@ int	main(void)
 
 	//str = ft_strcpy(ft_strnew(21), "This is a test string");
 	i = 126;
+	ft_printf("int: %d\n", i);
 	//ft_printf("String: \"%s\"\nInt: %d\n", str, i);
 	/*
 	ft_printf("%010d", i);
 	ft_putchar('\n');
-	*/
+
 	ft_printf("2d:    |%2d\n", i);
 	ft_printf("-2d:   |%-2d\n", i);
 	ft_printf("02d:   |%02d\n", i);
@@ -40,6 +41,7 @@ int	main(void)
 	printf("+010d: |%+010d\n", i);
 	printf("+010d: |%+010d\n", -i);
 	printf("+-10d: |%+-10d\n", i);
+	*/
 	/*
 	*/
 	return (0);

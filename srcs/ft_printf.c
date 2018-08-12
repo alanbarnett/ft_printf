@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
+/*   Updated: 2018/08/12 15:55:05 by abarnett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdarg.h>
 #include <stdio.h>
 #include "libft.h"
@@ -40,13 +52,29 @@ char				*flag_int(va_list valist)
 **		increase the jump table index count,
 **		add your function name to the jump table.
 */
+
+/*
+**		di				ouUxX					c		s			p
+**
+**		int				unsigned int			int		char*		void*
+**	hh	char			unsigned char
+**	h	short int		unsigned short int
+**	l	long int		unsigned long int		wint_t	wint_t*
+**	ll	long long int	unsigned long long int
+**	j	intmax_t		uintmax_t
+**	z	size_t			size_t
+*/
 int					conversion_chars(char **format)
 {
 	const char	*flags;
+	char		*index;
 
 	flags = "sSpdDioOuUxXcC";
-	if (ft_strchr(flags, **format))
-		return (ft_strchr(flags, **format) - flags);
+	if ((index = ft_strchr(flags, **format)))
+	{
+		(*format)++;
+		return (index - flags);
+	}
 	return (-1);
 }
 
@@ -70,6 +98,7 @@ int					field_width(char **format)
 **		add the flag character to the end of the flags string
 **			(make sure the type of ret is big enough to hold that many bits)
 **		make some shit to deal with that bit in the parse function
+**	The second to last line turns off the 0 flag if the - flag is also present.
 */
 int					flag_chars(char **format)
 {
@@ -87,28 +116,33 @@ int					flag_chars(char **format)
 	return (ret);
 }
 
-static char			*parse(const char **format, va_list valist)
+/*
+**	Maybe make a jump table for flags
+**	send it the width so it can make the output string
+**	send it the conversion so it can format it
+**	maybe make the flags a final stage for formatting?
+*/
+
+/*
+**	Parse takes a pointer to the format string at the format specifier so that 
+**	when it moves the pointer to the end of the format specifier, that change
+**	can be reflected in the calling function.
+*/
+static char			*parse(char **format, va_list valist)
 {
-	char		*fmt_str;
 	char		*conv;
 	int			flags;
 	int			width;
 	static char	*(*p[14])();
-	
+
 	p[0] = flag_string;
 	p[3] = flag_int;
 	p[5] = flag_int;
 
-	fmt_str = (char *)format;
+	flags = flag_chars(format);
+	width = field_width(format);
+	conv = p[conversion_chars(format)](valist);
 	/*
-	**	Maybe make a jump table for flags
-	**	send it the width so it can make the output string
-	**	send it the conversion so it can format it
-	**	maybe make the flags a final stage for formatting?
-	*/
-	flags = flag_chars(&fmt_str);
-	width = field_width(&fmt_str);
-	conv = p[conversion_chars(&fmt_str)](valist);
 	if (width > (int)ft_strlen(conv))
 	{
 		fmt_str = ft_memset(ft_strnew(width),		\
@@ -141,6 +175,7 @@ static char			*parse(const char **format, va_list valist)
 		ft_strdel(&conv);
 		conv = fmt_str;
 	}
+	*/
 	return (conv);
 }
 
@@ -152,9 +187,10 @@ void				ft_printf(const char *format, ...)
 	va_start(valist, format);
 	while ((p_str = ft_strchr(format, '%')))
 	{
-		write(1, format, p_str - format);
-		p_str = parse(&format, valist);
+		format += write(1, format, p_str - format) + 1;
+		p_str = parse((char **)&format, valist);
 		ft_putstr(p_str);
-		//ft_strdel(&p_str);
+		ft_strdel(&p_str);
 	}
+	write(1, format, ft_strlen(format));
 }
