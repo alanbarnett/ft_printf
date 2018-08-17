@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/08/12 15:55:05 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/08/16 17:46:47 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ char				*flag_int(va_list valist)
 	return (ft_itoa(va_arg(valist, int)));
 }
 
+char				*flag_percent()
+{
+	return (ft_strdup("%"));
+}
+
 /*
 **	The position of the characters in the flags string represent
 **	the index of their function in the function pointer array.
@@ -69,7 +74,7 @@ int					conversion_chars(char **format)
 	const char	*flags;
 	char		*index;
 
-	flags = "sSpdDioOuUxXcC";
+	flags = "sSpdDioOuUxXcC%";
 	if ((index = ft_strchr(flags, **format)))
 	{
 		(*format)++;
@@ -98,7 +103,8 @@ int					field_width(char **format)
 **		add the flag character to the end of the flags string
 **			(make sure the type of ret is big enough to hold that many bits)
 **		make some shit to deal with that bit in the parse function
-**	The second to last line turns off the 0 flag if the - flag is also present.
+**	The third to last line disables the 0 flag if the - flag is also present.
+**	The second to last line disables the ' ' flag if the + flag is also present.
 */
 int					flag_chars(char **format)
 {
@@ -113,16 +119,25 @@ int					flag_chars(char **format)
 		(*format)++;
 	}
 	ret = ((ret & 0x6) == 0x6 ? (ret ^ 0x2) : ret);
+	ret = ((ret & 0x18) == 0x18 ? (ret ^ 0x10) : ret);
 	return (ret);
 }
-
 /*
-**	Maybe make a jump table for flags
-**	send it the width so it can make the output string
-**	send it the conversion so it can format it
-**	maybe make the flags a final stage for formatting?
-*/
+char				*format(char *str, int flags, int width)
+{
+	char	*formatted;
 
+
+	if (flags & 0x4)
+	{
+		if (width > (int)ft_strlen(str))
+		{
+			formatted = ft_memalloc(width);
+			
+		}
+	}
+}
+*/
 /*
 **	Parse takes a pointer to the format string at the format specifier so that 
 **	when it moves the pointer to the end of the format specifier, that change
@@ -133,49 +148,18 @@ static char			*parse(char **format, va_list valist)
 	char		*conv;
 	int			flags;
 	int			width;
-	static char	*(*p[14])();
+	static char	*(*p[15])();
 
 	p[0] = flag_string;
 	p[3] = flag_int;
 	p[5] = flag_int;
+	p[14] = flag_percent;
 
 	flags = flag_chars(format);
 	width = field_width(format);
+	//still need to get the fucking precision
 	conv = p[conversion_chars(format)](valist);
-	/*
-	if (width > (int)ft_strlen(conv))
-	{
-		fmt_str = ft_memset(ft_strnew(width),		\
-					((flags & 0x2) ? '0' : ' '),	\
-					width);
-		if (flags & 0x4)
-		{
-			if (flags & 0x8 && ft_isdigit(*conv))
-			{
-				*fmt_str = '+';
-				ft_memcpy(fmt_str + 1, conv, ft_strlen(conv));
-			}
-			else
-				ft_memcpy(fmt_str, conv, ft_strlen(conv));
-		}
-		else
-		{
-			ft_memcpy(fmt_str + (width - ft_strlen(conv)), conv, ft_strlen(conv));
-			if (flags & 0x8 && ft_isdigit(*conv))
-				*(fmt_str + ((flags & 0x2) ? 0 : (width - ft_strlen(conv) - 1))) = '+';
-		}
-		ft_strdel(&conv);
-		conv = fmt_str;
-	}
-	else if (flags & 0x8 && ft_isdigit(*conv))
-	{
-		fmt_str = ft_strnew(ft_strlen(conv) + 1);
-		*fmt_str = '+';
-		ft_memcpy(fmt_str + 1, conv, ft_strlen(conv));
-		ft_strdel(&conv);
-		conv = fmt_str;
-	}
-	*/
+	//conv = format(conv, flags, width);
 	return (conv);
 }
 
