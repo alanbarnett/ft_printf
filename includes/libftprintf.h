@@ -6,16 +6,34 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2018/08/16 17:46:17 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/08/21 22:40:23 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
+#include "libft.h"
+
+typedef struct		s_format
+{
+	char			*conv;
+	int				flags;
+	int				width;
+	int				precision;
+}					t_format;
+
+// function pointer functions
 char				*flag_string(va_list valist);
 char				*flag_int(va_list valist);
-int					conversion_launcher(char flag);
+char				*flag_percent();
+
+// parse functions
+int					conversion_chars(char **format, t_format fmt_struct);
+int					width_precision(char **format, t_format fmt_struct);
+int					flag_chars(char **format, t_format fmt_struct);
+
+// printf functions
 //char				*format(char *str, int flags, int width);
 static char			*parse(char **format, va_list valist);
 void				ft_printf(const char *format, ...);

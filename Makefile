@@ -6,40 +6,35 @@
 #    By: abarnett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/25 22:40:12 by abarnett          #+#    #+#              #
-#    Updated: 2018/08/12 15:55:29 by abarnett         ###   ########.fr        #
+#    Updated: 2018/08/19 11:56:59 by abarnett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := libftprintf
-L_NAME := libft
+NAME := libftprintf.a
 
 SRC_DIR := srcs
-INCLUDE_DIRS := ./includes $(L_NAME)/includes
+INCLUDE_DIRS := ./includes ./libft/includes
 C_OBJS := $(patsubst %.c,%.o,$(wildcard ./$(SRC_DIR)/*.c))
-L_OBJS := $(patsubst %.c,%.o,$(wildcard ./$(L_NAME)/$(SRC_DIR)/*.c))
+L_OBJS := $(patsubst %.c,%.o,$(wildcard ./libft/$(SRC_DIR)/*.c))
 
 CFLAGS += -Wall -Wextra -Werror $(foreach includedir,$(INCLUDE_DIRS),-I$(includedir))
-LDFLAGS += -L./$(L_NAME) -lft
+LDFLAGS += -L./ -lftprintf
 
 .PHONY: all clean fclean re
 
-all: $(NAME).a
+all: $(NAME)
 
-test: $(NAME).a $(L_NAME)/$(L_NAME).a main.o
+test: $(NAME) main.o
 	$(CC) $(CFLAGS) -o test $(C_OBJS) main.o $(LDFLAGS)
 
-$(NAME).a: $(L_NAME)/$(L_NAME).a $(C_OBJS)
-	ar rc $(NAME).a $(C_OBJS)
-	ranlib $(NAME).a
-
-$(L_NAME)/$(L_NAME).a: $(L_OBJS)
-	ar rc $(L_NAME)/$(L_NAME).a $(L_OBJS)
-	ranlib $(L_NAME)/$(L_NAME).a
+$(NAME): $(C_OBJS) $(L_OBJS)
+	ar rc $(NAME) $(C_OBJS) $(L_OBJS)
+	ranlib $(NAME)
 
 clean:
 	@- $(RM) $(C_OBJS) main.o $(L_OBJS) test
 
 fclean: clean
-	@- $(RM) $(NAME).a $(L_NAME)/$(L_NAME).a
+	@- $(RM) $(NAME)
 
 re: fclean all
