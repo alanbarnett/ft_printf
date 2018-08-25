@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/08/24 18:05:17 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/08/24 21:12:33 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,10 @@ char				*flag_percent()
 {
 	return (ft_strdup("%"));
 }
-/*
-char				*format(char *str, int flags, int width)
+
+void				*format(t_format fmt_struct)
 {
 	char	*formatted;
-
 
 	if (flags & 0x4)
 	{
@@ -72,7 +71,7 @@ char				*format(char *str, int flags, int width)
 		}
 	}
 }
-*/
+
 /*
 **	Parse takes a pointer to the format string at the format specifier so that 
 **	when it moves the pointer to the end of the format specifier, that change
@@ -91,11 +90,8 @@ static char			*parse(char **format, va_list valist)
 
 	flag_chars(format, fmt_struct);
 	width_precision(format, fmt_struct);
-	printf("flags: %s\n", ft_itoa_base(fmt_struct->flags, 2));
-	printf("width: %d\n", fmt_struct->width);
-	printf("precision: %d\n\n", fmt_struct->precision);
 	fmt_struct->conv = p[conversion_chars(format)](valist);
-	//conv = format(conv, flags, width);
+	format(fmt_struct);
 	return (fmt_struct->conv);
 }
 

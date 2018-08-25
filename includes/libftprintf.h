@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2018/08/24 18:04:41 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/08/24 21:12:33 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void				width_precision(char **format, t_format *fmt_struct);
 void				flag_chars(char **format, t_format *fmt_struct);
 
 // printf functions
-//char				*format(char *str, int flags, int width);
+//void					format(t_format fmt_struct);
 //static char			*parse(char **format, va_list valist);
 void				ft_printf(const char *format, ...);
 

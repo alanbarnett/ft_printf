@@ -26,7 +26,7 @@ int	main(void)
 	//str = ft_strcpy(ft_strnew(21), "This is a test string");
 	i = 126;
 	ft_printf("int: %+015.7d, int2: %-0015.8d, testing some %5% shits % %\n", i, 17);
-	ft_printf("%# 05.3d %d %d %d gg!\n", 1, -2, 33, 42);
+	ft_printf("%# 05.3d %.d %d %d gg!\n", 1, -2, 33, 42);
 	/*
 	params(4, "string one", "the next string will be null", (void *)0, \
 	"that last one was null");
