@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 21:38:40 by abarnett          #+#    #+#             */
-/*   Updated: 2018/08/21 22:40:26 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:04:41 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,20 @@ int					conversion_chars(char **format)
 	return (-1);
 }
 
-int					width_precision(char **format)
+void				width_precision(char **format, t_format *fmt_struct)
 {
-	int		width;
-
-	width = -1;
 	if (ft_isdigit(**format))
 	{
-		width = ft_atoi(*format);
-		*format += ft_numlen(width);
+		fmt_struct->width = ft_atoi(*format);
+		*format += ft_numlen(fmt_struct->width);
 	}
-	return (width);
+	if (**format == '.')
+	{
+		++(*format);
+		fmt_struct->precision = ft_atoi(*format);
+		while (ft_isdigit(**format))
+			++(*format);
+	}
 }
 
 /*
@@ -69,7 +72,7 @@ int					width_precision(char **format)
 **	The third to last line disables the 0 flag if the - flag is also present.
 **	The second to last line disables the ' ' flag if the + flag is also present.
 */
-int					flag_chars(char **format)
+void				flag_chars(char **format, t_format *fmt_struct)
 {
 	const char	*flags;
 	int			ret;
@@ -83,5 +86,5 @@ int					flag_chars(char **format)
 	}
 	ret = ((ret & 0x6) == 0x6 ? (ret ^ 0x2) : ret);
 	ret = ((ret & 0x18) == 0x18 ? (ret ^ 0x10) : ret);
-	return (ret);
+	fmt_struct->flags = ret;
 }

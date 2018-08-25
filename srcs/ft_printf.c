@@ -6,11 +6,10 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/08/21 22:40:32 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:05:17 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include <stdio.h>
 #include "libftprintf.h"
 
@@ -31,6 +30,18 @@
 **		%k:		date in ISO format
 **	colors, fd, etc..
 */
+
+t_format			*new_fmt_struct()
+{
+	t_format	*fmt;
+
+	fmt = (t_format *)ft_memalloc(sizeof(t_format));
+	fmt->conv = 0;
+	fmt->flags = 0;
+	fmt->width = 0;
+	fmt->precision = 0;
+	return (fmt);
+}
 
 char				*flag_string(va_list valist)
 {
@@ -72,16 +83,20 @@ static char			*parse(char **format, va_list valist)
 	t_format	*fmt_struct;
 	static char	*(*p[15])();
 
+	fmt_struct = new_fmt_struct();
 	p[0] = flag_string;
 	p[3] = flag_int;
 	p[5] = flag_int;
 	p[14] = flag_percent;
 
 	flag_chars(format, fmt_struct);
-	field_width(format);
-	conv = p[conversion_chars(format)](valist);
+	width_precision(format, fmt_struct);
+	printf("flags: %s\n", ft_itoa_base(fmt_struct->flags, 2));
+	printf("width: %d\n", fmt_struct->width);
+	printf("precision: %d\n\n", fmt_struct->precision);
+	fmt_struct->conv = p[conversion_chars(format)](valist);
 	//conv = format(conv, flags, width);
-	return (conv);
+	return (fmt_struct->conv);
 }
 
 void				ft_printf(const char *format, ...)

@@ -1,5 +1,22 @@
 #include <stdio.h>
+#include <stdarg.h>
 #include "libft.h"
+
+void params(int strings, ...)
+{
+	va_list	valist;
+	int		i;
+	char	*str;
+
+	va_start(valist, strings);
+	i = 0;
+	while (i < strings)
+	{
+		(!(str = va_arg(valist, char *))) ? printf("(null)\n") : printf("%s\n", str);
+		++i;
+	}
+	va_end(valist);
+}
 
 int	main(void)
 {
@@ -8,8 +25,17 @@ int	main(void)
 
 	//str = ft_strcpy(ft_strnew(21), "This is a test string");
 	i = 126;
-	ft_printf("int: %d, int2: %d, testing some %5% shits % %\n", i, 17);
-	ft_printf("%d %d %d %d gg!\n", 1, -2, 33, 42);
+	ft_printf("int: %+015.7d, int2: %-0015.8d, testing some %5% shits % %\n", i, 17);
+	ft_printf("%# 05.3d %d %d %d gg!\n", 1, -2, 33, 42);
+	/*
+	params(4, "string one", "the next string will be null", (void *)0, \
+	"that last one was null");
+	printf("%10.d\n", i);
+	printf("%p\n", (void *)0);
+	printf("%zD\n", (long)i);
+	printf("%zO\n", (long)i);
+	printf("%zU\n", (long)i);
+	printf("%zo\n", 0xffffffffffffffff);
 	printf("string: %10s\n", "hello");
 	printf("%X\n", 12648430);
 	printf("@moulitest: %s\n", NULL);
@@ -43,6 +69,7 @@ int	main(void)
 	printf("%+06d\n", -i);
 	printf("%lu\n", 299999999UL);
 	printf("% 010d\n", 135);
+	*/
 	
 	//ft_printf("String: \"%s\"\nInt: %d\n", str, i);
 	/*
