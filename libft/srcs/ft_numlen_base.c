@@ -6,13 +6,13 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 16:23:46 by abarnett          #+#    #+#             */
-/*   Updated: 2018/06/06 17:24:01 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/09/03 21:46:54 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_numlen_base(long num, int base)
+size_t	ft_numlen_base(long num, int base)
 {
 	int length;
 

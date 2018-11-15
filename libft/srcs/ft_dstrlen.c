@@ -6,13 +6,13 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 12:19:17 by abarnett          #+#    #+#             */
-/*   Updated: 2018/05/31 15:20:57 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/09/03 21:45:30 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_dstrlen(const char *str, char del)
+size_t	ft_dstrlen(const char *str, char del)
 {
 	int	i;
 

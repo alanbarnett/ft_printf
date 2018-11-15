@@ -6,17 +6,18 @@
 #    By: abarnett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 14:22:04 by abarnett          #+#    #+#              #
-#    Updated: 2018/06/06 17:27:04 by abarnett         ###   ########.fr        #
+#    Updated: 2018/11/14 18:03:05 by abarnett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := libft.a
-C_OBJS := $(patsubst %.c,%.o,$(wildcard ./srcs/*.c))
-INCLUDE_DIR = includes
+NAME :=			libft.a
 
-CFLAGS += -Wall -Wextra -Werror -I./$(INCLUDE_DIR)
+C_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./srcs/*.c))
+INCLUDE_DIR :=	./includes
 
-.PHONY: all clean fclean re
+CFLAGS +=		-Wall -Wextra -Werror -I$(INCLUDE_DIR)
+
+.PHONY:			all clean fclean re
 
 all: $(NAME)
 

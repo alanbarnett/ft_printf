@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/06/07 20:40:58 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/11/14 18:35:30 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int					ft_tolower(int c);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 char				*ft_strnew(size_t size);
+char				*ft_strinit(size_t size, int c);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
 void				ft_striter(char*s, void (*f)(char *));
@@ -81,10 +82,10 @@ char				*ft_strsub(const char *s, unsigned int start, size_t len);
 char				*ft_strjoin(const char *s1, const char *s2);
 char				*ft_strtrim(const char *s);
 int					ft_count_words(const char *str, char del);
-int					ft_dstrlen(const char *str, char del);
+size_t				ft_dstrlen(const char *str, char del);
 char				**ft_strsplit(const char *s, char c);
-int					ft_numlen(long num);
-int					ft_numlen_base(long num, int base);
+size_t				ft_numlen(long num);
+size_t				ft_numlen_base(long num, int base);
 void				ft_strapp(char *dst, char c);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int n, int base);
@@ -112,5 +113,6 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+size_t				ft_lstlen(t_list *head);
 
 #endif
