@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/08/24 21:12:33 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/11/28 23:56:52 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@
 **	must manage:	minimum field-width and precision
 **	flags:			hh, h, l, ll, j, z
 **
+**	.___________________________________.
+**	|conversion	|	length		|flags	|
+**	|-----------+---------------+-------|
+**	|	c		|				|		|
+**	|	s		|				|		|
+**	|	p		|				|		|
+**	|-----------+---------------+-------|
+**	|	d		| h, hh, l, ll	| 0-+s	|
+**	|	i		| h, hh, l, ll	| 0-+s	|
+**	|	o		| h, hh, l, ll	| 0-+s	|
+**	|	u		| h, hh, l, ll	| 0-+s	|
+**	|	x		| h, hh, l, ll	| 0-+s	|
+**	|	X		| h, hh, l, ll	| 0-+s	|
+**
 ** Bonuses include:
 **	conversions:	eE, fF, gG, aA, n
 **	flags:			*, %, L, '
@@ -31,45 +45,49 @@
 **	colors, fd, etc..
 */
 
-t_format			*new_fmt_struct()
+t_format			*init()
 {
 	t_format	*fmt;
 
 	fmt = (t_format *)ft_memalloc(sizeof(t_format));
-	fmt->conv = 0;
 	fmt->flags = 0;
 	fmt->width = 0;
-	fmt->precision = 0;
+	fmt->precision = -1;
+	fmt->length = 0;
+	fmt->conv = -1;
 	return (fmt);
 }
 
-char				*flag_string(va_list valist)
+/*
+** Static function to house my dispatch table, which takes the index from the
+** conversion, the fmt_struct, and the valist. it returns the string that the
+** conversion function makes.
+**
+** Current copy of flags string: (UPDATE IF YOU CHANGE IT)
+** flags = "cCsSdDioOuUxXp%";
+*/
+static char			*dispatch(t_format *fmt_struct, va_list valist)
 {
-	return (va_arg(valist, char *));
-}
+	static char	*(*p[15])();
 
-char				*flag_int(va_list valist)
-{
-	return (ft_itoa(va_arg(valist, int)));
-}
-
-char				*flag_percent()
-{
-	return (ft_strdup("%"));
-}
-
-void				*format(t_format fmt_struct)
-{
-	char	*formatted;
-
-	if (flags & 0x4)
-	{
-		if (width > (int)ft_strlen(str))
-		{
-			formatted = ft_memalloc(width);
-			
-		}
-	}
+	p[0] = flag_char;
+	p[1] = flag_char;
+	p[2] = flag_string;
+	p[3] = flag_string;
+	p[4] = flag_int;
+	p[5] = flag_int;
+	p[6] = flag_int;
+	p[7] = flag_string;
+	p[8] = flag_string;
+	p[9] = flag_string;
+	p[10] = flag_string;
+	p[11] = flag_string;
+	p[12] = flag_string;
+	p[13] = flag_string;
+	p[14] = flag_percent;
+	if (fmt_struct->conv != -1)
+		return (p[fmt_struct->conv](fmt_struct, valist));
+	return (0);
 }
 
 /*
@@ -77,36 +95,67 @@ void				*format(t_format fmt_struct)
 **	when it moves the pointer to the end of the format specifier, that change
 **	can be reflected in the calling function.
 */
-static char			*parse(char **format, va_list valist)
+static char			*parse(const char **format, va_list valist)
 {
 	t_format	*fmt_struct;
-	static char	*(*p[15])();
+	char		*ret;
 
-	fmt_struct = new_fmt_struct();
-	p[0] = flag_string;
-	p[3] = flag_int;
-	p[5] = flag_int;
-	p[14] = flag_percent;
-
-	flag_chars(format, fmt_struct);
-	width_precision(format, fmt_struct);
-	fmt_struct->conv = p[conversion_chars(format)](valist);
-	format(fmt_struct);
-	return (fmt_struct->conv);
+	fmt_struct = init();
+	get_flags(format, fmt_struct);
+	get_width_precis(format, fmt_struct);
+	get_length(format, fmt_struct);
+	fmt_struct->conv = conversion_chars(format);
+	ret = dispatch(fmt_struct, valist);
+	free(fmt_struct);
+	return (ret);
 }
 
-void				ft_printf(const char *format, ...)
+/*
+** Make a linked list of substrings using a format string and va_list
+** Update the list with a double pointer
+** Return the combined length of the substrings
+*/
+static size_t		make_list(t_list **list, const char *format, va_list valist)
+{
+	char	*sub;
+	size_t	len;
+	size_t	total_len;
+
+	total_len = 0;
+	while (format && *format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			sub = parse(&format, valist);
+			len = ft_strlen(sub);
+		}
+		else
+		{
+			len = ft_dstrlen(format, '%');
+			sub = ft_strndup(format, len);
+			format += len;
+		}
+		total_len += len;
+		ft_lstadd_tail(list, ft_lstinit(sub, len));
+	}
+	return (total_len);
+}
+
+/*
+** Generate a linked list of substrings from format
+** Print them one by one at the end
+*/
+int					ft_printf(const char *format, ...)
 {
 	va_list		valist;
-	char		*p_str;
+	t_list		*strings;
+	size_t		total_len;
 
 	va_start(valist, format);
-	while ((p_str = ft_strchr(format, '%')))
-	{
-		format += write(1, format, p_str - format) + 1;
-		p_str = parse((char **)&format, valist);
-		ft_putstr(p_str);
-		ft_strdel(&p_str);
-	}
-	write(1, format, ft_strlen(format));
+	strings = 0;
+	total_len = make_list(&strings, format, valist);
+	ft_lstiter(strings, ft_lstputstr);
+	va_end(valist);
+	return (total_len);
 }

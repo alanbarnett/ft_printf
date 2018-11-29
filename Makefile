@@ -6,7 +6,7 @@
 #    By: abarnett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/25 22:40:12 by abarnett          #+#    #+#              #
-#    Updated: 2018/11/06 18:42:49 by abarnett         ###   ########.fr        #
+#    Updated: 2018/11/29 00:03:05 by alan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,13 @@ INCLUDE_DIRS :=	./includes ./libft/includes
 C_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./$(SRC_DIR)/*.c))
 L_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./libft/$(SRC_DIR)/*.c))
 
-CFLAGS +=		-Wall -Wextra -Werror $(foreach includedir,$(INCLUDE_DIRS),-I$(includedir))
+CFLAGS +=		-g -Wall -Wextra -Werror $(foreach includedir,$(INCLUDE_DIRS),-I$(includedir))
 LDFLAGS +=		-L./ -lftprintf
 
-.PHONY: all clean fclean re
+.PHONY:			all clean fclean re
 
 all: $(NAME)
+	ctags --recurse=yes
 
 test: $(NAME) main.o
 	$(CC) $(CFLAGS) -o test $(C_OBJS) main.o $(LDFLAGS)

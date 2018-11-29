@@ -1,35 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
+/*   Updated: 2018/11/29 00:12:12 by alan             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdarg.h>
-#include "libft.h"
-
-void params(int strings, ...)
-{
-	va_list	valist;
-	int		i;
-	char	*str;
-
-	va_start(valist, strings);
-	i = 0;
-	while (i < strings)
-	{
-		(!(str = va_arg(valist, char *))) ? printf("(null)\n") : printf("%s\n", str);
-		++i;
-	}
-	va_end(valist);
-}
+#include "libftprintf.h"
 
 int	main(void)
 {
-	//char	*str;
-	int		i;
+	//int		i;
 
-	//str = ft_strcpy(ft_strnew(21), "This is a test string");
-	i = 126;
-	ft_printf("int: %+015.7d, int2: %-0015.8d, testing some %5% shits % %\n", i, 17);
-	ft_printf("%# 05.3d %.d %d %d gg!\n", 1, -2, 33, 42);
+	//i = 99;
+	//ft_printf("Hello, World!\n");
+	ft_printf("Hello %.5s!\n", "world, and all it's inhabitants");
+	//ft_printf("testing a %char\n", (char)i);
+	//ft_printf("i: %d\n", i);
+	//ft_printf("int: %+015.7d, int2: %-0015.8d, testing some %5% shits % %\n", i, 17);
+	//ft_printf("testing with %lld %hhd %ld %hd\n", i, i, i, i);
+	//ft_printf("%# 05.3d %.d %d %d gg!\n", 1, -2, 33, 42);
 	/*
-	params(4, "string one", "the next string will be null", (void *)0, \
-	"that last one was null");
 	printf("%10.d\n", i);
 	printf("%p\n", (void *)0);
 	printf("%zD\n", (long)i);
@@ -70,12 +67,9 @@ int	main(void)
 	printf("%lu\n", 299999999UL);
 	printf("% 010d\n", 135);
 	*/
-	
+
 	//ft_printf("String: \"%s\"\nInt: %d\n", str, i);
 	/*
-	ft_printf("%010d", i);
-	ft_putchar('\n');
-
 	ft_printf("2d:    |%2d\n", i);
 	ft_printf("-2d:   |%-2d\n", i);
 	ft_printf("02d:   |%02d\n", i);
@@ -103,8 +97,6 @@ int	main(void)
 	printf("+010d: |%+010d\n", i);
 	printf("+010d: |%+010d\n", -i);
 	printf("+-10d: |%+-10d\n", i);
-	*/
-	/*
 	*/
 	return (0);
 }

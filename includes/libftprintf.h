@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2018/08/24 21:12:33 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/11/29 00:07:41 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,27 @@
 
 typedef struct		s_format
 {
-	char			*conv;
-	int				flags;
+	unsigned char	flags;
 	int				width;
 	int				precision;
+	char			length;
+	int				conv;
 }					t_format;
 
 // function pointer functions
-char				*flag_string(va_list valist);
-char				*flag_int(va_list valist);
-char				*flag_percent();
+char				*flag_char(t_format *fmt_struct, va_list valist);
+char				*flag_string(t_format *fmt_struct, va_list valist);
+char				*flag_int(t_format *fmt_struct, va_list valist);
+char				*flag_percent(t_format *fmt_struct);
 
 // parse functions
-int					conversion_chars(char **format);
-void				width_precision(char **format, t_format *fmt_struct);
-void				flag_chars(char **format, t_format *fmt_struct);
+int					conversion_chars(const char **format);
+void				get_length(const char **format, t_format *fmt_struct);
+void				get_width_precis(const char **format, t_format *fmt_struct);
+void				get_flags(const char **format, t_format *fmt_struct);
 
 // printf functions
-//void					format(t_format fmt_struct);
-//static char			*parse(char **format, va_list valist);
-void				ft_printf(const char *format, ...);
+int					ft_printf(const char *format, ...);
 
 #endif
 
