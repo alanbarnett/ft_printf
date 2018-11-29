@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/11/14 18:35:30 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/11/26 22:56:34 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t				ft_strlen(const char *str);
 char				*ft_strdup(const char *s1);
+char				*ft_strndup(const char *s1, size_t len);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
 char				*ft_strcat(char *s1, const char *s2);
@@ -102,16 +103,19 @@ void				ft_putnbr_fd(int n, int fd);
 ** Additional
 */
 //int					get_next_line(char **line, int size);
-void				ft_printf(const char *format, ...);
+//void				ft_printf(const char *format, ...);
 
 /*
 ** Bonus
 */
+t_list				*ft_lstinit(void const *content, size_t content_size);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
-void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lstadd(t_list **alst, t_list *init);
+void				ft_lstadd_tail(t_list **alst, t_list *init);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+void				ft_lstputstr(t_list *item);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t				ft_lstlen(t_list *head);
 

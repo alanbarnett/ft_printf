@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dstrlen.c                                       :+:      :+:    :+:   */
+/*   ft_lstputstr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/26 12:19:17 by abarnett          #+#    #+#             */
-/*   Updated: 2018/09/03 21:45:30 by abarnett         ###   ########.fr       */
+/*   Created: 2018/11/26 17:02:34 by alan              #+#    #+#             */
+/*   Updated: 2018/11/26 17:22:12 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_dstrlen(const char *str, char del)
+/*
+** Only really useful if used with ft_lstiter.
+** Will print a (char *) from the list content.
+*/
+void				ft_lstputstr(t_list *item)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i] && str[i] != del)
-		i++;
-	return (i);
+	if (item)
+		ft_putstr((char *)item->content);
 }
