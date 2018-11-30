@@ -1,15 +1,4 @@
 #include "libftprintf.h"
-#include <stdio.h>
-
-static void			print_params(t_format fmt_struct)
-{
-	printf("flags:	%x\n", fmt_struct.flags);
-	printf("width:	%d\n", fmt_struct.width);
-	printf("precis:	%d\n", fmt_struct.precision);
-	printf("length:	%c\n", fmt_struct.length);
-	printf("conv:	%d\n", fmt_struct.conv);
-	printf("\n");
-}
 
 /*
 ** string came from strdup, guaranteed to be null terminated
@@ -21,53 +10,67 @@ static void			add_precision(int precision, char **str)
 	char	*newstr;
 
 	len = ft_strlen(*str);
-	if (len > precision)
+	if ((precision != -1) && len > precision)
 	{
 		newstr = ft_strndup(*str, precision);
+		ft_strdel(str);
 		*str = newstr;
 	}
 }
 
-/*
-static void			add_width(int width, char *str)
+static void			add_width(int width, char **str, int is_left)
 {
+	int		len;
+	char	*newstr;
 
+	len = ft_strlen(*str);
+	if (width > len)
+	{
+		newstr = ft_nmemset(ft_strnew(width), ' ', width);
+		if (is_left)
+			ft_strncpy(newstr, *str, len);
+		else
+			ft_strncpy(newstr + (width - len), *str, len);
+		ft_strdel(str);
+		*str = newstr;
+	}
 }
-*/
 
 char				*flag_char(t_format *fmt_struct, va_list valist)
 {
 	char	c;
+	char	*str;
 
-	print_params(*fmt_struct);
+	//print_params(*fmt_struct);
 	c = (char)va_arg(valist, int);
 	if (!c)
-		return (ft_strdup("^@"));
-	return (ft_strdup(&c));
+		str = ft_strdup("^@");
+	str = ft_strndup(&c, 1);
+	add_width(fmt_struct->width, &str, (fmt_struct->flags & MINUS));
+	return (str);
 }
 
 char				*flag_string(t_format *fmt_struct, va_list valist)
 {
 	char	*str;
 
-	print_params(*fmt_struct);
+	//print_params(*fmt_struct);
 	str = va_arg(valist, char *);
 	if (!str)
 		str = ft_strdup("(null)");
 	else
 		str = ft_strdup(str);
 	add_precision(fmt_struct->precision, &str);
+	add_width(fmt_struct->width, &str, (fmt_struct->flags & MINUS));
 	return (str);
-}
-
-char				*flag_int(t_format *fmt_struct, va_list valist)
-{
-	print_params(*fmt_struct);
-	return (ft_itoa(va_arg(valist, int)));
 }
 
 char				*flag_percent(t_format *fmt_struct)
 {
-	print_params(*fmt_struct);
-	return (ft_strdup("%"));
+	char	*str;
+
+	//print_params(*fmt_struct);
+	str = ft_strdup("%");
+	add_width(fmt_struct->width, &str, (fmt_struct->flags & MINUS));
+	return (str);
 }
