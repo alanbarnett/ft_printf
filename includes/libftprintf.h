@@ -6,15 +6,21 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2018/11/29 00:07:41 by alan             ###   ########.fr       */
+/*   Updated: 2018/11/29 02:21:46 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
-#include <stdarg.h>
-#include "libft.h"
+# include <stdarg.h>
+# include "libft.h"
+
+# define SHARP 0x1
+# define ZERO 0x2
+# define MINUS 0x4
+# define PLUS 0x8
+# define SPACE 0x10
 
 typedef struct		s_format
 {
@@ -32,6 +38,7 @@ char				*flag_int(t_format *fmt_struct, va_list valist);
 char				*flag_percent(t_format *fmt_struct);
 
 // parse functions
+void				print_params(t_format fmt_struct);
 int					conversion_chars(const char **format);
 void				get_length(const char **format, t_format *fmt_struct);
 void				get_width_precis(const char **format, t_format *fmt_struct);

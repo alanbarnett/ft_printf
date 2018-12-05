@@ -6,11 +6,44 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 21:38:40 by abarnett          #+#    #+#             */
-/*   Updated: 2018/11/28 22:45:51 by alan             ###   ########.fr       */
+/*   Updated: 2018/11/30 05:32:28 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
+
+void			print_params(t_format fmt_struct)
+{
+	char	*convs;
+	char	*flags;
+	int		i;
+
+	convs = "cCsSdDioOuUxXp%";
+	flags = "#0-+ ";
+	i = 0;
+	ft_putchar('%');
+	if (fmt_struct.flags)
+	{
+		while (i < 5)
+		{
+			if ((1 << i) & fmt_struct.flags)
+				ft_putchar(flags[i]);
+			++i;
+		}
+	}
+	if (fmt_struct.width)
+		ft_putnbr(fmt_struct.width);
+	if (fmt_struct.precision != -1)
+	{
+		ft_putchar('.');
+		ft_putnbr(fmt_struct.precision);
+	}
+	if (fmt_struct.length)
+		ft_putchar(fmt_struct.length);
+	ft_putchar(*(convs + fmt_struct.conv));
+	ft_putstr(":	");
+}
 
 /*
 **		di				ouUxX					c		s			p
@@ -83,21 +116,16 @@ void				get_length(const char **format, t_format *fmt_struct)
 **	it is important that we don't move by the length of the number for
 **	precision, because a '.' that isn't followed by a number has a precision
 **	of 0, and the numlen of 0 is 1, so it would move it unnecessarily.
-**	instead we increase it while the character is a digit.
-**
-**	temporarily trying out doing it without numlen, as it seems that might
-**	be unneccessary. i think it really comes down to taste, as numlen doesn't
-**	really do that many more operations, but this might be a bit cleaner.
-**	plus now I do more checks if it's a valid character. don't want any sneaky
-**	segfaults now, do we? (i wonder how many operations that part adds. I'll
-**	go crazy if I try to consider everything.)
+**	instead we increase it while the character is a digit. this also prevents
+**	negative numbers from getting through (by not moving past the minus sign,
+**	even though atoi will do that anyway) in addition to the if statement below
+**	that checks if atoi was able to pull one.
 */
 void				get_width_precis(const char **format, t_format *fmt_struct)
 {
 	if (*format && ft_isdigit(**format))
 	{
 		fmt_struct->width = ft_atoi(*(char **)format);
-		//format += ft_numlen(fmt_struct->width);
 		while (*format && ft_isdigit(**format))
 			++(*format);
 	}
@@ -107,6 +135,8 @@ void				get_width_precis(const char **format, t_format *fmt_struct)
 		fmt_struct->precision = ft_atoi(*(char **)format);
 		while (*format && ft_isdigit(**format))
 			++(*format);
+		if (fmt_struct->precision < 0)
+			fmt_struct->precision = 0;
 	}
 }
 
@@ -116,6 +146,7 @@ void				get_width_precis(const char **format, t_format *fmt_struct)
 **	To add new flags,
 **		add the flag character to the end of the flags string
 **			(make sure the type of ret is big enough to hold that many bits)
+**			(add a macro for easier usage if you want)
 **		flags will be dealt with in modules for each conversion
 **	The third to last line disables the 0 flag if the - flag is also present.
 **	The second to last line disables the ' ' flag if the + flag is also present.
@@ -133,7 +164,7 @@ void				get_flags(const char **format, t_format *fmt_struct)
 		ret = ret | (1 << (cur - flags));
 		(*format)++;
 	}
-	ret = ((ret & 0x6) == 0x6 ? (ret ^ 0x2) : ret);
-	ret = ((ret & 0x18) == 0x18 ? (ret ^ 0x10) : ret);
+	ret = ((ret & (ZERO | MINUS)) == (ZERO | MINUS) ? (ret ^ ZERO) : ret);
+	ret = ((ret & (SPACE | PLUS)) == (SPACE | PLUS) ? (ret ^ SPACE) : ret);
 	fmt_struct->flags = ret;
 }
