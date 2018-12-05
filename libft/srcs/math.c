@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 04:24:42 by alan              #+#    #+#             */
-/*   Updated: 2018/11/30 04:36:04 by alan             ###   ########.fr       */
+/*   Updated: 2018/11/30 05:58:31 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		ft_vamax(int params, ...)
 				max = cur;
 		}
 	}
-	return (max)
+	return (max);
 }
 
 int		ft_vamin(int params, ...)
@@ -56,7 +56,17 @@ int		ft_vamin(int params, ...)
 				min = cur;
 		}
 	}
-	return (min)
+	return (min);
+}
+
+int		ft_max(int a, int b)
+{
+	return ((a > b) ? a : b);
+}
+
+int		ft_min(int a, int b)
+{
+	return ((a < b) ? a : b);
 }
 
 long	ft_abs(long nb)

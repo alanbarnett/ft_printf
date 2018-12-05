@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/11/30 04:37:07 by alan             ###   ########.fr       */
+/*   Updated: 2018/11/30 05:59:32 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,14 @@ void				ft_putnbr_fd(int n, int fd);
 */
 //int					get_next_line(char **line, int size);
 //void				ft_printf(const char *format, ...);
+
+/*
+** Math
+*/
 int					ft_vamax(int params, ...);
 int					ft_vamin(int params, ...);
+int					ft_max(int a, int b);
+int					ft_min(int a, int b);
 long				ft_abs(long nb);
 
 /*
