@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/11/28 23:56:52 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/03 18:21:40 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ static size_t		make_list(t_list **list, const char *format, va_list valist)
 		{
 			format++;
 			sub = parse(&format, valist);
+			if (!sub)
+				continue ;
 			len = ft_strlen(sub);
 		}
 		else
