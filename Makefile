@@ -6,7 +6,7 @@
 #    By: abarnett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/25 22:40:12 by abarnett          #+#    #+#              #
-#    Updated: 2018/11/29 00:03:05 by alan             ###   ########.fr        #
+#    Updated: 2018/11/29 19:13:29 by alan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ LDFLAGS +=		-L./ -lftprintf
 .PHONY:			all clean fclean re
 
 all: $(NAME)
-	ctags --recurse=yes
+	@ctags --recurse=yes
 
-test: $(NAME) main.o
+test: all main.o
 	$(CC) $(CFLAGS) -o test $(C_OBJS) main.o $(LDFLAGS)
 
 $(NAME): $(C_OBJS) $(L_OBJS)
