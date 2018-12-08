@@ -1,2 +1,3 @@
+*.o
 *.vimsession
 tags
