@@ -126,8 +126,9 @@ static void			ft_nbrcpy(long long nb, char *str)
 ** If width is largest, nothing happens
 ** If len is larger than width, set width to len
 **		this avoids a width that's too small, which has no effect.
-** If precision is larger than width, set width to precision
+** If precision is larger than width, set width to max of precision and len
 **		precision has higher precedence than width
+**		len is still important
 ** If either precision or width are smaller than len
 **		they have no effect
 ** Overall, this sets the width to the maximum size of the new string
@@ -138,15 +139,17 @@ static void			ft_nbrcpy(long long nb, char *str)
 ** Function with notes on the lines mixed in
 ** static char			*format_nb(t_format *fmt, int nb, int len)
 ** {
-** 	char	*str;
-** 
 ** 	// if precision is supplied,
+** 	// if it's less than the len,
+** 	// 	set it to the len
 ** 	// if there's a sign,
 ** 	// 	increase precision to fit the sign
 ** 	// if the width is less than precision,
 ** 	// 	set width to precision
 ** 	if (fmt->precision != -1)
 ** 	{
+** 		if (fmt->precision < len)
+** 			fmt->precision = len;
 ** 		if ((fmt->flags & (PLUS | SPACE)) || nb < 0)
 ** 			++fmt->precision;
 ** 		if (fmt->precision > fmt->width)
@@ -178,16 +181,15 @@ static void			ft_nbrcpy(long long nb, char *str)
 ** 	// Here, width is set to max length
 ** 	// precision is set to the size of the internal string
 ** 	// 	includes the sign
-** 	str = ft_strinit(fmt->width, ' ');
-** 	return (str);
+** 	return (ft_strinit(fmt->width, ' '));
 ** }
 */
 static char			*format_nb(t_format *fmt, int nb, int len)
 {
-	char	*str;
-
 	if (fmt->precision != -1)
 	{
+		if (fmt->precision < len)
+			fmt->precision = len;
 		if ((fmt->flags & (PLUS | SPACE)) || nb < 0)
 			++fmt->precision;
 		if (fmt->precision > fmt->width)
@@ -206,8 +208,7 @@ static char			*format_nb(t_format *fmt, int nb, int len)
 		if (fmt->flags & ZERO)
 			fmt->precision = fmt->width;
 	}
-	str = ft_strinit(fmt->width, ' ');
-	return (str);
+	return (ft_strinit(fmt->width, ' '));
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/04 15:58:34 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/07 23:20:38 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int	main(void)
 {
-	int		i;
+	//int		i;
 
-	i = 99;
+	//i = 99;
 	/*
 	// normal tests
 	ft_printf("Hello, World!\n");
@@ -133,6 +133,7 @@ int	main(void)
 	//ft_printf("%# 05.3d %.d %d %d gg!\n", 1, -2, 33, 42);
 
 	// versus test with width, precision, and -+ 0 flags
+	/*
 	ft_printf("3d:      |%3d|\n", 42890);
 	ft_printf("3d:      |%3d|\n", -42890);
 	ft_printf("2d:      |%2d|\n", i);
@@ -190,5 +191,16 @@ int	main(void)
 	printf("+10.4d:  |%10.4d|\n", i);
 	printf("-010.4d: |%-10.4d|\n", -i);
 	printf("010.4d:  |%10.4d|\n", -i);
+	*/
+
+	// individual tests
+	ft_printf("%.2d\n", 4242);
+	ft_printf("%.d\n", 4242);
+	ft_printf("%+.2d\n", 4242);
+	ft_printf("%+.d\n", 4242);
+	ft_printf("%-.2d\n", 4242);
+	ft_printf("%-.d\n", 4242);
+	ft_printf("%0.2d\n", 4242);
+	ft_printf("%0.d\n", 4242);
 	return (0);
 }
