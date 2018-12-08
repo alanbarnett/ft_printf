@@ -7,6 +7,7 @@
 ** It will do nothing if the sign isn't needed, so no need to wrap it in an if
 ** condition.
 */
+/*
 static void			add_sign(char *str, t_format *fmt, int nb)
 {
 	if (!(fmt->flags & MINUS))
@@ -21,6 +22,7 @@ static void			add_sign(char *str, t_format *fmt, int nb)
 			*str = ' ';
 	}
 }
+*/
 
 /*
 ** Function to replace spaces with zeros
@@ -35,12 +37,41 @@ static void			add_sign(char *str, t_format *fmt, int nb)
 ** because this function is tiny, and it'll take three extra lines to do the if
 ** checks in the calling function for left or right justification.
 */
+/*
 static void			add_zeros(char *str, t_format *fmt, int nb)
 {
 	if (!(fmt->flags & MINUS))
 		str += (fmt->width - fmt->precision);
 	if (((fmt->flags & (PLUS | SPACE)) || nb < 0))
 		++str;
+	while (str && *str == ' ')
+		*str++ = '0';
+}
+*/
+
+/*
+** This function adds the sign and zeros from a format struct to a string
+**
+** First it moves the string, if it's supposed to be left justified
+**
+** Then it will add the appropriate sign to the string, based on the sign of
+** the number and the PLUS and SPACE flags
+**
+** Then it replaces spaces inbetween the minus sign and the number with zeros
+*/
+static void			add_flags(char *str, t_format *fmt, int nb)
+{
+	if (!(fmt->flags & MINUS))
+		str += (fmt->width - fmt->precision);
+	if (((fmt->flags & (PLUS | SPACE)) || nb < 0))
+	{
+		if (nb < 0)
+			*str++ = '-';
+		else if ((fmt->flags & PLUS) && nb >= 0)
+			*str++ = '+';
+		else if ((fmt->flags & SPACE) && nb >= 0)
+			*str++ = ' ';
+	}
 	while (str && *str == ' ')
 		*str++ = '0';
 }
@@ -266,7 +297,10 @@ char				*flag_int(t_format *fmt_struct, va_list valist)
 		else
 			ft_nbrcpy(nb, str + (fmt_struct->width - 1));
 	}
+	/*
 	add_sign(str, fmt_struct, nb);
 	add_zeros(str, fmt_struct, nb);
+	*/
+	add_flags(str, fmt_struct, nb);
 	return (str);
 }
