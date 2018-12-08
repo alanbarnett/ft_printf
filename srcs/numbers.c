@@ -126,8 +126,10 @@ static void			ft_nbrcpy(long long nb, char *str)
 ** If width is largest, nothing happens
 ** If len is larger than width, set width to len
 **		this avoids a width that's too small, which has no effect.
-** If precision is larger than width, set width to precision
+** If precision is larger than width, set width to max(precision, len)
 **		precision has higher precedence than width
+**		width of 0 will always be less than precision, must consider the length
+**		of the number with max
 ** If either precision or width are smaller than len
 **		they have no effect
 ** Overall, this sets the width to the maximum size of the new string
@@ -149,8 +151,10 @@ static void			ft_nbrcpy(long long nb, char *str)
 ** 	{
 ** 		if ((fmt->flags & (PLUS | SPACE)) || nb < 0)
 ** 			++fmt->precision;
-** 		if (fmt->precision > fmt->width)
-** 			fmt->width = fmt->precision;
+** 		// >= because if width is 0, nothing happens
+** 		// set to max because no width is 0, so it needs to include len
+** 		if (fmt->precision >= fmt->width)
+** 			fmt->width = ft_max(fmt->precision, len);
 ** 	}
 ** 
 ** 	// if precision is not supplied,
@@ -190,8 +194,8 @@ static char			*format_nb(t_format *fmt, int nb, int len)
 	{
 		if ((fmt->flags & (PLUS | SPACE)) || nb < 0)
 			++fmt->precision;
-		if (fmt->precision > fmt->width)
-			fmt->width = fmt->precision;
+		if (fmt->precision >= fmt->width)
+			fmt->width = ft_max(fmt->precision, len);
 	}
 	else
 	{
