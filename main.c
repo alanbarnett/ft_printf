@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/07 23:20:38 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/09 01:32:49 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,8 @@ int	main(void)
 	printf("010.4d:  |%10.4d|\n", -i);
 	*/
 
-	// individual tests
+	/*
+	// Tests with precision less than number length
 	ft_printf("%.2d\n", 4242);
 	ft_printf("%.d\n", 4242);
 	ft_printf("%+.2d\n", 4242);
@@ -202,5 +203,11 @@ int	main(void)
 	ft_printf("%-.d\n", 4242);
 	ft_printf("%0.2d\n", 4242);
 	ft_printf("%0.d\n", 4242);
+	*/
+
+	// Tests with other sizes
+	ft_printf("%hhd\n", 128);
+	ft_printf("%ld\n", 2147483648);
+	ft_printf("%lld\n", 9223372036854775807);
 	return (0);
 }
