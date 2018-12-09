@@ -1,6 +1,32 @@
 #include "libftprintf.h"
 
 /*
+** Figures out the size of the number to be pulled from va_arg
+** Uses the length in my format struct, passed as a character
+*/
+static long long	get_nb(char length, va_list valist)
+{
+	long long	nb;
+
+	nb = 0;
+	if (length == 0)
+		nb = va_arg(valist, int);
+	else if (length == 'l')
+		nb = va_arg(valist, long);
+	else if (length == 'L')
+		nb = va_arg(valist, long long);
+	else if (length == 'h')
+		nb = (short)va_arg(valist, int);
+	else if (length == 'H')
+		nb = (char)va_arg(valist, int);
+	else if (length == 'j')
+		nb = va_arg(valist, long long);
+	else if (length == 'z')
+		nb = va_arg(valist, size_t);
+	return (nb);
+}
+
+/*
 ** This function adds the sign and zeros from a format struct to a string
 **
 ** First it moves the string, if it's supposed to be left justified,
@@ -8,7 +34,7 @@
 ** the number and the PLUS and SPACE flags,
 **tThen it replaces spaces in between the minus sign and the number with zeros.
 */
-static void			add_flags(char *str, t_format *fmt, int nb)
+static void			add_flags(char *str, t_format *fmt, long long nb)
 {
 	if (!(fmt->flags & MINUS))
 		str += (fmt->width - fmt->precision);
@@ -184,7 +210,7 @@ static void			ft_nbrcpy(long long nb, char *str)
 ** 	return (ft_strinit(fmt->width, ' '));
 ** }
 */
-static char			*format_nb(t_format *fmt, int nb, int len)
+static char			*format_nb(t_format *fmt, long long nb, int len)
 {
 	if (fmt->precision != -1)
 	{
@@ -230,11 +256,12 @@ static char			*format_nb(t_format *fmt, int nb, int len)
 */
 char				*flag_int(t_format *fmt_struct, va_list valist)
 {
-	char	*str;
-	int		nb;
-	int		len;
+	char		*str;
+	long long	nb;
+	int			len;
 
-	nb = va_arg(valist, int);
+	//nb = va_arg(valist, int);
+	nb = get_nb(fmt_struct->length, valist);
 	if (fmt_struct->precision == 0 && nb == 0)
 		len = 0;
 	else
