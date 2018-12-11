@@ -66,7 +66,7 @@ static void			add_flags(char *str, t_format *fmt, long long nb)
 */
 static void			ft_nbrcpy(long long nb, char *str)
 {
-	if (nb > 10 || nb < -10)
+	if (nb >= 10 || nb <= -10)
 		ft_nbrcpy(nb / 10, str - 1);
 	if (nb < 0)
 		*str = (ft_abs(nb % 10) + '0');
@@ -260,7 +260,6 @@ char				*flag_int(t_format *fmt_struct, va_list valist)
 	long long	nb;
 	int			len;
 
-	//nb = va_arg(valist, int);
 	nb = get_nb(fmt_struct->length, valist);
 	if (fmt_struct->precision == 0 && nb == 0)
 		len = 0;

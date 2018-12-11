@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/10 19:54:29 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/10 20:13:30 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(void)
 	ft_printf("i: %d\n", i);
 	ft_printf("String: \"%s\"\nInt: %d\n", "stringy string", 1990);
 	*/
+	/*
 	// tests with precision and width for strings
 	ft_printf("Hello %.5s!\n", "world, and all it's inhabitants");
 	ft_printf("Hello %.10s!\n", "world");
@@ -53,7 +54,6 @@ int	main(void)
 	ft_printf("|%10.2s|\n", "(null)");
 	ft_printf("|%.3s|\n", "(null)");
 	ft_printf("|%.6s|\n", "(null)");
-	/*
 	ft_putchar('\n');
 	printf("|%s|\n", (char *)0);
 	printf("|%10s|\n", (char *)0);
@@ -62,7 +62,6 @@ int	main(void)
 	printf("|%.3s|\n", (char *)0);
 	printf("|%.6s|\n", (char *)0);
 	ft_putchar('\n');
-	*/
 	ft_printf("|%c|\n", 0);
 	ft_printf("|%10c|\n", 0);
 	ft_printf("|%10.2c|\n", 0);
@@ -71,6 +70,7 @@ int	main(void)
 	ft_printf("|%-10c|\n", 0);
 	ft_printf("|%-10.2c|\n", 0);
 	ft_printf("|%-2.10c|\n", 0);
+	*/
 	/*
 	// tests with precision and width for ints
 	ft_printf("|%.5d|, 99\n", i);
@@ -118,6 +118,7 @@ int	main(void)
 	// gross tests
 	ft_printf("%%10% : |%10%|\n");
 	*/
+	ft_printf("%d\n", 1001);
 
 	/*
 	// testing standard printf
