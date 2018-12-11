@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/09 01:32:49 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/10 19:54:29 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,53 @@ int	main(void)
 	ft_printf("i: %d\n", i);
 	ft_printf("String: \"%s\"\nInt: %d\n", "stringy string", 1990);
 	*/
-	/*
-	// tests with precision and width for strings and ints
+	// tests with precision and width for strings
 	ft_printf("Hello %.5s!\n", "world, and all it's inhabitants");
 	ft_printf("Hello %.10s!\n", "world");
-	ft_printf("|%10s|, hello\n", "hello");
-	ft_printf("|%10.3s|, hello\n", "hello");
-	ft_printf("|%10.9s|, hello\n", "hello");
-	ft_printf("|%10c|, h\n", 'h');
-	ft_printf("|%10%|\n");
-	ft_printf("|%-10s|, helo\n", "hello");
-	ft_printf("|%-10.3s|, helo\n", "hello");
-	ft_printf("|%-10.9s|, helo\n", "hello");
-	ft_printf("|%-10c|, h\n", 'h');
-	ft_printf("|%-10%|\n");
+	ft_printf("10s:       |%10s|\n", "hello");
+	ft_printf("10.3s:     |%10.3s|\n", "hello");
+	ft_printf("10.9s:     |%10.9s|\n", "hello");
+	ft_printf("1.9s:      |%1.9s|\n", "hello");
+	ft_printf(".4s:       |%.4s|\n", "hello");
+	ft_printf("10c:       |%10c|\n", 'h');
+	ft_printf("10%%:       |%10%|\n");
+	ft_printf("-10s:      |%-10s|\n", "hello");
+	ft_printf("-10.3s:    |%-10.3s|\n", "hello");
+	ft_printf("-10.9s:    |%-10.9s|\n", "hello");
+	ft_printf("-1.9s:     |%.4s|\n", "hello");
+	ft_printf("-.4s:      |%1.9s|\n", "hello");
+	ft_printf("-10c:      |%-10c|\n", 'h');
+	ft_printf("-10%%:      |%-10%|\n");
+	// testing null strings && characters
+	ft_printf("|%s|\n", 0);
+	ft_printf("|%10s|\n", 0);
+	ft_printf("|%10.2s|\n", 0);
+	ft_printf("|%2.10s|\n", 0);
+	ft_printf("|%.3s|\n", 0);
+	ft_printf("|%.6s|\n", 0);
+	ft_printf("|%10.2s|\n", "(null)");
+	ft_printf("|%.3s|\n", "(null)");
+	ft_printf("|%.6s|\n", "(null)");
+	/*
+	ft_putchar('\n');
+	printf("|%s|\n", (char *)0);
+	printf("|%10s|\n", (char *)0);
+	printf("|%10.2s|\n", (char *)0);
+	printf("|%2.10s|\n", (char *)0);
+	printf("|%.3s|\n", (char *)0);
+	printf("|%.6s|\n", (char *)0);
+	ft_putchar('\n');
+	*/
+	ft_printf("|%c|\n", 0);
+	ft_printf("|%10c|\n", 0);
+	ft_printf("|%10.2c|\n", 0);
+	ft_printf("|%2.10c|\n", 0);
+	ft_printf("|%-c|\n", 0);
+	ft_printf("|%-10c|\n", 0);
+	ft_printf("|%-10.2c|\n", 0);
+	ft_printf("|%-2.10c|\n", 0);
+	/*
+	// tests with precision and width for ints
 	ft_printf("|%.5d|, 99\n", i);
 	ft_printf("|%.0d|, 99\n", i);
 	ft_printf("|%.d|, 0\n", 0);
@@ -205,9 +238,11 @@ int	main(void)
 	ft_printf("%0.d\n", 4242);
 	*/
 
+	/*
 	// Tests with other sizes
 	ft_printf("%hhd\n", 128);
 	ft_printf("%ld\n", 2147483648);
 	ft_printf("%lld\n", 9223372036854775807);
+	*/
 	return (0);
 }
