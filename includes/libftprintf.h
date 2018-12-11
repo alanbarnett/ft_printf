@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2018/11/29 02:21:46 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/10 17:14:10 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define PLUS 0x8
 # define SPACE 0x10
 
+# define CONVS "cCsS%dDiuUbBoOxXp"
+
 typedef struct		s_format
 {
 	unsigned char	flags;
@@ -32,10 +34,13 @@ typedef struct		s_format
 }					t_format;
 
 // function pointer functions
-char				*flag_char(t_format *fmt_struct, va_list valist);
-char				*flag_string(t_format *fmt_struct, va_list valist);
-char				*flag_int(t_format *fmt_struct, va_list valist);
-char				*flag_percent(t_format *fmt_struct);
+char				*flag_char(t_format *fmt, va_list valist);
+char				*flag_string(t_format *fmt, va_list valist);
+char				*flag_percent(t_format *fmt);
+char				*flag_int(t_format *fmt, va_list valist);
+char				*flag_uint(t_format *fmt, va_list valist);
+char				*flag_box(t_format *fmt, va_list valist);
+char				*flag_pointer(t_format *fmt, va_list valist);
 
 // parse functions
 void				print_params(t_format fmt_struct);

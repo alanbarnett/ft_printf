@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/03 18:21:40 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/10 17:17:48 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,29 @@ t_format			*init()
 ** conversion function makes.
 **
 ** Current copy of flags string: (UPDATE IF YOU CHANGE IT)
-** flags = "cCsSdDioOuUxXp%";
+** flags = "cCsS%dDiuUbBoOxXp";
 */
 static char			*dispatch(t_format *fmt_struct, va_list valist)
 {
-	static char	*(*p[15])();
+	static char	*(*p[17])();
 
 	p[0] = flag_char;
 	p[1] = flag_char;
 	p[2] = flag_string;
 	p[3] = flag_string;
-	p[4] = flag_int;
+	p[4] = flag_percent;
 	p[5] = flag_int;
 	p[6] = flag_int;
-	p[7] = flag_string;
-	p[8] = flag_string;
-	p[9] = flag_string;
-	p[10] = flag_string;
-	p[11] = flag_string;
-	p[12] = flag_string;
-	p[13] = flag_string;
-	p[14] = flag_percent;
+	p[7] = flag_int;
+	p[8] = flag_uint;
+	p[9] = flag_uint;
+	p[10] = flag_box;
+	p[11] = flag_box;
+	p[12] = flag_box;
+	p[13] = flag_box;
+	p[14] = flag_box;
+	p[15] = flag_box;
+	p[16] = flag_pointer;
 	if (fmt_struct->conv != -1)
 		return (p[fmt_struct->conv](fmt_struct, valist));
 	return (0);

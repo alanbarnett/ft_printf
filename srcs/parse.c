@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 21:38:40 by abarnett          #+#    #+#             */
-/*   Updated: 2018/11/30 05:32:28 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/10 17:22:32 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void			print_params(t_format fmt_struct)
 **	If you would like to add a new function with a new character,
 **		add your function to the srcs/ directory,
 **			add a prototype to the header file too,
-**		add the character to the end of the list,
-**		increase the jump table index count,
+**		add the character to the end of the list (found in the header file),
+**		increase the jump table index count (found in printf.c),
 **		add your function name to the jump table.
 */
 int					conversion_chars(const char **format)
@@ -72,7 +72,7 @@ int					conversion_chars(const char **format)
 	const char	*flags;
 	char		*index;
 
-	flags = "cCsSdDioOuUxXp%";
+	flags = CONVS;
 	if (*format && (index = ft_strchr(flags, **format)))
 	{
 		(*format)++;
