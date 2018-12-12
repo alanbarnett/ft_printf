@@ -4,11 +4,18 @@
 ** Figures out the size of the number to be pulled from va_arg
 ** Uses the length in my format struct, passed as a character
 */
-static long long	get_nb(char length, va_list valist)
+static long long	get_nb(char conv, char length, va_list valist)
 {
 	long long	nb;
 
 	nb = 0;
+	if (conv == 'D')
+	{
+		if (length == 'l' || length == 'L')
+			length = 'L';
+		else if (length == 0)
+			length = 'l';
+	}
 	if (length == 0)
 		nb = va_arg(valist, int);
 	else if (length == 'l')
@@ -257,25 +264,25 @@ static char			*format_nb(t_format *fmt, long long nb, int len)
 **
 ** Then the sign and zeros are added to the string.
 */
-char				*flag_int(t_format *fmt_struct, va_list valist)
+char				*flag_int(t_format *fmt, va_list valist)
 {
 	char		*str;
 	long long	nb;
 	int			len;
 
-	nb = get_nb(fmt_struct->length, valist);
-	if (fmt_struct->precision == 0 && nb == 0)
+	nb = get_nb(fmt->conv, fmt->length, valist);
+	if (fmt->precision == 0 && nb == 0)
 		len = 0;
 	else
 		len = ft_numlen(nb);
-	str = format_nb(fmt_struct, nb, len);
+	str = format_nb(fmt, nb, len);
 	if (len)
 	{
-		if (fmt_struct->flags & MINUS)
-			ft_nbrcpy(nb, str + (fmt_struct->precision - 1));
+		if (fmt->flags & MINUS)
+			ft_nbrcpy(nb, str + (fmt->precision - 1));
 		else
-			ft_nbrcpy(nb, str + (fmt_struct->width - 1));
+			ft_nbrcpy(nb, str + (fmt->width - 1));
 	}
-	add_flags(str, fmt_struct, nb, len);
+	add_flags(str, fmt, nb, len);
 	return (str);
 }

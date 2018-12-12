@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/10 19:43:34 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 17:47:11 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_format			*init()
 	fmt->width = 0;
 	fmt->precision = -1;
 	fmt->length = 0;
-	fmt->conv = -1;
+	fmt->conv = 0;
 	return (fmt);
 }
 
@@ -66,7 +66,7 @@ t_format			*init()
 ** Current copy of flags string: (UPDATE IF YOU CHANGE IT)
 ** flags = "cCsS%dDiuUbBoOxXp";
 */
-static char			*dispatch(t_format *fmt_struct, va_list valist)
+static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 {
 	static char	*(*p[17])();
 
@@ -87,13 +87,14 @@ static char			*dispatch(t_format *fmt_struct, va_list valist)
 	p[14] = flag_box;
 	p[15] = flag_box;
 	p[16] = flag_pointer;
-	if (fmt_struct->conv != -1)
-		return (p[fmt_struct->conv](fmt_struct, valist));
+	if (index != -1)
+		return (p[index](fmt_struct, valist));
+	// TODO make sure this doesn't cause a problem when freeing
 	return (0);
 }
 
 /*
-**	Parse takes a pointer to the format string at the format specifier so that 
+**	Parse takes a pointer to the format string at the format specifier so that
 **	when it moves the pointer to the end of the format specifier, that change
 **	can be reflected in the calling function.
 */
@@ -101,13 +102,15 @@ static char			*parse(const char **format, va_list valist, size_t *len)
 {
 	t_format	*fmt_struct;
 	char		*ret;
+	int			index;
 
 	fmt_struct = init();
 	get_flags(format, fmt_struct);
 	get_width_precis(format, fmt_struct);
 	get_length(format, fmt_struct);
-	fmt_struct->conv = conversion_chars(format);
-	ret = dispatch(fmt_struct, valist);
+	index = get_conversion(format, fmt_struct);
+	ret = dispatch(index, fmt_struct, valist);
+	// TODO remember why I do this
 	if (ret)
 		*len = (size_t)fmt_struct->width;
 	free(fmt_struct);
