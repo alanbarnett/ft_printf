@@ -34,7 +34,7 @@ static long long	get_nb(char length, va_list valist)
 ** the number and the PLUS and SPACE flags,
 **tThen it replaces spaces in between the minus sign and the number with zeros.
 */
-static void			add_flags(char *str, t_format *fmt, long long nb)
+static void			add_flags(char *str, t_format *fmt, long long nb, int len)
 {
 	if (!(fmt->flags & MINUS))
 		str += (fmt->width - fmt->precision);
@@ -47,8 +47,11 @@ static void			add_flags(char *str, t_format *fmt, long long nb)
 		else if ((fmt->flags & SPACE) && nb >= 0)
 			*str++ = ' ';
 	}
-	while (str && *str == ' ')
-		*str++ = '0';
+	if (len)
+	{
+		while (str && *str == ' ')
+			*str++ = '0';
+	}
 }
 
 /*
@@ -273,6 +276,6 @@ char				*flag_int(t_format *fmt_struct, va_list valist)
 		else
 			ft_nbrcpy(nb, str + (fmt_struct->width - 1));
 	}
-	add_flags(str, fmt_struct, nb);
+	add_flags(str, fmt_struct, nb, len);
 	return (str);
 }
