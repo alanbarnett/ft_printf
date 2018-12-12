@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/11 19:16:37 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 21:03:25 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,23 @@
 
 int	main(void)
 {
-	//int		i;
-
-	//i = 99;
 	/*
+	int		i;
+
+	i = 99;
 	// normal tests
 	ft_printf("Hello, World!\n");
 	ft_printf("testing a %char\n", (char)i);
 	ft_printf("i: %d\n", i);
 	ft_printf("String: \"%s\"\nInt: %d\n", "stringy string", 1990);
+	ft_printf("%d %ld %lld\n", 123, 1234, 12345);
+	*/
+	/*
+	// poop tests
+	ft_printf("%.0d\n", 0);
+	ft_printf("|%.-3d|\n", 0);
+	printf("%.0d\n", 0);
+	printf("%.-3d\n", 0);
 	*/
 	/*
 	// tests with precision and width for strings
@@ -133,7 +141,7 @@ int	main(void)
 	*/
 	//ft_printf("%d\n", 1001);
 	// testing U
-	ft_printf("|%hU|\n", 4294967296);
+	//ft_printf("|%hU|\n", 4294967296);
 
 	/*
 	// testing standard printf
