@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 10:06:41 by abarnett          #+#    #+#             */
-/*   Updated: 2018/11/26 22:17:00 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 21:39:27 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 ** this function exists to put a pointer into the list easily
 ** content and content size get directly copied, instead of making new memory
 */
+
 t_list	*ft_lstinit(void const *content, size_t content_size)
 {
 	t_list *head;

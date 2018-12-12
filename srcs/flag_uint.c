@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_uint.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
+/*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 17:29:28 by alan              #+#    #+#             */
-/*   Updated: 2018/12/11 19:25:26 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 21:30:37 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 ** Figures out the size of the number to be pulled from va_arg
 ** Uses the length in my format struct, passed as a character
 */
+
 static unsigned long long	get_nb(char conv, char length, va_list valist)
 {
 	unsigned long long	nb;
@@ -52,6 +53,7 @@ static unsigned long long	get_nb(char conv, char length, va_list valist)
 ** then it checks if the length of the number is greater than zero,
 ** then it replaces spaces up to the number with zeros.
 */
+
 static void					add_flags(char *str, t_format *fmt, int len)
 {
 	if (!(fmt->flags & MINUS))
@@ -76,7 +78,8 @@ static void					add_flags(char *str, t_format *fmt, int len)
 ** each step. Once the number is small enough, it will add the ascii at the
 ** character position.
 */
-static void			ft_nbrcpy(unsigned long long nb, char *str)
+
+static void					ft_nbrcpy(unsigned long long nb, char *str)
 {
 	if (nb >= 10)
 		ft_nbrcpy(nb / 10, str - 1);
@@ -204,6 +207,7 @@ static void			ft_nbrcpy(unsigned long long nb, char *str)
 ** 	return (ft_strinit(fmt->width, ' '));
 ** }
 */
+
 static char					*format_nb(t_format *fmt, int len)
 {
 	if (fmt->precision != -1)
@@ -240,7 +244,8 @@ static char					*format_nb(t_format *fmt, int len)
 **
 ** Then the sign and zeros are added to the string.
 */
-char		*flag_uint(t_format *fmt, va_list valist)
+
+char						*flag_uint(t_format *fmt, va_list valist)
 {
 	char				*str;
 	unsigned long long	nb;

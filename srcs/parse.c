@@ -6,14 +6,13 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 21:38:40 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/11 20:56:04 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 21:34:13 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
-void			print_params(t_format fmt_struct)
+void				print_params(t_format fmt_struct)
 {
 	char	*convs;
 	char	*flags;
@@ -67,6 +66,7 @@ void			print_params(t_format fmt_struct)
 **		increase the jump table index count (found in printf.c/dispatch),
 **		add your function name to the jump table.
 */
+
 int					get_conversion(const char **format, t_format *fmt_struct)
 {
 	const char	*flags;
@@ -88,6 +88,7 @@ int					get_conversion(const char **format, t_format *fmt_struct)
 **
 **	If the length "hh" or "ll" is used, it is replaced with "H" or "L".
 */
+
 void				get_length(const char **format, t_format *fmt_struct)
 {
 	const char	*flags;
@@ -122,6 +123,7 @@ void				get_length(const char **format, t_format *fmt_struct)
 **	even though atoi will do that anyway) in addition to the if statement below
 **	that checks if atoi was able to pull one.
 */
+
 void				get_width_precis(const char **format, t_format *fmt_struct)
 {
 	if (*format && ft_isdigit(**format))
@@ -152,6 +154,7 @@ void				get_width_precis(const char **format, t_format *fmt_struct)
 **	The third to last line disables the 0 flag if the - flag is also present.
 **	The second to last line disables the ' ' flag if the + flag is also present.
 */
+
 void				get_flags(const char **format, t_format *fmt_struct)
 {
 	const char		*flags;

@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/11 20:45:38 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 21:38:52 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 **	colors, fd, etc..
 */
 
-t_format			*init()
+static t_format		*init(void)
 {
 	t_format	*fmt;
 
@@ -66,6 +66,7 @@ t_format			*init()
 ** Current copy of flags string: (UPDATE IF YOU CHANGE IT)
 ** flags = "cCsS%dDiuUbBoOxXp";
 */
+
 static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 {
 	static char	*(*p[17])();
@@ -98,6 +99,7 @@ static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 **	when it moves the pointer to the end of the format specifier, that change
 **	can be reflected in the calling function.
 */
+
 static char			*parse(const char **format, va_list valist, size_t *len)
 {
 	t_format	*fmt_struct;
@@ -122,6 +124,7 @@ static char			*parse(const char **format, va_list valist, size_t *len)
 ** Update the list with a double pointer
 ** Return the combined length of the substrings
 */
+
 static size_t		make_list(t_list **list, const char *format, va_list valist)
 {
 	char	*sub;
@@ -154,6 +157,7 @@ static size_t		make_list(t_list **list, const char *format, va_list valist)
 ** Generate a linked list of substrings from format
 ** Print them one by one at the end
 */
+
 int					ft_printf(const char *format, ...)
 {
 	va_list		valist;

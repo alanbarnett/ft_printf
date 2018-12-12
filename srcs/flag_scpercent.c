@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flag_scpercent.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/11 21:34:21 by abarnett          #+#    #+#             */
+/*   Updated: 2018/12/11 21:34:46 by abarnett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libftprintf.h"
 
 /*
@@ -7,6 +19,7 @@
 ** It takes the length of the string to compare, and the format struct for
 ** access to precision and width
 */
+
 static char			*format_string(t_format *fmt, char *str, int len)
 {
 	if (fmt->precision != -1)
@@ -32,7 +45,6 @@ char				*flag_string(t_format *fmt, va_list valist)
 	char	*newstr;
 	int		len;
 
-	//print_params(*fmt);
 	str = va_arg(valist, char *);
 	if (!str)
 		len = 6;
@@ -53,7 +65,6 @@ char				*flag_char(t_format *fmt, va_list valist)
 	char	c;
 	char	*newstr;
 
-	//print_params(*fmt);
 	c = (char)va_arg(valist, int);
 	if (fmt->width < 1)
 		fmt->width = 1;
@@ -69,11 +80,11 @@ char				*flag_char(t_format *fmt, va_list valist)
 ** This function makes a new string of the width (or 1, of width is less), and
 ** copies a percent sign in on the left or right, depending on the MINUS flag.
 */
+
 char				*flag_percent(t_format *fmt)
 {
 	char	*newstr;
 
-	//print_params(*fmt);
 	if (fmt->width < 1)
 		fmt->width = 1;
 	newstr = ft_strinit(fmt->width, ' ');

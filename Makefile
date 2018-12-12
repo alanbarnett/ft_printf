@@ -6,7 +6,7 @@
 #    By: abarnett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/25 22:40:12 by abarnett          #+#    #+#              #
-#    Updated: 2018/12/11 19:28:40 by alan             ###   ########.fr        #
+#    Updated: 2018/12/11 21:49:15 by abarnett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ INCLUDE_DIRS :=	./includes ./libft/includes
 C_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./$(SRC_DIR)/*.c))
 L_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./libft/$(SRC_DIR)/*.c))
 
-CFLAGS +=		-g -Wall -Wextra -Werror $(foreach includedir,$(INCLUDE_DIRS),-I$(includedir))
+CFLAGS +=		-Wall -Wextra -Werror $(foreach includedir,$(INCLUDE_DIRS),-I$(includedir))
 LDFLAGS +=		-L./ -lftprintf
 
 .PHONY:			all clean fclean re
