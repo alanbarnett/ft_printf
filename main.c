@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/11 12:54:30 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 17:00:13 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,13 @@ int	main(void)
 	ft_printf("|%+07.d|, 0\n", 0);
 	ft_printf("|%-+07.d|, 0\n", 0);
 	ft_printf("|% 07.d|, 0\n", 0);
+	/*
 	printf("|%-07.u|, 0\n", 0);
 	printf("|%-07.d|, 0\n", 0);
 	printf("|%+07.d|, 0\n", 0);
 	printf("|%-+07.d|, 0\n", 0);
 	printf("|% 07.d|, 0\n", 0);
+	*/
 	ft_putchar('\n');
 	// testing 0 flag for ints
 	ft_printf("|%08u|\n", i);
