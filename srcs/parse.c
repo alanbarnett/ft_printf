@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 21:38:40 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/10 17:22:32 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 17:29:16 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			print_params(t_format fmt_struct)
 	char	*flags;
 	int		i;
 
-	convs = "cCsSdDioOuUxXp%";
+	convs = CONVS;
 	flags = "#0-+ ";
 	i = 0;
 	ft_putchar('%');
@@ -64,10 +64,10 @@ void			print_params(t_format fmt_struct)
 **		add your function to the srcs/ directory,
 **			add a prototype to the header file too,
 **		add the character to the end of the list (found in the header file),
-**		increase the jump table index count (found in printf.c),
+**		increase the jump table index count (found in printf.c/dispatch),
 **		add your function name to the jump table.
 */
-int					conversion_chars(const char **format)
+int					get_conversion(const char **format, t_format *fmt_struct)
 {
 	const char	*flags;
 	char		*index;
@@ -76,6 +76,7 @@ int					conversion_chars(const char **format)
 	if (*format && (index = ft_strchr(flags, **format)))
 	{
 		(*format)++;
+		fmt_struct->conv = *index;
 		return (index - flags);
 	}
 	return (-1);
