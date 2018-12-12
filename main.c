@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/10 20:13:30 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 12:54:30 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int	main(void)
 {
-	//int		i;
+	int		i;
 
-	//i = 99;
+	i = 99;
 	/*
 	// normal tests
 	ft_printf("Hello, World!\n");
@@ -71,45 +71,52 @@ int	main(void)
 	ft_printf("|%-10.2c|\n", 0);
 	ft_printf("|%-2.10c|\n", 0);
 	*/
-	/*
 	// tests with precision and width for ints
-	ft_printf("|%.5d|, 99\n", i);
-	ft_printf("|%.0d|, 99\n", i);
-	ft_printf("|%.d|, 0\n", 0);
-	ft_printf("|%7.5d|, 99\n", i);
-	ft_printf("|%7.0d|, 99\n", i);
-	ft_printf("|%7.d|, 0\n", 0);
-	ft_printf("|%-7.5d|, 99\n", i);
-	ft_printf("|%0+7.5d|, 99\n", i);
-	ft_printf("|% 07.0d|, 99\n", i);
+	ft_printf("|%.5u|, 99\n", i);
+	ft_printf("|%.0u|, 99\n", i);
+	ft_printf("|%.u|, 0\n", 0);
+	ft_printf("|%7.5u|, 99\n", i);
+	ft_printf("|%7.0u|, 99\n", i);
+	ft_printf("|%7.u|, 0\n", 0);
+	ft_printf("|%-7.5u|, 99\n", i);
+	ft_printf("|%0+7.5u|, 99\n", i);
+	ft_printf("|% 07.0u|, 99\n", i);
+	ft_putchar('\n');
+	ft_printf("|%-07.u|, 0\n", 0);
 	ft_printf("|%-07.d|, 0\n", 0);
-	*/
-	/*
+	ft_printf("|%+07.d|, 0\n", 0);
+	ft_printf("|%-+07.d|, 0\n", 0);
+	ft_printf("|% 07.d|, 0\n", 0);
+	printf("|%-07.u|, 0\n", 0);
+	printf("|%-07.d|, 0\n", 0);
+	printf("|%+07.d|, 0\n", 0);
+	printf("|%-+07.d|, 0\n", 0);
+	printf("|% 07.d|, 0\n", 0);
+	ft_putchar('\n');
 	// testing 0 flag for ints
-	ft_printf("|%08d|\n", i);
-	ft_printf("|%02d|\n", i);
-	ft_printf("|%01d|\n", i);
-	ft_printf("|%08.5d|\n", i);
-	ft_printf("|%-8.5d|\n", i);
-	ft_printf("|%08.5d|\n", -i);
-	ft_printf("|%-8.5d|\n", -i);
-	ft_printf("|%8.9d|\n", -i);
-	ft_printf("|%-8.9d|\n", i);
-	ft_printf("|%02.d|\n", i);
-	ft_printf("|%01.d|\n", 0);
-	ft_printf("|%08d|\n", -i);
-	ft_printf("|%08.5d|\n", -i);
-	ft_printf("|%.5d|, 99\n", i);
-	ft_printf("|%.0d|, 99\n", i);
-	ft_printf("|%.d|, 0\n", 0);
-	ft_printf("|%7.5d|, 99\n", i);
-	ft_printf("|%7.0d|, 99\n", i);
-	ft_printf("|%7.d|, 0\n", 0);
-	ft_printf("|%-7.5d|, 99\n", i);
-	ft_printf("|%0+7.5d|, 99\n", i);
-	ft_printf("|% 07.0d|, 99\n", i);
-	ft_printf("|%-07.d|, 0\n", 0);
-	*/
+	ft_printf("|%08u|\n", i);
+	ft_printf("|%02u|\n", i);
+	ft_printf("|%01u|\n", i);
+	ft_printf("|%08.5u|\n", i);
+	ft_printf("|%-8.5u|\n", i);
+	ft_printf("|%08.5u|\n", -i);
+	ft_printf("|%-8.5u|\n", -i);
+	ft_printf("|%8.9u|\n", -i);
+	ft_printf("|%-8.9u|\n", i);
+	ft_printf("|%02.u|\n", i);
+	ft_printf("|%01.u|\n", 0);
+	ft_printf("|%08u|\n", -i);
+	ft_printf("|%08.5u|\n", -i);
+	ft_printf("|%.5u|, 99\n", i);
+	ft_printf("|%.0u|, 99\n", i);
+	ft_printf("|%.u|, 0\n", 0);
+	ft_printf("|%7.5u|, 99\n", i);
+	ft_printf("|%7.0u|, 99\n", i);
+	ft_printf("|%7.u|, 0\n", 0);
+	ft_printf("|%-7.5u|, 99\n", i);
+	ft_printf("|%0+7.5u|, 99\n", i);
+	ft_printf("|% 07.0u|, 99\n", i);
+	ft_printf("|%-07.u|, 0\n", 0);
 	/*
 	// testing lengths
 	ft_printf("testing with %lld %hhd %ld %hd\n", i, i, i, i);
@@ -118,7 +125,7 @@ int	main(void)
 	// gross tests
 	ft_printf("%%10% : |%10%|\n");
 	*/
-	ft_printf("%d\n", 1001);
+	//ft_printf("%d\n", 1001);
 
 	/*
 	// testing standard printf
