@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/11 17:47:11 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 20:45:38 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ static size_t		make_list(t_list **list, const char *format, va_list valist)
 	{
 		if (*format == '%')
 		{
-			format++;
+			++format;
 			sub = parse(&format, valist, &len);
 			if (!sub)
 				continue ;
@@ -164,6 +164,7 @@ int					ft_printf(const char *format, ...)
 	strings = 0;
 	total_len = make_list(&strings, format, valist);
 	ft_lstiter(strings, ft_lstputstr_len);
+	ft_lstdel(&strings, ft_lstmemdel);
 	va_end(valist);
 	return (total_len);
 }

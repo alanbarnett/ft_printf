@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 21:38:40 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/11 17:29:16 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 20:56:04 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int					get_conversion(const char **format, t_format *fmt_struct)
 void				get_length(const char **format, t_format *fmt_struct)
 {
 	const char	*flags;
-	char		*index;
+	const char	*index;
 
 	flags = "hHlLjz";
 	if (*format && (index = ft_strchr(flags, **format)))
@@ -163,7 +163,7 @@ void				get_flags(const char **format, t_format *fmt_struct)
 	while ((cur = ft_strchr(flags, **format)))
 	{
 		ret = ret | (1 << (cur - flags));
-		(*format)++;
+		++(*format);
 	}
 	ret = ((ret & (ZERO | MINUS)) == (ZERO | MINUS) ? (ret ^ ZERO) : ret);
 	ret = ((ret & (SPACE | PLUS)) == (SPACE | PLUS) ? (ret ^ SPACE) : ret);
