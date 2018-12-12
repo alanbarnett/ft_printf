@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 17:29:28 by alan              #+#    #+#             */
-/*   Updated: 2018/12/11 16:55:38 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 17:41:27 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,18 @@
 ** Figures out the size of the number to be pulled from va_arg
 ** Uses the length in my format struct, passed as a character
 */
-static unsigned long long	get_nb(char length, va_list valist)
+static unsigned long long	get_nb(char conv, char length, va_list valist)
 {
 	unsigned long long	nb;
 
 	nb = 0;
+	if (conv == 'U')
+	{
+		if (length == 'l' || length == 'L')
+			length = 'L';
+		else if (length == 0)
+			length = 'l';
+	}
 	if (length == 0)
 		nb = va_arg(valist, unsigned int);
 	else if (length == 'l')
@@ -239,8 +246,7 @@ char		*flag_uint(t_format *fmt, va_list valist)
 	unsigned long long	nb;
 	int					len;
 
-	//nb = va_arg(valist, int);
-	nb = get_nb(fmt->length, valist);
+	nb = get_nb(fmt->conv, fmt->length, valist);
 	if (fmt->precision == 0 && nb == 0)
 		len = 0;
 	else
