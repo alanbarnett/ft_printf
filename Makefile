@@ -6,7 +6,7 @@
 #    By: abarnett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/25 22:40:12 by abarnett          #+#    #+#              #
-#    Updated: 2018/12/10 20:03:52 by alan             ###   ########.fr        #
+#    Updated: 2018/12/11 19:28:40 by alan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,14 @@ $(NAME): $(C_OBJS) $(L_OBJS)
 	ar rc $(NAME) $(C_OBJS) $(L_OBJS)
 	ranlib $(NAME)
 
+test: all main.o
+	@ctags -R
+	$(CC) $(CFLAGS) $(C_OBJS) main.o -o test $(LDFLAGS)
+
 clean:
-	@- $(RM) $(C_OBJS) $(L_OBJS)
+	@- $(RM) $(C_OBJS) $(L_OBJS) main.o
 
 fclean: clean
-	@- $(RM) $(NAME)
+	@- $(RM) $(NAME) test
 
 re: fclean all
