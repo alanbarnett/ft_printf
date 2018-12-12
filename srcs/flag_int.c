@@ -13,7 +13,7 @@ static long long	get_nb(char conv, char length, va_list valist)
 	{
 		if (length == 'l' || length == 'L')
 			length = 'L';
-		else if (length == 0)
+		else
 			length = 'l';
 	}
 	if (length == 0)

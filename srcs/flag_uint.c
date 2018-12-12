@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 17:29:28 by alan              #+#    #+#             */
-/*   Updated: 2018/12/11 17:41:27 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 19:25:26 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static unsigned long long	get_nb(char conv, char length, va_list valist)
 	{
 		if (length == 'l' || length == 'L')
 			length = 'L';
-		else if (length == 0)
+		else
 			length = 'l';
 	}
 	if (length == 0)
