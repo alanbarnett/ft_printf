@@ -32,7 +32,8 @@ static long long	get_nb(char length, va_list valist)
 ** First it moves the string, if it's supposed to be left justified,
 ** then it will add the appropriate sign to the string, based on the sign of
 ** the number and the PLUS and SPACE flags,
-**tThen it replaces spaces in between the minus sign and the number with zeros.
+** then it checks if the length of the number is greater than zero,
+** then it replaces spaces in between the minus sign and the number with zeros.
 */
 static void			add_flags(char *str, t_format *fmt, long long nb, int len)
 {
@@ -165,7 +166,7 @@ static void			ft_nbrcpy(long long nb, char *str)
 *******************************************************************************
 */
 /*
-** Function with notes on the lines mixed in
+** // Function with notes on the lines mixed in
 ** static char			*format_nb(t_format *fmt, int nb, int len)
 ** {
 ** 	// if precision is supplied,
@@ -184,7 +185,6 @@ static void			ft_nbrcpy(long long nb, char *str)
 ** 		if (fmt->precision > fmt->width)
 ** 			fmt->width = fmt->precision;
 ** 	}
-** 
 ** 	// if precision is not supplied,
 ** 	// set width to the length of the number w/o sign, if it's less
 ** 	// set precision to the length of the number
