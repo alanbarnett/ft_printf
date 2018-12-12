@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/10 19:37:24 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/11 16:56:27 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,11 @@ char				*ft_strtrim(const char *s);
 int					ft_count_words(const char *str, char del);
 size_t				ft_dstrlen(const char *str, char del);
 char				**ft_strsplit(const char *s, char c);
-size_t				ft_numlen_sign(long num);
-size_t				ft_numlen(long num);
-size_t				ft_numlen_sign_base(long num, int base);
-size_t				ft_numlen_base(long num, int base);
+size_t				ft_numlen_sign(long long num);
+size_t				ft_numlen(long long num);
+size_t				ft_unumlen(unsigned long long num);
+size_t				ft_numlen_sign_base(long long num, int base);
+size_t				ft_numlen_base(long long num, int base);
 void				ft_strapp(char *dst, char c);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int n, int base);
