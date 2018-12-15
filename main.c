@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/14 21:37:38 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/14 22:10:39 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,80 +160,85 @@ int	main(void)
 	// ft_printf("@moulitest: |%#.o %#.0o|\n", 0, 0);
 	// ft_printf("%-#10.o\n", 250);
 	// ft_printf("%-#10.o\n", 0);
-//	ft_printf("%#-5.o\n", 0);
-//	ft_printf("%#5.o\n", 0);
-//	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 0, 0, 0, 0, 0);
-//	ft_printf("%o\t%#o\t%.o\t%#.o\t%#6.4o\n", 7, 7, 7, 7, 7);
-//	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 8, 8, 8, 8, 512);
-//	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.2o\n", 8, 8, 8, 8, 512);
-//	ft_printf("\n");
-//	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 0, 0, 0, 0, 0);
-//	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 7, 7, 7, 7, 7);
-//	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 8, 8, 8, 8, 8);
-//	ft_printf("\n");
-//	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 0, 0, 0, 0, 0);
-//	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 7, 7, 7, 7, 7);
-//	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 8, 8, 8, 8, 8);
-//	ft_printf("\n");
-	ft_printf("%#.4x\n", 42);
-	ft_printf("%#.4x\n", 255);
-	printf("%#.4x\n", 42);
-	printf("%#.4x\n\n", 255);
-
-	ft_printf("%#6.4x\n", 42);
-	ft_printf("%#6.4x\n", 255);
-	printf("%#6.4x\n", 42);
-	printf("%#6.4x\n\n", 255);
-
-	ft_printf("%#4x\n", 42);
-	ft_printf("%#4x\n", 255);
-	printf("%#4x\n", 42);
-	printf("%#4x\n\n", 255);
-
-	ft_printf("%#6x\n", 42);
-	ft_printf("%#6x\n", 255);
-	printf("%#6x\n", 42);
-	printf("%#6x\n\n", 255);
-
-	ft_printf("%.4x\n", 42);
-	ft_printf("%.4x\n", 255);
-	printf("%.4x\n", 42);
-	printf("%.4x\n\n", 255);
-
-	ft_printf("%6.4x\n", 42);
-	ft_printf("%6.4x\n", 255);
-	printf("%6.4x\n", 42);
-	printf("%6.4x\n\n", 255);
-
-	ft_printf("%4x\n", 42);
-	ft_printf("%4x\n", 255);
-	printf("%4x\n", 42);
-	printf("%4x\n\n", 255);
-
-	ft_printf("%6x\n", 42);
-	ft_printf("%6x\n", 255);
-	printf("%6x\n", 42);
-	printf("%6x\n\n", 255);
-
-	ft_printf("%0.4x\n", 42);
-	ft_printf("%0.4x\n", 255);
-	printf("%0.4x\n", 42);
-	printf("%0.4x\n\n", 255);
-
-	ft_printf("%06.4x\n", 42);
-	ft_printf("%06.4x\n", 255);
-	printf("%06.4x\n", 42);
-	printf("%06.4x\n\n", 255);
-
-	ft_printf("%#04x\n", 42);
-	ft_printf("%#04x\n", 255);
-	printf("%#04x\n", 42);
-	printf("%#04x\n\n", 255);
-
-	ft_printf("%#06x\n", 42);
-	ft_printf("%#06x\n", 255);
-	printf("%#06x\n", 42);
-	printf("%#06x\n\n", 255);
+/*
+**	ft_printf("%#-5.o\n", 0);
+**	ft_printf("%#5.o\n", 0);
+**	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 0, 0, 0, 0, 0);
+**	ft_printf("%o\t%#o\t%.o\t%#.o\t%#6.4o\n", 7, 7, 7, 7, 7);
+**	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 8, 8, 8, 8, 512);
+**	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.2o\n", 8, 8, 8, 8, 512);
+**	ft_printf("\n");
+**	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 0, 0, 0, 0, 0);
+**	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 7, 7, 7, 7, 7);
+**	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 8, 8, 8, 8, 8);
+**	ft_printf("\n");
+**	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 0, 0, 0, 0, 0);
+**	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 7, 7, 7, 7, 7);
+**	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 8, 8, 8, 8, 8);
+**	ft_printf("\n");
+** 	ft_printf("%#.4x\n", 42);
+** 	ft_printf("%#.4x\n", 255);
+** 	printf("%#.4x\n", 42);
+** 	printf("%#.4x\n\n", 255);
+**
+** 	ft_printf("%#6.4x\n", 42);
+** 	ft_printf("%#6.4x\n", 255);
+** 	printf("%#6.4x\n", 42);
+** 	printf("%#6.4x\n\n", 255);
+**
+** 	ft_printf("%#4x\n", 42);
+** 	ft_printf("%#4x\n", 255);
+** 	printf("%#4x\n", 42);
+** 	printf("%#4x\n\n", 255);
+**
+** 	ft_printf("%#6x\n", 42);
+** 	ft_printf("%#6x\n", 255);
+** 	printf("%#6x\n", 42);
+** 	printf("%#6x\n\n", 255);
+**
+** 	ft_printf("%.4x\n", 42);
+** 	ft_printf("%.4x\n", 255);
+** 	printf("%.4x\n", 42);
+** 	printf("%.4x\n\n", 255);
+**
+** 	ft_printf("%6.4x\n", 42);
+** 	ft_printf("%6.4x\n", 255);
+** 	printf("%6.4x\n", 42);
+** 	printf("%6.4x\n\n", 255);
+**
+** 	ft_printf("%4x\n", 42);
+** 	ft_printf("%4x\n", 255);
+** 	printf("%4x\n", 42);
+** 	printf("%4x\n\n", 255);
+**
+** 	ft_printf("%6x\n", 42);
+** 	ft_printf("%6x\n", 255);
+** 	printf("%6x\n", 42);
+** 	printf("%6x\n\n", 255);
+**
+** 	ft_printf("%0.4x\n", 42);
+** 	ft_printf("%0.4x\n", 255);
+** 	printf("%0.4x\n", 42);
+** 	printf("%0.4x\n\n", 255);
+**
+** 	ft_printf("%06.4x\n", 42);
+** 	ft_printf("%06.4x\n", 255);
+** 	printf("%06.4x\n", 42);
+** 	printf("%06.4x\n\n", 255);
+**
+** 	ft_printf("%#04x\n", 42);
+** 	ft_printf("%#04x\n", 255);
+** 	printf("%#04x\n", 42);
+** 	printf("%#04x\n\n", 255);
+**
+** 	ft_printf("%#06x\n", 42);
+** 	ft_printf("%#06x\n", 255);
+** 	printf("%#06x\n", 42);
+** 	printf("%#06x\n\n", 255);
+*/
+	// yuck tests
+	ft_printf("");
+	ft_printf("%");
 
 	/*
 	// testing standard printf
