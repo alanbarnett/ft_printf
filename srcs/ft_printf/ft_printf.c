@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/14 18:29:59 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/14 23:25:37 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ static t_format		*init(void)
 ** conversion, the fmt_struct, and the valist. it returns the string that the
 ** conversion function makes.
 **
+** It doesn't need to check for a valid index, that is done in the calling
+** function
+**
 ** Current copy of flags string: (UPDATE IF YOU CHANGE IT)
 ** flags = "cCsS%dDiuUboOxXp";
 */
@@ -87,16 +90,16 @@ static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 	p[13] = flag_hex;
 	p[14] = flag_hex;
 	p[15] = flag_pointer;
-	if (index != -1)
-		return (p[index](fmt_struct, valist));
-	// TODO make sure this doesn't cause a problem when freeing
-	return (0);
+	return (p[index](fmt_struct, valist));
 }
 
 /*
 **	Parse takes a pointer to the format string at the format specifier so that
 **	when it moves the pointer to the end of the format specifier, that change
 **	can be reflected in the calling function.
+**
+**	I send in len because I'd just have to use strlen to get it later, when
+**	I've already calculated it now
 */
 
 static char			*parse(const char **format, va_list valist, size_t *len)
@@ -106,14 +109,17 @@ static char			*parse(const char **format, va_list valist, size_t *len)
 	int			index;
 
 	fmt_struct = init();
+	ret = 0;
 	get_flags(format, fmt_struct);
 	get_width_precis(format, fmt_struct);
 	get_length(format, fmt_struct);
 	index = get_conversion(format, fmt_struct);
-	ret = dispatch(index, fmt_struct, valist);
-	// TODO remember why I do this
-	if (ret)
-		*len = (size_t)fmt_struct->width;
+	if (index != -1)
+	{
+		ret = dispatch(index, fmt_struct, valist);
+		if (ret)
+			*len = (size_t)fmt_struct->width;
+	}
 	free(fmt_struct);
 	return (ret);
 }
@@ -122,6 +128,11 @@ static char			*parse(const char **format, va_list valist, size_t *len)
 ** Make a linked list of substrings using a format string and va_list
 ** Update the list with a double pointer
 ** Return the combined length of the substrings
+**
+**
+** potential bug when malloc returns 0 from strndup, and whatever the length
+** was supposed to be gets added, and potentially used for malloc in other
+** printfs.
 */
 
 static size_t		make_list(t_list **list, const char *format, va_list valist)
