@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/11 20:52:14 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/13 23:04:29 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
+void				ft_strupper(char *);
 
 /*
 ** Section Two
@@ -90,6 +91,7 @@ size_t				ft_numlen(long long num);
 size_t				ft_unumlen(unsigned long long num);
 size_t				ft_numlen_sign_base(long long num, int base);
 size_t				ft_numlen_base(long long num, int base);
+size_t				ft_unumlen_base(unsigned long long num, int base);
 void				ft_strapp(char *dst, char c);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int n, int base);
