@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/13 23:04:29 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/14 21:43:23 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
-void				ft_strupper(char *);
+void				ft_strupper(char *str);
 
 /*
 ** Section Two
