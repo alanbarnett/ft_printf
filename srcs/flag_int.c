@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flag_int.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/14 04:36:34 by alan              #+#    #+#             */
+/*   Updated: 2018/12/14 18:21:36 by alan             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libftprintf.h"
 
 /*
 ** Figures out the size of the number to be pulled from va_arg
 ** Uses the length in my format struct, passed as a character
+** Checks for capital as a shortcut for long
 */
+
 static long long	get_nb(char conv, char length, va_list valist)
 {
 	long long	nb;
@@ -42,6 +56,7 @@ static long long	get_nb(char conv, char length, va_list valist)
 ** then it checks if the length of the number is greater than zero,
 ** then it replaces spaces in between the minus sign and the number with zeros.
 */
+
 static void			add_flags(char *str, t_format *fmt, long long nb, int len)
 {
 	if (!(fmt->flags & MINUS))
@@ -75,6 +90,7 @@ static void			add_flags(char *str, t_format *fmt, long long nb, int len)
 ** each step. Once the number is small enough, it will add the ascii at the
 ** character position. It does not care about the sign of the number.
 */
+
 static void			ft_nbrcpy(long long nb, char *str)
 {
 	if (nb >= 10 || nb <= -10)
@@ -220,6 +236,7 @@ static void			ft_nbrcpy(long long nb, char *str)
 ** 	return (ft_strinit(fmt->width, ' '));
 ** }
 */
+
 static char			*format_nb(t_format *fmt, long long nb, int len)
 {
 	if (fmt->precision != -1)
@@ -264,6 +281,7 @@ static char			*format_nb(t_format *fmt, long long nb, int len)
 **
 ** Then the sign and zeros are added to the string.
 */
+
 char				*flag_int(t_format *fmt, va_list valist)
 {
 	char		*str;

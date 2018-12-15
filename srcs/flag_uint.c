@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_uint.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
+/*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 17:29:28 by alan              #+#    #+#             */
-/*   Updated: 2018/12/11 19:25:26 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/14 18:21:38 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 /*
 ** Figures out the size of the number to be pulled from va_arg
 ** Uses the length in my format struct, passed as a character
+** Checks for capital as a shortcut for long
 */
+
 static unsigned long long	get_nb(char conv, char length, va_list valist)
 {
 	unsigned long long	nb;
@@ -52,6 +54,7 @@ static unsigned long long	get_nb(char conv, char length, va_list valist)
 ** then it checks if the length of the number is greater than zero,
 ** then it replaces spaces up to the number with zeros.
 */
+
 static void					add_flags(char *str, t_format *fmt, int len)
 {
 	if (!(fmt->flags & MINUS))
