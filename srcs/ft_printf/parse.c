@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 21:38:40 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/14 22:18:34 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/14 22:49:47 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int					get_conversion(const char **format, t_format *fmt_struct)
 	char		*index;
 
 	flags = CONVS;
-	if (*format && (index = ft_strchr(flags, **format)))
+	if (**format && (index = ft_strchr(flags, **format)))
 	{
 		(*format)++;
 		fmt_struct->conv = *index;
@@ -95,7 +95,7 @@ void				get_length(const char **format, t_format *fmt_struct)
 	const char	*index;
 
 	flags = "hHlLjz";
-	if (*format && (index = ft_strchr(flags, **format)))
+	if (**format && (index = ft_strchr(flags, **format)))
 	{
 		if (**format == 'h' && *(*format + 1) == 'h')
 		{
@@ -126,13 +126,13 @@ void				get_length(const char **format, t_format *fmt_struct)
 
 void				get_width_precis(const char **format, t_format *fmt_struct)
 {
-	if (*format && ft_isdigit(**format))
+	if (**format && ft_isdigit(**format))
 	{
 		fmt_struct->width = ft_atoi(*(char **)format);
 		while (*format && ft_isdigit(**format))
 			++(*format);
 	}
-	if (*format && **format == '.')
+	if (**format && **format == '.')
 	{
 		++(*format);
 		fmt_struct->precision = ft_atoi(*(char **)format);
