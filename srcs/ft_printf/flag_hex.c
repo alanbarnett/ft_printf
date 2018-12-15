@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 22:09:07 by alan              #+#    #+#             */
-/*   Updated: 2018/12/14 04:20:40 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/14 21:27:27 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,17 +219,19 @@ static void					ft_unbrcpy_hex(unsigned long long nb, char *str)
 static char					*format_nb(t_format *fmt, unsigned long long nb,
 										int len)
 {
-	if (fmt->flags & SHARP && nb != 0)
-		len += 2;
 	if (fmt->precision != -1)
 	{
 		if (fmt->precision < len)
 			fmt->precision = len;
+		if (fmt->flags & SHARP)
+			fmt->precision += 2;
 		if (fmt->precision > fmt->width)
 			fmt->width = fmt->precision;
 	}
 	else
 	{
+		if (fmt->flags & SHARP && nb != 0)
+			len += 2;
 		fmt->width = ft_max(fmt->width, len);
 		fmt->precision = len;
 		if (fmt->flags & ZERO)
