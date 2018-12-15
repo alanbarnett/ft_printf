@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 22:09:07 by alan              #+#    #+#             */
-/*   Updated: 2018/12/14 21:37:06 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/14 22:24:42 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,9 +195,9 @@ static void					ft_unbrcpy_hex(unsigned long long nb, char *str)
 ** 	{
 ** 		if (fmt->precision < len)
 ** 			fmt->precision = len;
-**		// Add to the precision if there's alternate form
+**		// Add to the precision if alternate form and the number isn't 0
 **		//	the alternate form goes around the number
-** 		if (fmt->flags & SHARP)
+** 		if (fmt->flags & SHARP && nb != 0)
 ** 			fmt->precision += 2;
 ** 		if (fmt->precision > fmt->width)
 ** 			fmt->width = fmt->precision;
@@ -231,7 +231,7 @@ static char					*format_nb(t_format *fmt, unsigned long long nb,
 	{
 		if (fmt->precision < len)
 			fmt->precision = len;
-		if (fmt->flags & SHARP)
+		if (fmt->flags & SHARP && nb != 0)
 			fmt->precision += 2;
 		if (fmt->precision > fmt->width)
 			fmt->width = fmt->precision;
