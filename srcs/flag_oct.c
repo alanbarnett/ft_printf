@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 17:27:01 by alan              #+#    #+#             */
-/*   Updated: 2018/12/14 16:18:27 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/14 18:20:06 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static unsigned long long	get_nb(char conv, char length, va_list valist)
 ** This function adds the zeros from a format struct to a string
 **
 ** First it moves the string, if it's supposed to be left justified,
+** then it takes care of the case where you would need a zero, but len is zero,
 ** then it checks if the length of the number is greater than zero,
 ** then it replaces spaces up to the number with zeros.
 */
@@ -60,7 +61,7 @@ static void					add_flags(char *str, t_format *fmt, int len)
 	if (!(fmt->flags & MINUS))
 		str += (fmt->width - fmt->precision);
 	if (fmt->flags & SHARP && len == 0)
-		++len;
+		*str++ = '0';
 	if (len)
 	{
 		while (str && *str == ' ')
@@ -188,6 +189,17 @@ static void					ft_unbrcpy_oct(unsigned long long nb, char *str)
 ** 	// 	set width to precision
 ** 	if (fmt->precision != -1)
 ** 	{
+** 		// since precision is defined, we only add a zero when it's less than
+** 		//	or equal to the length
+** 		// if it's greater than len, then there will already be extra zeros
+** 		// if len is 0, precision will be 1 already (taken care of earlier)
+** 		//		ONLY IF there's the # flag on ^^^
+** 		// This increases len if precision has been defined, and it is the
+** 		// same length as the len. This adds an extra zero when the number is
+** 		// the same size (or less) than the precision (i.e. it doesn't start
+** 		// with a zero)
+** 		if (fmt->flags & SHARP && fmt->precision <= len)
+** 			++len;
 ** 		if (fmt->precision < len)
 ** 			fmt->precision = len;
 ** 		if (fmt->precision > fmt->width)
@@ -200,6 +212,11 @@ static void					ft_unbrcpy_oct(unsigned long long nb, char *str)
 ** 	// 	set precision to width
 ** 	else
 ** 	{
+** 		// since precision is not defined, we only care if the number is zero
+** 		// in cases where precision is not defined, the only time we will not
+** 		// add an extra zero is in the case of the number being zero
+** 		if (fmt->flags & SHARP && nb != 0)
+** 			++len;
 ** 		fmt->width = ft_max(fmt->width, len);
 ** 		fmt->precision = len;
 ** 		if (fmt->flags & ZERO)
@@ -216,11 +233,6 @@ static char					*format_nb(t_format *fmt, unsigned long long nb,
 {
 	if (fmt->precision != -1)
 	{
-		// if precision is defined, we care if it will be adding extra zeros
-		// since precision is defined, we only add a zero when it's less than
-		// or equal to the length
-		// They're both in here at least zero, which means at any combination
-		// of them is okay
 		if (fmt->flags & SHARP && fmt->precision <= len)
 			++len;
 		if (fmt->precision < len)
@@ -230,9 +242,6 @@ static char					*format_nb(t_format *fmt, unsigned long long nb,
 	}
 	else
 	{
-		// since precision is not defined, we only care if the number is zero
-		// in cases where precision is not defined, the only time we will not
-		// add an extra zero is in the case of the number being zero
 		if (fmt->flags & SHARP && nb != 0)
 			++len;
 		fmt->width = ft_max(fmt->width, len);
@@ -252,6 +261,10 @@ static char					*format_nb(t_format *fmt, unsigned long long nb,
 ** supposed to happen with these values).
 ** Sign is not included in the length, this is just the length of digits.
 **
+** If the len has been set to zero,
+**	increase precision by one, if there is alternate form and no number to be
+**	printed (0 precision, 0 number)
+**
 ** Then the struct gets formatted for the number and it's length
 **
 ** Then the number is copied into the string
@@ -269,7 +282,11 @@ char						*flag_oct(t_format *fmt, va_list valist)
 
 	nb = get_nb(fmt->conv, fmt->length, valist);
 	if (fmt->precision == 0 && nb == 0)
+	{
 		len = 0;
+		if (fmt->flags & SHARP)
+			++fmt->precision;
+	}
 	else
 		len = ft_unumlen_base(nb, 8);
 	str = format_nb(fmt, nb, len);
