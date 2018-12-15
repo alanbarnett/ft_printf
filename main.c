@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/14 15:53:26 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/14 17:15:50 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,8 @@ int	main(void)
 	// ft_printf("@moulitest: |%#.o %#.0o|\n", 0, 0);
 	// ft_printf("%-#10.o\n", 250);
 	// ft_printf("%-#10.o\n", 0);
-	ft_printf("%#.o\n", 0);
+	ft_printf("%#-5.o\n", 0);
+	ft_printf("%#5.o\n", 0);
 	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 0, 0, 0, 0, 0);
 	ft_printf("%o\t%#o\t%.o\t%#.o\t%#6.4o\n", 7, 7, 7, 7, 7);
 	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 8, 8, 8, 8, 512);
