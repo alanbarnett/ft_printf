@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/11 21:03:25 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/14 15:53:26 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,38 @@ int	main(void)
 	//ft_printf("%d\n", 1001);
 	// testing U
 	//ft_printf("|%hU|\n", 4294967296);
+	// ft_printf("%o\n", 255);
+	// ft_printf("%O\n", 255);
+	// ft_printf("%#o\n", 0);
+	// ft_printf("%#O\n", 0);
+	// ft_printf("");
+	// ft_printf("%x\n", 255);
+	// ft_printf("%X\n", 255);
+	// ft_printf("%#x\n", 0);
+	// ft_printf("%#X\n", 0);
+	// ft_printf("%#x\n", 255);
+	// ft_printf("%#X\n", 158);
+	// ft_printf("%#05x\n", 255);
+	// ft_printf("%#05X\n", 158);
+	// ft_printf("%#6o\n", 2500);
+	// ft_printf("%-#6o\n", 2500);
+	// ft_printf("@moulitest: |%#.o %#.0o|\n", 0, 0);
+	// ft_printf("%-#10.o\n", 250);
+	// ft_printf("%-#10.o\n", 0);
+	ft_printf("%#.o\n", 0);
+	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 0, 0, 0, 0, 0);
+	ft_printf("%o\t%#o\t%.o\t%#.o\t%#6.4o\n", 7, 7, 7, 7, 7);
+	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 8, 8, 8, 8, 512);
+	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.2o\n", 8, 8, 8, 8, 512);
+	ft_printf("\n");
+	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 0, 0, 0, 0, 0);
+	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 7, 7, 7, 7, 7);
+	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 8, 8, 8, 8, 8);
+	ft_printf("\n");
+	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 0, 0, 0, 0, 0);
+	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 7, 7, 7, 7, 7);
+	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 8, 8, 8, 8, 8);
+	ft_printf("\n");
 
 	/*
 	// testing standard printf
