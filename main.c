@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/14 21:21:39 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/14 21:37:38 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,15 +225,15 @@ int	main(void)
 	printf("%06.4x\n", 42);
 	printf("%06.4x\n\n", 255);
 
-	ft_printf("%04x\n", 42);
-	ft_printf("%04x\n", 255);
-	printf("%04x\n", 42);
-	printf("%04x\n\n", 255);
+	ft_printf("%#04x\n", 42);
+	ft_printf("%#04x\n", 255);
+	printf("%#04x\n", 42);
+	printf("%#04x\n\n", 255);
 
-	ft_printf("%06x\n", 42);
-	ft_printf("%06x\n", 255);
-	printf("%06x\n", 42);
-	printf("%06x\n\n", 255);
+	ft_printf("%#06x\n", 42);
+	ft_printf("%#06x\n", 255);
+	printf("%#06x\n", 42);
+	printf("%#06x\n\n", 255);
 
 	/*
 	// testing standard printf
