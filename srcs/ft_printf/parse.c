@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 21:38:40 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/11 21:34:13 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/14 22:18:34 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void				get_flags(const char **format, t_format *fmt_struct)
 
 	flags = "#0-+ ";
 	ret = 0;
-	while ((cur = ft_strchr(flags, **format)))
+	while (**format && (cur = ft_strchr(flags, **format)))
 	{
 		ret = ret | (1 << (cur - flags));
 		++(*format);
