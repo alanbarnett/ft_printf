@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/14 17:15:50 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/17 06:47:48 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ int	main(void)
 	// gross tests
 	ft_printf("%%10% : |%10%|\n");
 	*/
+	/*
 	//ft_printf("%d\n", 1001);
 	// testing U
 	//ft_printf("|%hU|\n", 4294967296);
@@ -160,21 +161,37 @@ int	main(void)
 	// ft_printf("@moulitest: |%#.o %#.0o|\n", 0, 0);
 	// ft_printf("%-#10.o\n", 250);
 	// ft_printf("%-#10.o\n", 0);
-	ft_printf("%#-5.o\n", 0);
-	ft_printf("%#5.o\n", 0);
-	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 0, 0, 0, 0, 0);
-	ft_printf("%o\t%#o\t%.o\t%#.o\t%#6.4o\n", 7, 7, 7, 7, 7);
-	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 8, 8, 8, 8, 512);
-	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.2o\n", 8, 8, 8, 8, 512);
-	ft_printf("\n");
-	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 0, 0, 0, 0, 0);
-	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 7, 7, 7, 7, 7);
-	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 8, 8, 8, 8, 8);
-	ft_printf("\n");
-	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 0, 0, 0, 0, 0);
-	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 7, 7, 7, 7, 7);
-	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 8, 8, 8, 8, 8);
-	ft_printf("\n");
+	// */
+/*
+**	ft_printf("%#-5.o\n", 0);
+**	ft_printf("%#5.o\n", 0);
+**	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 0, 0, 0, 0, 0);
+**	ft_printf("%o\t%#o\t%.o\t%#.o\t%#6.4o\n", 7, 7, 7, 7, 7);
+**	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 8, 8, 8, 8, 512);
+**	ft_printf("%o\t%#o\t%.o\t%#.o\t%#.2o\n", 8, 8, 8, 8, 512);
+**	ft_printf("\n");
+**	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 0, 0, 0, 0, 0);
+**	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 7, 7, 7, 7, 7);
+**	ft_printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 8, 8, 8, 8, 8);
+**	ft_printf("\n");
+**	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 0, 0, 0, 0, 0);
+**	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 7, 7, 7, 7, 7);
+**	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 8, 8, 8, 8, 8);
+**	ft_printf("\n");
+*/
+	// int i;
+
+	// i = 9;
+	// ft_printf("%p: %d\n", &i, i);
+	// printf("%p: %d\n", &i, i);
+	ft_printf("%f\n", 14.75);
+	ft_printf("%.4f\n", 1997.0918);
+	ft_printf("%.9f\n", 217.4444444);
+	ft_printf("%.12lf\n", 0.000000000252628);
+	printf("%f\n", 14.75);
+	printf("%.4f\n", 1997.0918);
+	printf("%.9f\n", 217.4444444);
+	printf("%.12lf\n", 0.000000000252628);
 
 	/*
 	// testing standard printf
