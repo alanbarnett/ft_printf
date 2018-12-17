@@ -6,16 +6,15 @@
 #    By: abarnett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/25 22:40:12 by abarnett          #+#    #+#              #
-#    Updated: 2018/12/14 18:25:22 by alan             ###   ########.fr        #
+#    Updated: 2018/12/17 06:55:51 by alan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME :=			libftprintf.a
 
-SRC_DIR :=		srcs
 INCLUDE_DIR :=	./includes
-C_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./$(SRC_DIR)/*.c))
-L_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./libft/$(SRC_DIR)/*.c))
+L_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./srcs/*.c))
+C_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./srcs/ft_printf/*.c))
 
 CFLAGS +=		-g -Wall -Wextra -Werror -I$(INCLUDE_DIR)
 LDFLAGS +=		-L./ -lftprintf
@@ -24,8 +23,8 @@ LDFLAGS +=		-L./ -lftprintf
 
 all: $(NAME)
 
-$(NAME): $(C_OBJS) $(L_OBJS)
-	ar rc $(NAME) $(C_OBJS) $(L_OBJS)
+$(NAME): $(L_OBJS) $(C_OBJS)
+	ar rc $(NAME) $(L_OBJS) $(C_OBJS)
 	ranlib $(NAME)
 
 test: all main.o
