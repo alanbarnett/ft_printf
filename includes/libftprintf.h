@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/14 18:32:24 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/15 16:14:22 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define PLUS 0x8
 # define SPACE 0x10
 
-# define CONVS "cCsS%dDiuUboOxXp"
+# define CONVS "cCsS%dDiuUboOxXpf"
 
 typedef struct		s_format
 {
@@ -46,6 +46,7 @@ char				*flag_bin(t_format *fmt, va_list valist);
 char				*flag_oct(t_format *fmt, va_list valist);
 char				*flag_hex(t_format *fmt, va_list valist);
 char				*flag_pointer(t_format *fmt, va_list valist);
+char				*flag_float(t_format *fmt, va_list valist);
 
 /*
 ** parse functions

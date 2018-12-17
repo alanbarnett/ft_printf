@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/14 18:29:59 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/15 15:21:24 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ static t_format		*init(void)
 ** conversion function makes.
 **
 ** Current copy of flags string: (UPDATE IF YOU CHANGE IT)
-** flags = "cCsS%dDiuUboOxXp";
+** flags = "cCsS%dDiuUboOxXpf";
 */
 
 static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 {
-	static char	*(*p[16])();
+	static char	*(*p[17])();
 
 	p[0] = flag_char;
 	p[1] = flag_char;
@@ -87,6 +87,7 @@ static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 	p[13] = flag_hex;
 	p[14] = flag_hex;
 	p[15] = flag_pointer;
+	p[16] = flag_float;
 	if (index != -1)
 		return (p[index](fmt_struct, valist));
 	// TODO make sure this doesn't cause a problem when freeing
