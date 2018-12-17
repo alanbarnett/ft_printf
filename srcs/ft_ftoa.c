@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:37:04 by alan              #+#    #+#             */
-/*   Updated: 2018/12/17 04:58:38 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/17 06:46:17 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,18 @@ static long		get_fraction(int exp, long mantissa, int precision)
 	int			index;
 	int			max;
 	double		multiple;
-	long		fraction;
+	double		fraction;
 
+	// maybe subtract precision in this equation by some expression with
+	// exponent, if it's negative. after a certain amount I won't be affecting
+	// many numbers at all, and this would allow for very small exponents
 	multiple = (double)ft_pow(10, precision);
-	// index is the bit we're looking at, starting at the end of intpart
-	index = 51 - exp;
+	// index is the bit we're looking at, starting at zero
+	index = 1;
+	// add to index the negative offset from exponent, to get aligned with the
+	// front of the mantissa
+	if (exp < 0)
+		index += -(exp);
 	// Max index is ((precision * 3) + (precision / 3))
 	// if the number is not a multiple of 3, add 1
 	// 3 adds 1, 4 adds 2
@@ -90,18 +97,32 @@ static long		get_fraction(int exp, long mantissa, int precision)
 	// 10,4
 	//
 	// ceil(precision / 3)
-	max = (precision * 3) + ft_ceil((double)(precision / 3));
-	ft_putnbr(max);
-	ft_putchar('\n');
+	// adding one to precision to get better rounding behavior
+	max = ((precision + 1) * 3) + ft_ceil((double)((precision + 1) / 3));
 	fraction = 0;
-	while (index >= 0)
+	// If there's no intpart (exp < 0) and the fractional part is not just zero
+	// (by the fact that the mantissa exists), then add the implied 1 into the
+	// fractional part
+	// using index - 1 because index is already set to be one after where the
+	// implied 1 would exist
+	if (exp < 0 && mantissa)
+		fraction += multiple / (1L << (index - 1));
+	// max is the number of times starting at 1,
+	// index is the number of times starting at 1,
+	// index should go up to and including max
+	while (index <= max)
 	{
-		if (mantissa & (1L << index))
-			fraction +=  multiple / (1L << (52 - exp - index));
-		--index;
+		// to isolate the bit, we take 52 (highest bit in mantissa part), minus
+		// exponent (to offset the intpart of the binary stuff), minus index
+		// (to scooch down the mantissa)
+		if (mantissa & (1L << ((52 - exp) - index)))
+			// index + 1 because we're starting at 1/2, and index of 0 means
+			// there's an initial bit
+			fraction += multiple / (1L << index);
+		++index;
 	}
 
-	return (fraction);
+	return(ft_round(fraction));
 }
 
 static char		*make_string(int exp, long mantissa, int precision)
@@ -110,9 +131,13 @@ static char		*make_string(int exp, long mantissa, int precision)
 	long	fraction;
 	char	*str;
 
-	intpart = (mantissa >> (52 - exp));
-	if (intpart)
-		intpart |= 1 << (exp);
+	intpart = 0;
+	if (exp > 0)
+	{
+		intpart = (mantissa >> (52 - exp));
+		if (intpart)
+			intpart |= 1 << (exp);
+	}
 
 	fraction = get_fraction(exp, mantissa, precision);
 
