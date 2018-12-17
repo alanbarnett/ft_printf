@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/13 23:04:29 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/17 04:54:12 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ size_t				ft_unumlen_base(unsigned long long num, int base);
 void				ft_strapp(char *dst, char c);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int n, int base);
+char				*ft_ftoa(double nb, int precision);
 void				ft_putchar(char c);
 void				ft_putstr(const char *s);
 void				ft_putendl(const char *s);
@@ -118,6 +119,9 @@ int					ft_vamin(int params, ...);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);
 long				ft_abs(long nb);
+long				ft_pow(int a, int b);
+int					ft_floor(double roundee);
+int					ft_ceil(double roundee);
 
 /*
 ** Bonus
