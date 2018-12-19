@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/17 06:47:48 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/18 20:02:22 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,13 +185,18 @@ int	main(void)
 	// ft_printf("%p: %d\n", &i, i);
 	// printf("%p: %d\n", &i, i);
 	ft_printf("%f\n", 14.75);
+	ft_printf("%f\n", -14.75);
 	ft_printf("%.4f\n", 1997.0918);
 	ft_printf("%.9f\n", 217.4444444);
 	ft_printf("%.12lf\n", 0.000000000252628);
+	ft_printf("%.15lf\n", 0.000000000252628);
+	ft_printf("%.20lf\n", 0.000000000252628);
+	/*
 	printf("%f\n", 14.75);
 	printf("%.4f\n", 1997.0918);
 	printf("%.9f\n", 217.4444444);
 	printf("%.12lf\n", 0.000000000252628);
+	*/
 
 	/*
 	// testing standard printf
