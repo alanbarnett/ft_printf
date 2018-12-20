@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:37:04 by alan              #+#    #+#             */
-/*   Updated: 2018/12/20 01:02:18 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/20 01:11:51 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static long		get_fraction(int exp, long mantissa, int precision)
 	return(ft_round(fraction));
 }
 
-static char		*make_string(int exp, long mantissa, int precision)
+static char		*make_string(int sign, int exp, long mantissa, int precision)
 {
 	long	intpart;
 	int		len_of_intpart;
@@ -117,9 +117,19 @@ static char		*make_string(int exp, long mantissa, int precision)
 		intpart = (mantissa >> (52 - exp));
 	len_of_intpart = ft_numlen(intpart);
 	fraction = get_fraction(exp, mantissa, precision);
-	str = ft_strnew(len_of_intpart + 1 + precision);
-	ft_nbrcpy_p(intpart, len_of_intpart, str + len_of_intpart - 1);
-	ft_memcpy(str + len_of_intpart, ".", 1);
+	if (sign)
+	{
+		++len_of_intpart;
+		str = ft_strnew(len_of_intpart + 1 + precision);
+		*str = '-';
+		ft_nbrcpy_p(intpart, len_of_intpart - 1, str + len_of_intpart - 1);
+	}
+	else
+	{
+		str = ft_strnew(len_of_intpart + 1 + precision);
+		ft_nbrcpy_p(intpart, len_of_intpart, str + len_of_intpart - 1);
+	}
+	str[len_of_intpart] = '.';
 	ft_nbrcpy_p(fraction, precision, str + len_of_intpart + precision); 
 	return (str);
 }
@@ -135,17 +145,16 @@ char			*ft_ftoa(double nb, int precision)
 	unb.d = nb;
 
 	// and selects only the first bit for the sign
-	sign = (unb.l & 0x8000000000000000);
+	// !! will turn it off and back on, setting it to 0 or 1
+	sign = !!(unb.l & 0x8000000000000000);
 	// shift by 52 to isolate the exponent, and to isolate exponent, minus bias
 	exp = ((unb.l >> 52) & 0x7ff) - 1023;
 	// and to isolate mantissa
 	mantissa = (unb.l & 0x000fffffffffffff);
 
-	(void)sign;
-
 	if (exp != 0x7FF && !(exp == 0 && mantissa == 0))
 		mantissa |= (1L << 52);
-	str = make_string(exp, mantissa, precision);
+	str = make_string(sign, exp, mantissa, precision);
 
 	return (str);
 }
