@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:37:04 by alan              #+#    #+#             */
-/*   Updated: 2018/12/20 00:55:46 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/20 01:02:18 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,6 @@ static void		ft_nbrcpy_p(long nb, int precision, char *str)
 		*str = (nb % 10 + '0');
 }
 
-static char		*fill_string(long intpart, long fraction, int precision)
-{
-	char	*str;
-	int		len_of_intpart;
-	
-	len_of_intpart = ft_numlen(intpart);
-
-	str = ft_strnew(len_of_intpart + 1 + precision);
-
-	ft_nbrcpy_p(intpart, len_of_intpart, str + len_of_intpart - 1);
-	ft_memcpy(str + len_of_intpart, ".", 1);
-	ft_nbrcpy_p(fraction, precision, str + len_of_intpart + precision); 
-
-	return (str);
-}
-
 static long		get_fraction(int exp, long mantissa, int precision)
 {
 	int			index;
@@ -83,6 +67,7 @@ static long		get_fraction(int exp, long mantissa, int precision)
 	// exponent, if it's negative. after a certain amount I won't be affecting
 	// many numbers at all, and this would allow for very small exponents
 	multiple.d = (double)ft_pow(10, precision);
+	/*
 	// Max index is ((precision * 3) + (precision / 3))
 	// if the number is not a multiple of 3, add 1
 	// 3 adds 1, 4 adds 2
@@ -101,6 +86,7 @@ static long		get_fraction(int exp, long mantissa, int precision)
 	//
 	// ceil(precision / 3)
 	// adding one to precision to get better rounding behavior
+	*/
 	max = ((precision + 1) * 3) + ft_ceil((double)((precision + 1) / 3));
 	fraction = 0;
 	// max is the number of times starting at 1,
@@ -122,16 +108,19 @@ static long		get_fraction(int exp, long mantissa, int precision)
 static char		*make_string(int exp, long mantissa, int precision)
 {
 	long	intpart;
+	int		len_of_intpart;
 	long	fraction;
 	char	*str;
 
 	intpart = 0;
 	if (exp > 0)
 		intpart = (mantissa >> (52 - exp));
-
+	len_of_intpart = ft_numlen(intpart);
 	fraction = get_fraction(exp, mantissa, precision);
-
-	str = fill_string(intpart, fraction, precision);
+	str = ft_strnew(len_of_intpart + 1 + precision);
+	ft_nbrcpy_p(intpart, len_of_intpart, str + len_of_intpart - 1);
+	ft_memcpy(str + len_of_intpart, ".", 1);
+	ft_nbrcpy_p(fraction, precision, str + len_of_intpart + precision); 
 	return (str);
 }
 
