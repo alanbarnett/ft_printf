@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:37:04 by alan              #+#    #+#             */
-/*   Updated: 2018/12/20 16:15:33 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/20 20:55:38 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void		copy_fraction(char *str, double num, int precision, int offset)
 	int		len_of_f;
 
 	len_of_f = 0;
-	while (len_of_f < precision && len_of_f < 17)
+	while (len_of_f < precision && (len_of_f + offset) < 17)
 	{
 		num *= 10;
 		++len_of_f;
@@ -95,21 +95,24 @@ char			*ft_ftoa(double nb, int precision)
 	long		intpart;
 
 	unb.d = nb;
-
-	// shift by 52 to isolate the exponent, and to isolate exponent, minus bias
-	exp = ((unb.l >> 52) & 0x7ff) - 1023;
-	// and to isolate mantissa
+	exp = ((unb.l >> 52) & 0x7ff);
 	mantissa = (unb.l & 0x000fffffffffffff);
-
-	if (exp != 0x7FF && !(exp == 0 && mantissa == 0))
-		mantissa |= (1L << 52);
-	intpart = 0;
-	if (exp > 0)
-	{
-		if (exp > 52)
-			intpart = (mantissa << (exp - 52));
+	if (exp == 0x7ff)
+		if (mantissa)
+			return (ft_strdup("nan"));
 		else
-			intpart = (mantissa >> (52 - exp));
-	}
-	return (make_string((unb.d < 0), intpart, unb.d, precision));
+			if (unb.l & (1L << 63))
+				return (ft_strdup("-inf"));
+			else
+				return (ft_strdup("inf"));
+	else if (exp != 0)
+		mantissa |= (1L << 52);
+	exp -= 0x3ff;
+	intpart = 0;
+	// FIXME bounds
+	if (52 < exp && exp < 64)
+		intpart = (mantissa << (exp - 52));
+	else if (0 < exp)
+		intpart = (mantissa >> (52 - exp));
+	return (make_string(((unb.l >> 63) & 1), intpart, unb.d, precision));
 }
