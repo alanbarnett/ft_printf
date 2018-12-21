@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:37:04 by alan              #+#    #+#             */
-/*   Updated: 2018/12/20 03:24:41 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/20 16:15:33 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		copy_fraction(char *str, double num, int precision, int offset)
 		++len_of_f;
 	}
 	fraction = ft_round(num);
-	ft_nbrcpy_p(fraction, len_of_f, str + offset + len_of_f); 
+	ft_nbrcpy_p(fraction, len_of_f, str + offset + len_of_f);
 	if (precision > len_of_f)
 		ft_nbrcpy_p(0, precision - len_of_f, str + offset + precision);
 }
