@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 14:24:01 by alan              #+#    #+#             */
-/*   Updated: 2018/12/15 23:37:17 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/20 20:59:28 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ char			*flag_float(t_format *fmt, va_list valist)
 	char	*str;
 
 	nb = get_nb(fmt->length, valist);
+
+	if (fmt->precision == -1)
+		fmt->precision = 6;
+
 	str = ft_ftoa(nb, fmt->precision);
 
 	fmt->width = ft_strlen(str);
