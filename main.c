@@ -6,13 +6,20 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/18 20:02:22 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/22 02:24:08 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <math.h>
 #include "libftprintf.h"
+
+typedef union	u_double
+{
+	double		d;
+	long		l;
+}				t_double;
 
 int	main(void)
 {
@@ -179,11 +186,83 @@ int	main(void)
 **	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 8, 8, 8, 8, 8);
 **	ft_printf("\n");
 */
-	// int i;
+	/*
+	// Pointer tests
+	int pointer;
 
-	// i = 9;
-	// ft_printf("%p: %d\n", &i, i);
-	// printf("%p: %d\n", &i, i);
+	pointer = 9;
+	ft_printf("%p: %d\n", &pointer, pointer);
+	printf("%p: %d\n", &pointer, pointer);
+	*/
+	/*
+	// debug tests
+	ft_printf("ft_printf:\n");
+	ft_printf("%lf\n\n", 123456789123456789123456789.123456789123456789123456789);
+	ft_printf("%.25lf\n", 0.252628992932340986346278998);
+	ft_printf("%lf\n", 123456789123456789.625);
+	ft_printf("%lf\n", 12345678912345678912345.123456789);
+	ft_printf("\nBig tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%lf\n\n", 1e300);
+	ft_printf("%lf\n\n", 1e24);
+	ft_printf("%lf\n\n", 1e3);
+	ft_printf("%lf\n\n", 1e247);
+	ft_printf("%lf\n\n", 1e200);
+	ft_printf("%lf\n\n", 1e100);
+	ft_printf("%lf\n\n", 1e50);
+	ft_printf("%.6f\n", 1.1230996);
+	ft_printf("%.6f\n", 1.1230995);
+	ft_printf("%.6f\n", 1.1230985);
+	ft_printf("%.2f\n", 2.3650);
+	ft_printf("\nprintf:\n");
+	printf("%lf\n\n", 123456789123456789123456789.123456789123456789123456789);
+	printf("%.25lf\n", 0.252628992932340986346278998);
+	printf("%lf\n", 123456789123456789.625);
+	printf("%lf\n", 12345678912345678912345.123456789);
+	printf("%lf\n", 1.0e+300);
+	printf("%lf\n\n", 1e300);
+	printf("%lf\n\n", 1e24);
+	printf("%lf\n\n", 1e3);
+	printf("%lf\n\n", 1e247);
+	printf("%lf\n\n", 1e200);
+	printf("%lf\n\n", 1e100);
+	printf("%lf\n\n", 1e50);
+	printf("%.6f\n", 1.1230996);
+	printf("%.6f\n", 1.1230995);
+	printf("%.6f\n", 1.1230985);
+	printf("%.2f\n", 2.3650);
+	*/
+
+	// Trailing zeros
+	ft_printf("\nTrailing zeros tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%.25lf\n", 0.252628992900000000000000000);
+	ft_printf("\nprintf:\n");
+	printf("%.25lf\n", 0.252628992900000000000000000);
+	/*
+	// Leading zeros
+	ft_printf("\nLeading zeros tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%.12lf\n", -0.000000000252628);
+	ft_printf("%.12lf\n", 0.000000000252628);
+	ft_printf("%.15lf\n", 0.000000000252628);
+	ft_printf("%.18lf\n", 0.0000000000000252628);
+	ft_printf("%.25lf\n", 0.000000000000000002526289929);
+	ft_printf("%.300lf\n", 1.0e-300);
+	ft_printf("%.330lf\n", 2.0e-323);
+	ft_printf("\nprintf:\n");
+	printf("%.12lf\n", -0.000000000252628);
+	printf("%.12lf\n", 0.000000000252628);
+	printf("%.15lf\n", 0.000000000252628);
+	printf("%.18lf\n", 0.0000000000000252628);
+	printf("%.25lf\n", 0.000000000000000002526289929);
+	printf("%.300lf\n", 1.0e-300);
+	printf("%.330lf\n", 2.0e-323);
+	*/
+	/*
+	// Normal tests
+	ft_printf("\nNormal tests\n");
+	ft_printf("\nft_printf:\n");
 	ft_printf("%f\n", 14.75);
 	ft_printf("%f\n", -14.75);
 	ft_printf("%.4f\n", 1997.0918);
@@ -191,11 +270,56 @@ int	main(void)
 	ft_printf("%.12lf\n", 0.000000000252628);
 	ft_printf("%.15lf\n", 0.000000000252628);
 	ft_printf("%.20lf\n", 0.000000000252628);
-	/*
+	ft_printf("\nprintf:\n");
 	printf("%f\n", 14.75);
+	printf("%f\n", -14.75);
 	printf("%.4f\n", 1997.0918);
 	printf("%.9f\n", 217.4444444);
 	printf("%.12lf\n", 0.000000000252628);
+	printf("%.15lf\n", 0.000000000252628);
+	printf("%.20lf\n", 0.000000000252628);
+	*/
+	/*
+	// 5.0505 tests
+	ft_printf("\n5.0505 tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%.3f\n", 5.0505000);
+	ft_printf("%.4f\n", 5.0505000);
+	ft_printf("%.5f\n", 5.0505000);
+	ft_printf("%.6f\n", 5.0505000);
+	ft_printf("%.7f\n", 5.0505000);
+	ft_printf("%.15f\n", 5.0505000000000);
+	ft_printf("\nprintf:\n");
+	printf("%.3f\n", 5.0505000);
+	printf("%.4f\n", 5.0505000);
+	printf("%.5f\n", 5.0505000);
+	printf("%.6f\n", 5.0505000);
+	printf("%.7f\n", 5.0505000);
+	printf("%.15f\n", 5.0505000000000);
+	*/
+	/*
+	// inf nan
+	ft_printf("\ninf / -inf / nan tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%lf\n", INFINITY);
+	ft_printf("%lf\n", -INFINITY);
+	ft_printf("%lf\n", NAN);
+	ft_printf("\nprintf:\n");
+	printf("%lf\n", INFINITY);
+	printf("%lf\n", -INFINITY);
+	printf("%lf\n", NAN);
+	*/
+	/*
+	// Negative zero tests
+	ft_printf("\nNegative Zero\n");
+	t_double testprint;
+	testprint.l = (1L << 63);
+	ft_printf("\nft_printf:\n");
+	ft_printf("zero:	%lf\n", (double)0);
+	ft_printf("-zero:	%lf\n", testprint.d);
+	ft_printf("\nprintf:\n");
+	printf("zero:	%lf\n", (double)0);
+	printf("-zero:	%lf\n", testprint.d);
 	*/
 
 	/*
