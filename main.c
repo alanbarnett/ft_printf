@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/22 02:24:08 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/24 02:12:43 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,51 +194,67 @@ int	main(void)
 	ft_printf("%p: %d\n", &pointer, pointer);
 	printf("%p: %d\n", &pointer, pointer);
 	*/
-	/*
-	// debug tests
+	// large int/fraction tests
+	ft_printf("\nlarge int/fraction tests\n");
 	ft_printf("ft_printf:\n");
-	ft_printf("%lf\n\n", 123456789123456789123456789.123456789123456789123456789);
-	ft_printf("%.25lf\n", 0.252628992932340986346278998);
+	ft_printf("%lf\n", 123456789123456789123456789.123456789123456789123456789);
 	ft_printf("%lf\n", 123456789123456789.625);
 	ft_printf("%lf\n", 12345678912345678912345.123456789);
+	ft_printf("%lf\n", 123456789.123456789);
+	ft_printf("%lf\n", 1234567891234567.89);
+	ft_printf("%lf\n", 123456789123456.789);
+	ft_printf("\nprintf:\n");
+	printf("%lf\n", 123456789123456789123456789.123456789123456789123456789);
+	printf("%lf\n", 123456789123456789.625);
+	printf("%lf\n", 12345678912345678912345.123456789);
+	printf("%lf\n", 123456789.123456789);
+	printf("%lf\n", 1234567891234567.89);
+	printf("%lf\n", 123456789123456.789);
+	/*
+	// Big tests
 	ft_printf("\nBig tests\n");
 	ft_printf("\nft_printf:\n");
 	ft_printf("%lf\n\n", 1e300);
-	ft_printf("%lf\n\n", 1e24);
-	ft_printf("%lf\n\n", 1e3);
 	ft_printf("%lf\n\n", 1e247);
 	ft_printf("%lf\n\n", 1e200);
 	ft_printf("%lf\n\n", 1e100);
 	ft_printf("%lf\n\n", 1e50);
+	ft_printf("%lf\n\n", 1e24);
+	ft_printf("%lf\n\n", 1e3);
+	ft_printf("\nprintf:\n");
+	printf("%lf\n\n", 1.0e+300);
+	printf("%lf\n\n", 1e300);
+	printf("%lf\n\n", 1e247);
+	printf("%lf\n\n", 1e200);
+	printf("%lf\n\n", 1e100);
+	printf("%lf\n\n", 1e50);
+	printf("%lf\n\n", 1e24);
+	printf("%lf\n\n", 1e3);
+	*/
+	/*
+	// Rounding tests
+	ft_printf("\nRounding tests\n");
+	ft_printf("\nft_printf:\n");
 	ft_printf("%.6f\n", 1.1230996);
 	ft_printf("%.6f\n", 1.1230995);
 	ft_printf("%.6f\n", 1.1230985);
 	ft_printf("%.2f\n", 2.3650);
 	ft_printf("\nprintf:\n");
-	printf("%lf\n\n", 123456789123456789123456789.123456789123456789123456789);
-	printf("%.25lf\n", 0.252628992932340986346278998);
-	printf("%lf\n", 123456789123456789.625);
-	printf("%lf\n", 12345678912345678912345.123456789);
-	printf("%lf\n", 1.0e+300);
-	printf("%lf\n\n", 1e300);
-	printf("%lf\n\n", 1e24);
-	printf("%lf\n\n", 1e3);
-	printf("%lf\n\n", 1e247);
-	printf("%lf\n\n", 1e200);
-	printf("%lf\n\n", 1e100);
-	printf("%lf\n\n", 1e50);
 	printf("%.6f\n", 1.1230996);
 	printf("%.6f\n", 1.1230995);
 	printf("%.6f\n", 1.1230985);
 	printf("%.2f\n", 2.3650);
 	*/
-
+	/*
 	// Trailing zeros
 	ft_printf("\nTrailing zeros tests\n");
 	ft_printf("\nft_printf:\n");
 	ft_printf("%.25lf\n", 0.252628992900000000000000000);
+	ft_printf("%.25lf\n", 0.252628992932340986346278998);
 	ft_printf("\nprintf:\n");
 	printf("%.25lf\n", 0.252628992900000000000000000);
+	printf("%.25lf\n", 0.252628992932340986346278998);
+	*/
 	/*
 	// Leading zeros
 	ft_printf("\nLeading zeros tests\n");
