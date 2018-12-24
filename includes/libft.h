@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/22 03:09:28 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/24 04:06:04 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ double				ft_pow_d(double a, int b);
 int					ft_floor(double roundee);
 int					ft_ceil(double roundee);
 long				ft_round(double roundee);
-double				ft_round_d(double roundee);
 
 /*
 ** Bonus
