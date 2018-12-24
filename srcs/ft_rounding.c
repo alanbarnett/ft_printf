@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 04:11:14 by alan              #+#    #+#             */
-/*   Updated: 2018/12/22 03:11:52 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/24 01:33:37 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,9 @@ double	ft_round_d(double roundee)
 {
 	double	rounded;
 
-	/*
 	if (roundee < (1L << 63))
 		rounded = (double)ft_round(roundee);
 	else
 		rounded = roundee;
-	*/
-	rounded = roundee;
 	return (rounded);
 }
