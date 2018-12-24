@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/24 02:12:43 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/24 05:51:39 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,6 @@ int	main(void)
 	printf("%lf\n", 123456789.123456789);
 	printf("%lf\n", 1234567891234567.89);
 	printf("%lf\n", 123456789123456.789);
-	/*
 	// Big tests
 	ft_printf("\nBig tests\n");
 	ft_printf("\nft_printf:\n");
@@ -222,7 +221,6 @@ int	main(void)
 	ft_printf("%lf\n\n", 1e24);
 	ft_printf("%lf\n\n", 1e3);
 	ft_printf("\nprintf:\n");
-	printf("%lf\n\n", 1.0e+300);
 	printf("%lf\n\n", 1e300);
 	printf("%lf\n\n", 1e247);
 	printf("%lf\n\n", 1e200);
@@ -230,22 +228,6 @@ int	main(void)
 	printf("%lf\n\n", 1e50);
 	printf("%lf\n\n", 1e24);
 	printf("%lf\n\n", 1e3);
-	*/
-	/*
-	// Rounding tests
-	ft_printf("\nRounding tests\n");
-	ft_printf("\nft_printf:\n");
-	ft_printf("%.6f\n", 1.1230996);
-	ft_printf("%.6f\n", 1.1230995);
-	ft_printf("%.6f\n", 1.1230985);
-	ft_printf("%.2f\n", 2.3650);
-	ft_printf("\nprintf:\n");
-	printf("%.6f\n", 1.1230996);
-	printf("%.6f\n", 1.1230995);
-	printf("%.6f\n", 1.1230985);
-	printf("%.2f\n", 2.3650);
-	*/
-	/*
 	// Trailing zeros
 	ft_printf("\nTrailing zeros tests\n");
 	ft_printf("\nft_printf:\n");
@@ -254,8 +236,6 @@ int	main(void)
 	ft_printf("\nprintf:\n");
 	printf("%.25lf\n", 0.252628992900000000000000000);
 	printf("%.25lf\n", 0.252628992932340986346278998);
-	*/
-	/*
 	// Leading zeros
 	ft_printf("\nLeading zeros tests\n");
 	ft_printf("\nft_printf:\n");
@@ -274,7 +254,6 @@ int	main(void)
 	printf("%.25lf\n", 0.000000000000000002526289929);
 	printf("%.300lf\n", 1.0e-300);
 	printf("%.330lf\n", 2.0e-323);
-	*/
 	/*
 	// Normal tests
 	ft_printf("\nNormal tests\n");
@@ -336,6 +315,20 @@ int	main(void)
 	ft_printf("\nprintf:\n");
 	printf("zero:	%lf\n", (double)0);
 	printf("-zero:	%lf\n", testprint.d);
+	*/
+	/*
+	// Rounding tests
+	ft_printf("\nRounding tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%.6f\n", 1.1230996);
+	ft_printf("%.6f\n", 1.1230995);
+	ft_printf("%.6f\n", 1.1230985);
+	ft_printf("%.2f\n", 2.3650);
+	ft_printf("\nprintf:\n");
+	printf("%.6f\n", 1.1230996);
+	printf("%.6f\n", 1.1230995);
+	printf("%.6f\n", 1.1230985);
+	printf("%.2f\n", 2.3650);
 	*/
 
 	/*

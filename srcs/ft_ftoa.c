@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:37:04 by alan              #+#    #+#             */
-/*   Updated: 2018/12/24 01:43:18 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/24 06:14:50 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,62 +53,80 @@ static void		ft_nbrcpy_p(long nb, int precision, char *str)
 
 static void		copy_fraction(char *str, double num, int precision, int offset)
 {
-	double	fraction;
-	int		len_of_f;
+	long	fraction;
+	int		len_f;
 	int		leading_zeros;
 
-	len_of_f = 0;
+	len_f = 0;
 	leading_zeros = 0;
-	while (leading_zeros + len_of_f < precision && (len_of_f + offset < 17))
+	while (leading_zeros + len_f < precision && (len_f + offset < 17))
 	{
 		num *= 10;
 		if (num < -1 || num > 1)
-			++len_of_f;
+			++len_f;
 		else
 			++leading_zeros;
 	}
 	fraction = ft_round(num);
-
+	// shitty hack to fix a problem with not registering a length if the number
+	// needs to be rounded up to one from below, and also solving a problem
+	// with destroying the decimal point
+	// TODO this needs to be better
+	if (fraction > 0 && len_f == 0)
+		++len_f;
 	if (leading_zeros)
 		ft_nbrcpy_p(0, leading_zeros, str + offset + leading_zeros);
-	ft_nbrcpy_p(fraction, len_of_f, str + offset + leading_zeros + len_of_f);
-	if (precision > len_of_f + leading_zeros)
-		ft_nbrcpy_p(0, precision - len_of_f, str + offset + precision);
+	if (len_f)
+		ft_nbrcpy_p(fraction, len_f, str + offset + leading_zeros + len_f);
+	if (precision > len_f + leading_zeros)
+		ft_nbrcpy_p(0, precision - len_f, str + offset + precision);
 }
 
-static char		*make_string(int sign, long intpart, double num, int precision)
-{
-	int		len_of_i;
-	char	*str;
-
-	len_of_i = ft_numlen(intpart);
-	if (sign)
-	{
-		++len_of_i;
-		str = ft_strnew(len_of_i + 1 + precision);
-		*str = '-';
-		ft_nbrcpy_p(intpart, len_of_i - 1, str + len_of_i - 1);
-	}
-	else
-	{
-		str = ft_strnew(len_of_i + 1 + precision);
-		ft_nbrcpy_p(intpart, len_of_i, str + len_of_i - 1);
-	}
-	str[len_of_i] = '.';
-	copy_fraction(str, num, precision, len_of_i);
-	return (str);
-}
-
-static long		get_intpart(int exp, long mantissa)
+static long		get_intpart(double num, int *trailing_zeros)
 {
 	long	intpart;
 
-	intpart = 0;
-	if (52 <= exp && exp < 64)
-		intpart = (mantissa << (exp - 52));
-	else if (0 <= exp && exp < 52)
-		intpart = (mantissa >> (52 - exp));
+	*trailing_zeros = 0;
+	// UL because L is long, 1<<63 is over max long, technically negative
+	while (num >= (1UL << 63))
+	{
+		num /= 10;
+		++(*trailing_zeros);
+	}
+	if (*trailing_zeros)
+		intpart = ft_round(num);
+	else
+		intpart = (long)num;
 	return (intpart);
+}
+
+static char		*make_string(int sign, double num, int precision)
+{
+	long	intpart;
+	int		len_i;
+	int		trailing_zeros;
+	char	*str;
+
+	intpart = get_intpart(num, &trailing_zeros);
+	len_i = ft_numlen(intpart);
+	if (sign)
+	{
+		++len_i;
+		str = ft_strnew(len_i + trailing_zeros + 1 + precision);
+		*str = '-';
+		ft_nbrcpy_p(intpart, len_i - 1, str + len_i - 1);
+	}
+	else
+	{
+		str = ft_strnew(len_i + trailing_zeros + 1 + precision);
+		ft_nbrcpy_p(intpart, len_i, str + len_i - 1);
+	}
+	if (trailing_zeros)
+		ft_nbrcpy_p(0, trailing_zeros, str + len_i + trailing_zeros - 1);
+	if (precision)
+		str[len_i + trailing_zeros] = '.';
+	copy_fraction(str, num, precision, len_i + trailing_zeros);
+	return (str);
 }
 
 char			*ft_ftoa(double nb, int precision)
@@ -116,12 +134,12 @@ char			*ft_ftoa(double nb, int precision)
 	t_double	unb;
 	int			exp;
 	long		mantissa;
-	long		intpart;
 
 	unb.d = nb;
 	exp = ((unb.l >> 52) & 0x7ff);
 	mantissa = (unb.l & 0x000fffffffffffff);
 	if (exp == 0x7ff)
+	{
 		if (mantissa)
 			return (ft_strdup("nan"));
 		else
@@ -129,9 +147,6 @@ char			*ft_ftoa(double nb, int precision)
 				return (ft_strdup("-inf"));
 			else
 				return (ft_strdup("inf"));
-	else if (exp != 0)
-		mantissa |= (1L << 52);
-	exp -= 0x3ff;
-	intpart = get_intpart(exp, mantissa);
-	return (make_string(((unb.l >> 63) & 1), intpart, nb, precision));
+	}
+	return (make_string(((unb.l >> 63) & 1), nb, precision));
 }
