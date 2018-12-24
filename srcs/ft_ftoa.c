@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:37:04 by alan              #+#    #+#             */
-/*   Updated: 2018/12/22 03:12:41 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/24 01:43:18 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef union	u_double
 ** character position. It does not care about the sign of the number.
 */
 
-static void		ft_nbrcpy_p(double nb, int precision, char *str)
+static void		ft_nbrcpy_p(long nb, int precision, char *str)
 {
 	if (precision > 1)
 	{
@@ -44,7 +44,7 @@ static void		ft_nbrcpy_p(double nb, int precision, char *str)
 	if (nb < 0)
 		*str = (ft_abs(nb % 10) + '0');
 	else
-		*str = (nb % 10 + '0');
+		*str = ((nb % 10) + '0');
 }
 
 /*
@@ -55,17 +55,24 @@ static void		copy_fraction(char *str, double num, int precision, int offset)
 {
 	double	fraction;
 	int		len_of_f;
+	int		leading_zeros;
 
 	len_of_f = 0;
-	while (len_of_f < precision)
+	leading_zeros = 0;
+	while (leading_zeros + len_of_f < precision && (len_of_f + offset < 17))
 	{
 		num *= 10;
-		++len_of_f;
+		if (num < -1 || num > 1)
+			++len_of_f;
+		else
+			++leading_zeros;
 	}
-	fraction = ft_round_d(num);
+	fraction = ft_round(num);
 
-	ft_nbrcpy_p(fraction, len_of_f, str + offset + len_of_f);
-	if (precision > len_of_f)
+	if (leading_zeros)
+		ft_nbrcpy_p(0, leading_zeros, str + offset + leading_zeros);
+	ft_nbrcpy_p(fraction, len_of_f, str + offset + leading_zeros + len_of_f);
+	if (precision > len_of_f + leading_zeros)
 		ft_nbrcpy_p(0, precision - len_of_f, str + offset + precision);
 }
 
