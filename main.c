@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/24 05:51:39 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/25 03:45:44 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ int	main(void)
 	ft_printf("%p: %d\n", &pointer, pointer);
 	printf("%p: %d\n", &pointer, pointer);
 	*/
+	/*
 	// large int/fraction tests
 	ft_printf("\nlarge int/fraction tests\n");
 	ft_printf("ft_printf:\n");
@@ -254,6 +255,7 @@ int	main(void)
 	printf("%.25lf\n", 0.000000000000000002526289929);
 	printf("%.300lf\n", 1.0e-300);
 	printf("%.330lf\n", 2.0e-323);
+	*/
 	/*
 	// Normal tests
 	ft_printf("\nNormal tests\n");
@@ -329,6 +331,59 @@ int	main(void)
 	printf("%.6f\n", 1.1230995);
 	printf("%.6f\n", 1.1230985);
 	printf("%.2f\n", 2.3650);
+	*/
+
+	/*
+	// Pointer tests
+	ft_printf("\nPointer tests\n");
+
+	char	c = 0;
+	char	*str = "pouet";
+
+	ft_printf("\nft_printf:\n");
+	ft_printf("%p\n", &p);
+	ft_printf("%p\n", (void *)0);
+	ft_printf("%p\n", &c);
+	ft_printf("%p\n", str);
+	ft_printf("%p\n", &str);
+	str = NULL;
+	ft_printf("%p\n", str);
+	str = ft_strdup("Coucou les haricots !");
+	ft_printf("%p\n", str);
+
+	str = "pouet";
+
+	printf("\nprintf:\n");
+	printf("%p\n", &p);
+	printf("%p\n", (void *)0);
+	printf("%p\n", &c);
+	printf("%p\n", str);
+	printf("%p\n", &str);
+	str = NULL;
+	printf("%p\n", str);
+	str = ft_strdup("Coucou les haricots !");
+	printf("%p\n", str);
+	*/
+	/*
+	// Pointer flag tests
+	int		p = 900;
+	ft_printf("\nflag tests\n");
+	ft_printf("\nft_printf\n");
+	ft_printf("%p\n", &p);
+	ft_printf("%0p\n", &p);
+	ft_printf("%#p\n", &p);
+	ft_printf("%15p\n", &p);
+	ft_printf("%-15p\n", &p);
+	ft_printf("%15.3p\n", &p);
+	ft_printf("%20.10p\n", &p);
+	ft_printf("\nprintf:\n");
+	printf("%p\n", &p);
+	printf("%p\n", &p);
+	printf("%p\n", &p);
+	printf("%15p\n", &p);
+	printf("%-15p\n", &p);
+	printf("%15p\n", &p);
+	printf("%20p\n", &p);
 	*/
 
 	/*
