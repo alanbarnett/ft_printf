@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:37:04 by alan              #+#    #+#             */
-/*   Updated: 2018/12/28 00:17:28 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/28 00:18:59 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		ft_nbrcpy_p(long n, int precision, char *s)
 			ft_nbrcpy_p(0, precision - 1, s - 1);
 	}
 	if (n < 0)
-		*s = (ft_abs(n % 10) + '0');
+		*s = (((n % 10) * -1) + '0');
 	else
 		*s = ((n % 10) + '0');
 }
