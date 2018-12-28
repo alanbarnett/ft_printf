@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/28 00:38:51 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/28 00:42:13 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef union	u_double
+typedef union		u_double
 {
-	double		d;
-	long		l;
-}				t_double;
+	double			d;
+	long			l;
+}					t_double;
 
 /*
 ** Section One
 */
+
 void				*ft_memset(void *b, int c, size_t len);
 void				*ft_nmemset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -74,6 +75,7 @@ void				ft_strupper(char *);
 /*
 ** Section Two
 */
+
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 char				*ft_strnew(size_t size);
@@ -112,14 +114,9 @@ void				ft_putendl_fd(const char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
 /*
-** Additional
-*/
-//int					get_next_line(char **line, int size);
-//void				ft_printf(const char *format, ...);
-
-/*
 ** Math
 */
+
 int					ft_vamax(int params, ...);
 int					ft_vamin(int params, ...);
 int					ft_max(int a, int b);
@@ -134,6 +131,7 @@ long				ft_round(double roundee);
 /*
 ** Bonus
 */
+
 t_list				*ft_lstinit(void const *content, size_t content_size);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
