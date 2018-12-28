@@ -6,12 +6,13 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/14 23:34:02 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/28 01:21:11 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <math.h>
 #include "libftprintf.h"
 
 int	main(void)
@@ -26,6 +27,8 @@ int	main(void)
 	ft_printf("i: %d\n", i);
 	ft_printf("String: \"%s\"\nInt: %d\n", "stringy string", 1990);
 	ft_printf("%d %ld %lld\n", 123, 1234, 12345);
+	ft_printf("int: %+015.7d, int2: %-0015.8d, testing some %5% shits % %\n", i, 17);
+	ft_printf("%# 05.3d %.d %d %d gg!\n", 1, -2, 33, 42);
 	*/
 	/*
 	// poop tests
@@ -139,6 +142,7 @@ int	main(void)
 	// gross tests
 	ft_printf("%%10% : |%10%|\n");
 	*/
+	/*
 	//ft_printf("%d\n", 1001);
 	// testing U
 	//ft_printf("|%hU|\n", 4294967296);
@@ -160,6 +164,7 @@ int	main(void)
 	// ft_printf("@moulitest: |%#.o %#.0o|\n", 0, 0);
 	// ft_printf("%-#10.o\n", 250);
 	// ft_printf("%-#10.o\n", 0);
+	// */
 /*
 **	ft_printf("%#-5.o\n", 0);
 **	ft_printf("%#5.o\n", 0);
@@ -176,70 +181,203 @@ int	main(void)
 **	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 7, 7, 7, 7, 7);
 **	ft_printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 8, 8, 8, 8, 8);
 **	ft_printf("\n");
-** 	ft_printf("%#.4x\n", 42);
-** 	ft_printf("%#.4x\n", 255);
-** 	printf("%#.4x\n", 42);
-** 	printf("%#.4x\n\n", 255);
-**
-** 	ft_printf("%#6.4x\n", 42);
-** 	ft_printf("%#6.4x\n", 255);
-** 	printf("%#6.4x\n", 42);
-** 	printf("%#6.4x\n\n", 255);
-**
-** 	ft_printf("%#4x\n", 42);
-** 	ft_printf("%#4x\n", 255);
-** 	printf("%#4x\n", 42);
-** 	printf("%#4x\n\n", 255);
-**
-** 	ft_printf("%#6x\n", 42);
-** 	ft_printf("%#6x\n", 255);
-** 	printf("%#6x\n", 42);
-** 	printf("%#6x\n\n", 255);
-**
-** 	ft_printf("%.4x\n", 42);
-** 	ft_printf("%.4x\n", 255);
-** 	printf("%.4x\n", 42);
-** 	printf("%.4x\n\n", 255);
-**
-** 	ft_printf("%6.4x\n", 42);
-** 	ft_printf("%6.4x\n", 255);
-** 	printf("%6.4x\n", 42);
-** 	printf("%6.4x\n\n", 255);
-**
-** 	ft_printf("%4x\n", 42);
-** 	ft_printf("%4x\n", 255);
-** 	printf("%4x\n", 42);
-** 	printf("%4x\n\n", 255);
-**
-** 	ft_printf("%6x\n", 42);
-** 	ft_printf("%6x\n", 255);
-** 	printf("%6x\n", 42);
-** 	printf("%6x\n\n", 255);
-**
-** 	ft_printf("%0.4x\n", 42);
-** 	ft_printf("%0.4x\n", 255);
-** 	printf("%0.4x\n", 42);
-** 	printf("%0.4x\n\n", 255);
-**
-** 	ft_printf("%06.4x\n", 42);
-** 	ft_printf("%06.4x\n", 255);
-** 	printf("%06.4x\n", 42);
-** 	printf("%06.4x\n\n", 255);
-**
-** 	ft_printf("%#04x\n", 42);
-** 	ft_printf("%#04x\n", 255);
-** 	printf("%#04x\n", 42);
-** 	printf("%#04x\n\n", 255);
-**
-** 	ft_printf("%#06x\n", 42);
-** 	ft_printf("%#06x\n", 255);
-** 	printf("%#06x\n", 42);
-** 	printf("%#06x\n\n", 255);
 */
-	// yuck tests
-	ft_printf("");
-	ft_printf("%");
-	ft_printf("%s %C %d %p %x %% %S", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير");
+	/*
+	// Pointer tests
+	int pointer;
+
+	pointer = 9;
+	ft_printf("%p: %d\n", &pointer, pointer);
+	printf("%p: %d\n", &pointer, pointer);
+	*/
+	/*
+	// large int/fraction tests
+	ft_printf("\nlarge int/fraction tests\n");
+	ft_printf("ft_printf:\n");
+	ft_printf("%lf\n", 123456789123456789123456789.123456789123456789123456789);
+	ft_printf("%lf\n", 123456789123456789.625);
+	ft_printf("%lf\n", 12345678912345678912345.123456789);
+	ft_printf("%lf\n", 123456789.123456789);
+	ft_printf("%lf\n", 1234567891234567.89);
+	ft_printf("%lf\n", 123456789123456.789);
+	ft_printf("\nprintf:\n");
+	printf("%lf\n", 123456789123456789123456789.123456789123456789123456789);
+	printf("%lf\n", 123456789123456789.625);
+	printf("%lf\n", 12345678912345678912345.123456789);
+	printf("%lf\n", 123456789.123456789);
+	printf("%lf\n", 1234567891234567.89);
+	printf("%lf\n", 123456789123456.789);
+	// Big tests
+	ft_printf("\nBig tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%lf\n\n", 1e300);
+	ft_printf("%lf\n\n", 1e247);
+	ft_printf("%lf\n\n", 1e200);
+	ft_printf("%lf\n\n", 1e100);
+	ft_printf("%lf\n\n", 1e50);
+	ft_printf("%lf\n\n", 1e24);
+	ft_printf("%lf\n\n", 1e3);
+	ft_printf("\nprintf:\n");
+	printf("%lf\n\n", 1e300);
+	printf("%lf\n\n", 1e247);
+	printf("%lf\n\n", 1e200);
+	printf("%lf\n\n", 1e100);
+	printf("%lf\n\n", 1e50);
+	printf("%lf\n\n", 1e24);
+	printf("%lf\n\n", 1e3);
+	// Trailing zeros
+	ft_printf("\nTrailing zeros tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%.25lf\n", 0.252628992900000000000000000);
+	ft_printf("%.25lf\n", 0.252628992932340986346278998);
+	ft_printf("\nprintf:\n");
+	printf("%.25lf\n", 0.252628992900000000000000000);
+	printf("%.25lf\n", 0.252628992932340986346278998);
+	// Leading zeros
+	ft_printf("\nLeading zeros tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%.12lf\n", -0.000000000252628);
+	ft_printf("%.12lf\n", 0.000000000252628);
+	ft_printf("%.15lf\n", 0.000000000252628);
+	ft_printf("%.18lf\n", 0.0000000000000252628);
+	ft_printf("%.25lf\n", 0.000000000000000002526289929);
+	ft_printf("%.300lf\n", 1.0e-300);
+	ft_printf("%.330lf\n", 2.0e-323);
+	ft_printf("\nprintf:\n");
+	printf("%.12lf\n", -0.000000000252628);
+	printf("%.12lf\n", 0.000000000252628);
+	printf("%.15lf\n", 0.000000000252628);
+	printf("%.18lf\n", 0.0000000000000252628);
+	printf("%.25lf\n", 0.000000000000000002526289929);
+	printf("%.300lf\n", 1.0e-300);
+	printf("%.330lf\n", 2.0e-323);
+	*/
+	// Normal tests
+	ft_printf("\nNormal tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%f\n", 14.75);
+	ft_printf("%f\n", -14.75);
+	ft_printf("%.4f\n", 1997.0918);
+	ft_printf("%.9f\n", 217.4444444);
+	ft_printf("%.12lf\n", 0.000000000252628);
+	ft_printf("%.15lf\n", 0.000000000252628);
+	ft_printf("%.20lf\n", 0.000000000252628);
+	ft_printf("\nprintf:\n");
+	printf("%f\n", 14.75);
+	printf("%f\n", -14.75);
+	printf("%.4f\n", 1997.0918);
+	printf("%.9f\n", 217.4444444);
+	printf("%.12lf\n", 0.000000000252628);
+	printf("%.15lf\n", 0.000000000252628);
+	printf("%.20lf\n", 0.000000000252628);
+	/*
+	// 5.0505 tests
+	ft_printf("\n5.0505 tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%.3f\n", 5.0505000);
+	ft_printf("%.4f\n", 5.0505000);
+	ft_printf("%.5f\n", 5.0505000);
+	ft_printf("%.6f\n", 5.0505000);
+	ft_printf("%.7f\n", 5.0505000);
+	ft_printf("%.15f\n", 5.0505000000000);
+	ft_printf("\nprintf:\n");
+	printf("%.3f\n", 5.0505000);
+	printf("%.4f\n", 5.0505000);
+	printf("%.5f\n", 5.0505000);
+	printf("%.6f\n", 5.0505000);
+	printf("%.7f\n", 5.0505000);
+	printf("%.15f\n", 5.0505000000000);
+	*/
+	/*
+	// inf nan
+	ft_printf("\ninf / -inf / nan tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%lf\n", INFINITY);
+	ft_printf("%lf\n", -INFINITY);
+	ft_printf("%lf\n", NAN);
+	ft_printf("\nprintf:\n");
+	printf("%lf\n", INFINITY);
+	printf("%lf\n", -INFINITY);
+	printf("%lf\n", NAN);
+	*/
+	/*
+	// Negative zero tests
+	ft_printf("\nNegative Zero\n");
+	t_double testprint;
+	testprint.l = (1L << 63);
+	ft_printf("\nft_printf:\n");
+	ft_printf("zero:	%lf\n", (double)0);
+	ft_printf("-zero:	%lf\n", testprint.d);
+	ft_printf("\nprintf:\n");
+	printf("zero:	%lf\n", (double)0);
+	printf("-zero:	%lf\n", testprint.d);
+	*/
+	/*
+	// Rounding tests
+	ft_printf("\nRounding tests\n");
+	ft_printf("\nft_printf:\n");
+	ft_printf("%.6f\n", 1.1230996);
+	ft_printf("%.6f\n", 1.1230995);
+	ft_printf("%.6f\n", 1.1230985);
+	ft_printf("%.2f\n", 2.3650);
+	ft_printf("\nprintf:\n");
+	printf("%.6f\n", 1.1230996);
+	printf("%.6f\n", 1.1230995);
+	printf("%.6f\n", 1.1230985);
+	printf("%.2f\n", 2.3650);
+	*/
+
+	// Pointer tests
+	ft_printf("\nPointer tests\n");
+
+	int		p = 900;
+	char	c = 0;
+	char	*str = "pouet";
+
+	ft_printf("\nft_printf:\n");
+	ft_printf("%p\n", &p);
+	ft_printf("%p\n", (void *)0);
+	ft_printf("%p\n", &c);
+	ft_printf("%p\n", str);
+	ft_printf("%p\n", &str);
+	str = NULL;
+	ft_printf("%p\n", str);
+	str = ft_strdup("Coucou les haricots !");
+	ft_printf("%p\n", str);
+
+	str = "pouet";
+
+	printf("\nprintf:\n");
+	printf("%p\n", &p);
+	printf("%p\n", (void *)0);
+	printf("%p\n", &c);
+	printf("%p\n", str);
+	printf("%p\n", &str);
+	str = NULL;
+	printf("%p\n", str);
+	str = ft_strdup("Coucou les haricots !");
+	printf("%p\n", str);
+	/*
+	// Pointer flag tests
+	int		p = 900;
+	ft_printf("\nflag tests\n");
+	ft_printf("\nft_printf\n");
+	ft_printf("%p\n", &p);
+	ft_printf("%0p\n", &p);
+	ft_printf("%#p\n", &p);
+	ft_printf("%15p\n", &p);
+	ft_printf("%-15p\n", &p);
+	ft_printf("%15.3p\n", &p);
+	ft_printf("%20.10p\n", &p);
+	ft_printf("\nprintf:\n");
+	printf("%p\n", &p);
+	printf("%p\n", &p);
+	printf("%p\n", &p);
+	printf("%15p\n", &p);
+	printf("%-15p\n", &p);
+	printf("%15p\n", &p);
+	printf("%20p\n", &p);
+	*/
 
 	/*
 	// testing standard printf
@@ -282,13 +420,53 @@ int	main(void)
 	printf("%+06d\n", -i);
 	printf("%lu\n", 299999999UL);
 	printf("% 010d\n", 135);
+	printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 0, 0, 0, 0, 0);
+	printf("%o\t%#o\t%.o\t%#.o\t%#6.4o\n", 7, 7, 7, 7, 7);
+	printf("%o\t%#o\t%.o\t%#.o\t%#.4o\n", 8, 8, 8, 8, 512);
+	printf("%o\t%#o\t%.o\t%#.o\t%#.2o\n", 8, 8, 8, 8, 512);
+	printf("\n");
+	printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 0, 0, 0, 0, 0);
+	printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 7, 7, 7, 7, 7);
+	printf("%d\t%+d\t%.d\t%+.d\t%+.4d\n", 8, 8, 8, 8, 8);
+	printf("\n");
+	printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 0, 0, 0, 0, 0);
+	printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 7, 7, 7, 7, 7);
+	printf("%x\t%#x\t%.x\t%#.x\t%#.4x\n", 8, 8, 8, 8, 8);
+	printf("\n");
+	printf("%+d\n", 10);
+	printf("%+d\n", 0);
+	printf("%+d\n", -10);
+	printf("1234567890\n");
+	printf("%+10.8d\n", 10);
+	printf("%+10.8d\n", 0);
+	printf("%+10.8d\n", -10);
+	printf("1234567890\n");
+	printf("%+8.8d\n", 10);
+	printf("%+9.8d\n", 0);
+	printf("%+10.8d\n", -10);
+	printf("1234567890\n");
+	printf("%+8d\n", 10);
+	printf("%+9d\n", 0);
+	printf("%+10d\n", -10);
+	printf("1234567890\n");
+	printf("%+.8d\n", 10);
+	printf("%+.9d\n", 0);
+	printf("%+.10d\n", -10);
+	printf("1234567890\n");
+	printf("%+8.10d\n", 10);
+	printf("%+8.10d\n", 0);
+	printf("%+8.10d\n", -10);
+	printf("1234567890\n");
+	printf("%8.10d\n", 10);
+	printf("%8.10d\n", 0);
+	printf("%8.10d\n", -10);
+	printf("1234567890\n");
+	printf("%06.2d\n", 512);
+	printf("%Test\n");
 	*/
 
-	//ft_printf("int: %+015.7d, int2: %-0015.8d, testing some %5% shits % %\n", i, 17);
-	//ft_printf("%# 05.3d %.d %d %d gg!\n", 1, -2, 33, 42);
-
-	// versus test with width, precision, and -+ 0 flags
 	/*
+	// versus test with width, precision, and -+ 0 flags
 	ft_printf("3d:      |%3d|\n", 42890);
 	ft_printf("3d:      |%3d|\n", -42890);
 	ft_printf("2d:      |%2d|\n", i);
