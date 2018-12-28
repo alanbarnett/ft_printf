@@ -6,19 +6,13 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:37:04 by alan              #+#    #+#             */
-/*   Updated: 2018/12/28 00:36:13 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/28 00:38:38 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #define SIG_F (f.lead_zeros + f.len_f)
 #define SIG_I (f.len_i + f.trail_zeros)
-
-typedef union	u_double
-{
-	double		d;
-	long		l;
-}				t_double;
 
 typedef	struct	s_fp
 {
