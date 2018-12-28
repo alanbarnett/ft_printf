@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/14 23:25:37 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/28 01:10:49 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_format		*init(void)
 
 static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 {
-	static char	*(*p[16])();
+	static char	*(*p[17])();
 
 	p[0] = flag_char;
 	p[1] = flag_char;
@@ -90,6 +90,7 @@ static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 	p[13] = flag_hex;
 	p[14] = flag_hex;
 	p[15] = flag_pointer;
+	p[16] = flag_float;
 	return (p[index](fmt_struct, valist));
 }
 
