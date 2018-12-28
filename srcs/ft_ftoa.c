@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:37:04 by alan              #+#    #+#             */
-/*   Updated: 2018/12/24 06:14:50 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/27 20:21:31 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static void		ft_nbrcpy_p(long nb, int precision, char *str)
 
 /*
 ** Gather fraction part without bits
+** Needs to gather the whole fraction before copying any of it so we can round
+** the number properly
 */
 
 static void		copy_fraction(char *str, double num, int precision, int offset)
@@ -62,18 +64,13 @@ static void		copy_fraction(char *str, double num, int precision, int offset)
 	while (leading_zeros + len_f < precision && (len_f + offset < 17))
 	{
 		num *= 10;
-		if (num < -1 || num > 1)
+		if (num <= -1 || num >= 1
+			|| (leading_zeros + len_f == precision - 1 && ft_round(num)))
 			++len_f;
 		else
 			++leading_zeros;
 	}
 	fraction = ft_round(num);
-	// shitty hack to fix a problem with not registering a length if the number
-	// needs to be rounded up to one from below, and also solving a problem
-	// with destroying the decimal point
-	// TODO this needs to be better
-	if (fraction > 0 && len_f == 0)
-		++len_f;
 	if (leading_zeros)
 		ft_nbrcpy_p(0, leading_zeros, str + offset + leading_zeros);
 	if (len_f)
