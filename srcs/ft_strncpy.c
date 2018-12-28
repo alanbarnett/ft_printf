@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 21:13:52 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/14 23:13:56 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/06/04 14:29:17 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ char	*ft_strncpy(char *dst, const char *src, size_t len)
 		--len;
 	}
 	if (len)
-		ft_nmemset(cur, '\0', len);
+		ft_memset(cur, '\0', len);
 	return (dst);
 }
