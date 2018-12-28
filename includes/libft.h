@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/14 21:43:23 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/28 00:55:07 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef union	u_double
+{
+	double		d;
+	long		l;
+}				t_double;
 
 /*
 ** Section One
@@ -95,6 +101,7 @@ size_t				ft_unumlen_base(unsigned long long num, int base);
 void				ft_strapp(char *dst, char c);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int n, int base);
+char				*ft_ftoa(double nb, int precision);
 void				ft_putchar(char c);
 void				ft_putstr(const char *s);
 void				ft_putendl(const char *s);
@@ -118,6 +125,11 @@ int					ft_vamin(int params, ...);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);
 long				ft_abs(long nb);
+long				ft_pow(int a, int b);
+double				ft_pow_d(double a, int b);
+int					ft_floor(double roundee);
+int					ft_ceil(double roundee);
+long				ft_round(double roundee);
 
 /*
 ** Bonus
