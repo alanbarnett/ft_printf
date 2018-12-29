@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/25 03:52:00 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/29 03:19:38 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 #include <stdarg.h>
 #include <math.h>
 #include "libftprintf.h"
-
-typedef union	u_double
-{
-	double		d;
-	long		l;
-}				t_double;
 
 int	main(void)
 {
