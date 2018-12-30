@@ -6,17 +6,11 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 14:24:01 by alan              #+#    #+#             */
-/*   Updated: 2018/12/22 01:54:03 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/29 03:19:23 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-typedef union	u_double
-{
-	double		d;
-	long		l;
-}				t_double;
 
 static double	get_nb(char length, va_list valist)
 {
