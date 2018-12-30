@@ -6,7 +6,7 @@
 #    By: abarnett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/25 22:40:12 by abarnett          #+#    #+#              #
-#    Updated: 2018/12/14 18:57:27 by abarnett         ###   ########.fr        #
+#    Updated: 2018/12/29 23:42:34 by abarnett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INCLUDE_DIR :=	./includes
 L_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./srcs/*.c))
 C_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./srcs/ft_printf/*.c))
 
-CFLAGS +=		-Wall -Wextra -Werror -I$(INCLUDE_DIR)
+CFLAGS +=		-g -Wall -Wextra -Werror -I$(INCLUDE_DIR)
 LDFLAGS +=		-L./ -lftprintf
 
 .PHONY:			all clean fclean re
@@ -28,6 +28,10 @@ $(NAME): $(L_OBJS) $(C_OBJS)
 	ranlib $(NAME)
 
 test: all main.o
+<<<<<<< HEAD
+=======
+	@ctags -R
+>>>>>>> github/master
 	$(CC) $(CFLAGS) main.o -o test $(LDFLAGS)
 
 clean:
