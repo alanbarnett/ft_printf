@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/29 04:00:47 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/31 05:59:37 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,6 +328,15 @@ int	main(void)
 	printf("%.6f\n", 1.1230985);
 	printf("%.2f\n", 2.3650);
 	*/
+
+	/*
+	// Scientific notation tests
+	printf("%e\n", 12.234);
+	*/
+
+	// Unicode tests
+	ft_printf("%S\n", L"\u03c0test\u03c0");
+	ft_printf("%ls\n", L"\u03c0test\u03c0");
 
 	/*
 	ft_printf("%x\n", -42);
