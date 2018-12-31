@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/31 02:21:51 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/31 05:36:16 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 	static char	*(*p[18])();
 
 	p[0] = flag_char;
-	p[1] = flag_char;
+	p[1] = flag_wchar;
 	p[2] = flag_string;
-	p[3] = flag_string;
+	p[3] = flag_wstr;
 	p[4] = flag_percent;
 	p[5] = flag_int;
 	p[6] = flag_int;
