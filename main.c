@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/31 05:59:37 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/31 06:04:54 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,6 +337,9 @@ int	main(void)
 	// Unicode tests
 	ft_printf("%S\n", L"\u03c0test\u03c0");
 	ft_printf("%ls\n", L"\u03c0test\u03c0");
+	ft_printf("%S\n", 0);
+	ft_printf("%C\n", 0);
+	ft_printf("%lc\n", L'\U0001f47d');
 
 	/*
 	ft_printf("%x\n", -42);
