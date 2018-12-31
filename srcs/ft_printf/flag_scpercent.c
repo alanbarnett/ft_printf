@@ -6,7 +6,7 @@
 /*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 21:34:21 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/11 21:34:46 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/31 05:21:48 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char				*flag_string(t_format *fmt, va_list valist)
 	char	*newstr;
 	int		len;
 
+	if (fmt->length == 'l')
+		return (flag_wstr(fmt, valist));
 	str = va_arg(valist, char *);
 	if (!str)
 		len = 6;
@@ -65,6 +67,8 @@ char				*flag_char(t_format *fmt, va_list valist)
 	char	c;
 	char	*newstr;
 
+	if (fmt->length == 'l')
+		return (flag_wchar(fmt, valist));
 	c = (char)va_arg(valist, int);
 	if (fmt->width < 1)
 		fmt->width = 1;
