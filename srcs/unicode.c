@@ -6,7 +6,7 @@
 /*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 17:52:10 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/31 04:10:38 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/31 05:50:57 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ static int	get_bytes(wchar_t wc)
 ** This function converts a single wide character to a utf-8 multi-byte
 ** character.
 **
-**	if (!s && wc)
-**		s = ft_strnew(bytes);
+**	if (!str && wchar)
+**		str = ft_strnew(bytes);
 ** this checks if the string already exists, because it can be passed to this
 ** function (i.e. when it's used in conv_utf8_str), or it can be ignored (like
 ** when this function is used on its own). don't allocate space for a string
 ** that already exists.
 **
-**	if (!wc || !s)
-**		return ((!wc) ? ft_strnew(1) : 0);
+**	if (!wchar || !str)
+**		return ((!wchar) ? ft_strnew(1) : 0);
 ** check if either we have recieved an empty character, or if the alloc
 ** failed. ternary to check if we have recieved an empty character, then
 ** return an empty string with strnew, else if s alloc failed, return 0
@@ -72,95 +72,96 @@ static int	get_bytes(wchar_t wc)
 ** exists in the previous statement, so it wouldn't have alloced s if there
 ** was no character
 **
-**	*cur |= (!(cur - s) ? (0xFF << (8 - bytes)) : 0x80);
+**	*cur |= (!(cur - str) ? (0xFF << (8 - bytes)) : 0x80);
 ** This adds an empty continuation byte if the cursor is ahead of s
-** if the cursor is on s (cur - s == 0, returning false), it adds an empty
+** if the cursor is on s (cur - str == 0, returning false), it adds an empty
 ** starting utf-8 byte.
-**	*cur |= (wc & 0x3F);
+**	*cur |= (wchar & 0x3F);
 ** This adds the first six bits of the wide character into the cursor,
-**	wc = wc >> 6;
+**	wchar = wchar >> 6;
 ** and then this shifts the wide character over to the next 6.
-**	cur = (cur - s) ? (cur - 1) : 0;
-** finally, we move the cursor, or set it to 0 if it's on s (cur - s == 0,
+**	cur = (cur - str) ? (cur - 1) : 0;
+** finally, we move the cursor, or set it to 0 if it's on s (cur - str == 0,
 ** returning false).
 */
 
-char		*conv_utf8_char(wchar_t wc, char *s)
+char		*conv_utf8_char(wchar_t wchar, char *str)
 {
 	char	*cur;
 	int		bytes;
 
-	bytes = get_bytes(wc);
-	if (!s && wc)
-		s = ft_strnew(bytes);
-	if (!wc || !s)
-		return ((!wc) ? ft_strnew(1) : 0);
-	cur = s + bytes - 1;
+	bytes = get_bytes(wchar);
+	if (!str && wchar)
+		str = ft_strnew(bytes);
+	if (!wchar || !str)
+		return ((!wchar) ? ft_strnew(1) : 0);
+	cur = str + bytes - 1;
 	if (bytes > 1)
-		while (cur >= s)
+		while (cur >= str)
 		{
-			*cur |= (!(cur - s) ? (0xFF << (8 - bytes)) : 0x80);
-			*cur |= (wc & 0x3F);
-			wc = wc >> 6;
-			cur = (cur - s) ? (cur - 1) : 0;
+			*cur |= (!(cur - str) ? (0xFF << (8 - bytes)) : 0x80);
+			*cur |= (wchar & 0x3F);
+			wchar = wchar >> 6;
+			cur = (cur - str) ? (cur - 1) : 0;
 		}
 	else
-		*cur = (char)wc;
-	return (s);
+		*cur = (char)wchar;
+	return (str);
 }
 
 /*
 **	This function converts a wide character string to a utf-8 character string
 **
-**	if (!ws)
+**	if (!wstr)
 **		return (0);
 ** if no string, don't do anything
 **
-**	while (ws && *ws)
-**		totalbytes += get_bytes(*ws++);
+**	while (wstr && *wstr)
+**		totalbytes += get_bytes(*wstr++);
 ** check if the character is valid to grab bytes
 ** this is so it doesn't get bytes for a null character
-** also move ws to the end
+** also move wstr to the end
 **
-**	s += totalbytes;
+**	str += totalbytes;
 ** this starts s at the last byte, so we can move backwards. this is
 ** essentially to remove the need for a counter variable, because if I were to
 ** move forwards, we would have to count up to totalbytes. this allows me to
-** move s and ws backwards, while decreasing totalbytes to 0.
+** move str and wstr backwards, while decreasing totalbytes to 0.
 **
-**	--ws;
-** move behind the null terminator (that's what ws should be at now, thanks to
+**	--wstr;
+** move behind the null terminator (that's what wstr should be at now, thanks to
 ** the while loop earlier)
-**	bytes = get_bytes(*ws);
+**	bytes = get_bytes(*wstr);
 ** get the bytes for the current character
 **	totalbytes -= bytes;
 ** decrease totalbytes by that amount
-**	s -= bytes;
-** move s backwards by that amount, so it's lined up with the beginning of the
+**	str -= bytes;
+** move str backwards by that amount, so it's lined up with the beginning of the
 ** character it's about to copy
-**	s = conv_utf8_char(*ws, s);
+**	str = conv_utf8_char(*wstr, str);
 ** copy the character
 */
 
-char		*conv_utf8_str(wchar_t *ws, char *s)
+char		*conv_utf8_str(wchar_t *wstr)
 {
+	char	*str;
 	int		bytes;
 	int		totalbytes;
 
 	totalbytes = 0;
-	if (!ws)
+	if (!wstr)
 		return (0);
-	while (ws && *ws)
-		totalbytes += get_bytes(*ws++);
-	s = ft_strnew(totalbytes);
-	s += totalbytes;
+	while (wstr && *wstr)
+		totalbytes += get_bytes(*wstr++);
+	str = ft_strnew(totalbytes);
+	str += totalbytes;
 	while (totalbytes)
 	{
-		--ws;
-		bytes = get_bytes(*ws);
+		--wstr;
+		bytes = get_bytes(*wstr);
 		totalbytes -= bytes;
-		s -= bytes;
-		s = conv_utf8_char(*ws, s);
+		str -= bytes;
+		str = conv_utf8_char(*wstr, str);
 	}
-	return (s);
+	return (str);
 }
