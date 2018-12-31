@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/31 02:21:48 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/31 05:39:16 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ typedef struct		s_format
 */
 
 char				*flag_char(t_format *fmt, va_list valist);
+char				*flag_wchar(t_format *fmt, va_list valist);
 char				*flag_string(t_format *fmt, va_list valist);
+char				*flag_wstr(t_format *fmt, va_list valist);
 char				*flag_percent(t_format *fmt);
 char				*flag_int(t_format *fmt, va_list valist);
 char				*flag_uint(t_format *fmt, va_list valist);
