@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/31 05:56:22 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/31 05:58:30 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ long				ft_round(double roundee);
 ** Unicode
 */
 
-char				*conv_utf8_string(wchar_t *wstr);
+char				*conv_utf8_str(wchar_t *wstr);
 char				*conv_utf8_char(wchar_t wchar, char *str);
 
 /*
