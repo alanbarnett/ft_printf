@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/28 01:14:14 by abarnett         ###   ########.fr       */
+/*   Updated: 2018/12/31 02:21:51 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ static t_format		*init(void)
 ** function
 **
 ** Current copy of flags string: (UPDATE IF YOU CHANGE IT)
-** flags = "cCsS%dDiuUboOxXpf";
+** flags = "cCsS%dDiuUboOxXpfF";
 */
 
 static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 {
-	static char	*(*p[17])();
+	static char	*(*p[18])();
 
 	p[0] = flag_char;
 	p[1] = flag_char;
@@ -91,6 +91,7 @@ static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 	p[14] = flag_hex;
 	p[15] = flag_pointer;
 	p[16] = flag_float;
+	p[17] = flag_float;
 	return (p[index](fmt_struct, valist));
 }
 

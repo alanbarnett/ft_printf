@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/15 16:14:22 by alan             ###   ########.fr       */
+/*   Updated: 2018/12/31 02:21:48 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define PLUS 0x8
 # define SPACE 0x10
 
-# define CONVS "cCsS%dDiuUboOxXpf"
+# define CONVS "cCsS%dDiuUboOxXpfF"
 
 typedef struct		s_format
 {
