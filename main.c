@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2018/12/31 06:04:54 by abarnett         ###   ########.fr       */
+/*   Updated: 2019/01/02 20:30:36 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,22 @@
 #include <math.h>
 #include "libftprintf.h"
 
-int	main(void)
+void	ft_nbrcpy_p(long nb, int precision, char *str)
+{
+	if (precision > (int)ft_numlen(nb))
+	{
+		*(str + precision - 1) = '0';
+		ft_nbrcpy_p(nb, precision - 1, str);
+	}
+	else
+	{
+		if (nb >= 10)
+			ft_nbrcpy_p(nb/10, precision - 1, str);
+		*(str + precision - 1) = (nb % 10) + '0';
+	}
+}
+
+int		main(void)
 {
 	/*
 	int		i;
@@ -334,12 +349,14 @@ int	main(void)
 	printf("%e\n", 12.234);
 	*/
 
+	/*
 	// Unicode tests
 	ft_printf("%S\n", L"\u03c0test\u03c0");
 	ft_printf("%ls\n", L"\u03c0test\u03c0");
 	ft_printf("%S\n", 0);
 	ft_printf("%C\n", 0);
 	ft_printf("%lc\n", L'\U0001f47d');
+	*/
 
 	/*
 	ft_printf("%x\n", -42);
@@ -563,6 +580,30 @@ int	main(void)
 	ft_printf("%hhd\n", 128);
 	ft_printf("%ld\n", 2147483648);
 	ft_printf("%lld\n", 9223372036854775807);
+	*/
+
+	ft_printf("|%ls|\n", L"\u03c0test\u03c0");
+	ft_printf("|%.3ls|\n", L"\u03c0test\u03c0");
+	ft_printf("|%9ls|\n", L"\u03c0test\u03c0");
+	ft_printf("|%9.3ls|\n", L"\u03c0test\u03c0");
+	ft_printf("|%-9ls|\n", L"\u03c0test\u03c0");
+	ft_printf("|%-9.3ls|\n", L"\u03c0test\u03c0");
+	ft_printf("|%C|\n", L'\U0001f47d');
+	ft_printf("|%3C|\n", L'\U0001f47d');
+	ft_printf("|%-3C|\n", L'\U0001f47d');
+	ft_printf("|%9.3C|\n", L'\U0001f47d');
+	ft_printf("|%-9.3C|\n", L'\U0001f47d');
+	ft_printf("|%C|\n", L'\u03c0');
+	ft_printf("|%3C|\n", L'\u03c0');
+	ft_printf("|%-3C|\n", L'\u03c0');
+	ft_printf("|%9.3C|\n", L'\u03c0');
+	ft_printf("|%-9.3C|\n", L'\u03c0');
+	/*
+	char	*str;
+
+	str = ft_strinit(9, ' ');
+	ft_nbrcpy_p(1234, 9, str);
+	ft_printf("%s\n", str);
 	*/
 	return (0);
 }
