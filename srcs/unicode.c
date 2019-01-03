@@ -6,11 +6,21 @@
 /*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 17:52:10 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/31 05:50:57 by abarnett         ###   ########.fr       */
+/*   Updated: 2019/01/02 20:41:28 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+size_t		ft_wstrlen(const wchar_t *str)
+{
+	size_t i;
+
+	i = 0;
+	while (*str++)
+		i++;
+	return (i);
+}
 
 /*
 ** This function figures out how many bits a single wide character will need
@@ -148,9 +158,9 @@ char		*conv_utf8_str(wchar_t *wstr)
 	int		bytes;
 	int		totalbytes;
 
-	totalbytes = 0;
 	if (!wstr)
 		return (0);
+	totalbytes = 0;
 	while (wstr && *wstr)
 		totalbytes += get_bytes(*wstr++);
 	str = ft_strnew(totalbytes);
