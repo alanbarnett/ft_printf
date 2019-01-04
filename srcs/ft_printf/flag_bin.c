@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 17:27:01 by alan              #+#    #+#             */
-/*   Updated: 2018/12/14 02:27:42 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/04 01:09:50 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ static unsigned long long	get_nb(char length, va_list valist)
 }
 
 /*
-** This function adds the zeros from a format struct to a string
+** This function adds the flags from a format struct to a string
 **
 ** First it moves the string, if it's supposed to be left justified,
-** then it checks if the length of the number is greater than zero,
+** then it checks if the length of the number is greater than zero before
+** adding anything,
+** then it adds the 0b if it needs to,
 ** then it replaces spaces up to the number with zeros.
 */
 
@@ -82,7 +84,7 @@ static void					ft_unbrcpy_bin(unsigned long long nb, char *str)
 {
 	if (nb >= 2)
 		ft_unbrcpy_bin(nb / 2, str - 1);
-	*str = (nb % 2 + '0');
+	*str = ((nb % 2) + '0');
 }
 
 /*
@@ -90,7 +92,7 @@ static void					ft_unbrcpy_bin(unsigned long long nb, char *str)
 ** makes the length of the string I'll need
 **	width should be the full size of the string
 **	precision should be the size of the substring inside
-**		including zeros, and the length of the number
+**		including alternate form, zeros, and the length of the number
 **	len is the length of the number
 **	sign is not included, this function is for unsigned numbers
 */
@@ -177,6 +179,10 @@ static void					ft_unbrcpy_bin(unsigned long long nb, char *str)
 ** // Function with notes on the lines mixed in
 ** static char			*format_nb(t_format *fmt, int nb, int len)
 ** {
+**	// if the alternate form is used, and the number isn't zero,
+**	// increase the len by 2, to hold the alternate form
+**	if (fmt->flags & SHARP && nb != 0)
+**		len += 2;
 ** 	// if precision is supplied,
 ** 	// if it's less than the len,
 ** 	// 	set it to the len
@@ -230,7 +236,7 @@ static char					*format_nb(t_format *fmt, unsigned long long nb,
 }
 
 /*
-** This function creates of a string from my format struct for an integer
+** This function creates a string from my format struct for a binary number
 **
 ** If precision and the number are zero, set the length of the number to zero.
 ** len will be used to determine the sizes of width and precision in format_nb,
@@ -244,7 +250,9 @@ static char					*format_nb(t_format *fmt, unsigned long long nb,
 ** - not copied if the length is zero
 ** - copied to the right or left side, based on the MINUS flag
 **
-** Then the sign and zeros are added to the string.
+** Then the alternate form and zeros are added to the string
+**
+** Then it is made uppercase if it is a capital conversion
 */
 
 char						*flag_bin(t_format *fmt, va_list valist)
@@ -267,5 +275,7 @@ char						*flag_bin(t_format *fmt, va_list valist)
 			ft_unbrcpy_bin(nb, str + (fmt->width - 1));
 	}
 	add_flags(str, fmt, nb, len);
+	if (ft_isupper(fmt->conv))
+		ft_strupper(str);
 	return (str);
 }
