@@ -6,7 +6,7 @@
 /*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 23:12:22 by abarnett          #+#    #+#             */
-/*   Updated: 2019/01/06 00:12:44 by abarnett         ###   ########.fr       */
+/*   Updated: 2019/01/06 00:34:29 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int					ft_sprintf(char **str, const char *format, ...)
 	va_list		valist;
 	t_list		*strings;
 	size_t		total_len;
-	char		*combine;
 
 	va_start(valist, format);
 	strings = 0;
