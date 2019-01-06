@@ -6,7 +6,7 @@
 #    By: abarnett <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/25 22:40:12 by abarnett          #+#    #+#              #
-#    Updated: 2018/12/29 23:51:32 by alan             ###   ########.fr        #
+#    Updated: 2019/01/05 23:53:35 by abarnett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INCLUDE_DIR :=	./includes
 L_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./srcs/*.c))
 C_OBJS :=		$(patsubst %.c,%.o,$(wildcard ./srcs/ft_printf/*.c))
 
-CFLAGS +=		-g -Wall -Wextra -Werror -I$(INCLUDE_DIR)
+CFLAGS +=		-Wall -Wextra -Werror -I$(INCLUDE_DIR)
 LDFLAGS +=		-L./ -lftprintf
 
 .PHONY:			all clean fclean re
