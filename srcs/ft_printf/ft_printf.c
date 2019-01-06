@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2019/01/05 18:47:13 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/05 19:02:45 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 	p[15] = flag_pointer;
 	p[16] = flag_float;
 	p[17] = flag_float;
-	p[18] = flag_scienfitic;
+	p[18] = flag_scientific;
 	p[19] = flag_scientific;
 	return (p[index](fmt_struct, valist));
 }
