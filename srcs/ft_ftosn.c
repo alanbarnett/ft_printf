@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 04:19:45 by rreedy            #+#    #+#             */
-/*   Updated: 2019/01/05 18:46:09 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/05 19:00:00 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static t_fp		get_parts(double nb, int *exponent, int precision)
 		}
 		len = ft_numlen((long)nb);
 	}
-	f.integer = ft_round(nb) / ft_pow(10, precision);
-	f.fraction = ft_round(nb) - (f.integer * (long)ft_pow(10, precision));
+	f.integral = ft_round(nb) / ft_pow(10, precision);
+	f.fraction = ft_round(nb) - (f.integral * (long)ft_pow(10, precision));
 	if (nb)
 		*exponent += precision;
 	return (f);
@@ -74,7 +74,7 @@ static char		*make_string(t_fp f, int sign, int exponent, int precision)
 	cur = str;
 	if (sign)
 		*cur++ = '-';
-	*cur++ = f.integer + '0';
+	*cur++ = f.integral + '0';
 	if (precision)
 	{
 		*cur++ = '.';
@@ -92,7 +92,7 @@ static char		*make_string(t_fp f, int sign, int exponent, int precision)
 	return (str);
 }
 
-char			*ft_ftosn(double n, int precision)
+char			*ft_ftosn(double nb, int precision)
 {
 	t_double	doub;
 	t_fp		f;
@@ -100,7 +100,7 @@ char			*ft_ftosn(double n, int precision)
 	int			exp;
 	long		mantissa;
 
-	doub.d = n;
+	doub.d = nb;
 	sign = (doub.l >> 63) & 1;
 	exp = ((doub.l >> 52) & 0x7ff);
 	mantissa = (doub.l & 0x000fffffffffffff);
@@ -112,6 +112,6 @@ char			*ft_ftosn(double n, int precision)
 			return (ft_strdup((sign) ? "-inf" : "inf"));
 	}
 	exp = 0;
-	f = get_parts(ft_absd(n), &exp, precision);
+	f = get_parts((nb < 0 ? (nb * -1) : nb), &exp, precision);
 	return (make_string(f, sign, exp, precision));
 }
