@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2019/01/05 18:49:32 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/05 19:01:54 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char				*flag_oct(t_format *fmt, va_list valist);
 char				*flag_hex(t_format *fmt, va_list valist);
 char				*flag_pointer(t_format *fmt, va_list valist);
 char				*flag_float(t_format *fmt, va_list valist);
+char				*flag_scientific(t_format *fmt, va_list valist);
 
 /*
 ** parse functions
