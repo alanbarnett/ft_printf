@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 04:19:45 by rreedy            #+#    #+#             */
-/*   Updated: 2019/01/05 19:00:00 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/05 19:11:42 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static char		*make_string(t_fp f, int sign, int exponent, int precision)
 	char	*str;
 	char	*cur;
 
-	str = ft_strinit('0', sign + 3 + ((precision) ? precision + 1 : 0) +
-		((ft_numlen(exponent) < 2) ? 2 : ft_numlen(exponent)));
+	str = ft_strinit(sign + 3 + ((precision) ? precision + 1 : 0) +
+		((ft_numlen(exponent) < 2) ? 2 : ft_numlen(exponent)), '0');
 	cur = str;
 	if (sign)
 		*cur++ = '-';
