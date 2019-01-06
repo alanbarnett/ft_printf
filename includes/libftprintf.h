@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2019/01/05 19:01:54 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/06 00:12:41 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,25 @@ char				*flag_scientific(t_format *fmt, va_list valist);
 ** parse functions
 */
 
-void				print_params(t_format fmt_struct);
 int					get_conversion(const char **format, t_format *fmt_struct);
 void				get_length(const char **format, t_format *fmt_struct);
 void				get_width_precis(const char **format, t_format *fmt_struct);
 void				get_flags(const char **format, t_format *fmt_struct);
 
 /*
+** make list functions
+*/
+
+size_t				make_list(t_list **list, const char *format,
+							va_list valist);
+char				*combine_list(t_list *list, int size_of_list);
+
+/*
 ** printf functions
 */
 
 int					ft_printf(const char *format, ...);
+int					ft_printfd(int fd, const char *format, ...);
+int					ft_sprintf(char **str, const char *format, ...);
 
 #endif
