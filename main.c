@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2019/01/05 18:50:28 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/05 19:04:16 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -373,10 +373,8 @@ int		main(void)
 	ft_printf("|%-4f|\n", 12.345000000);
 	*/
 
-	/*
 	// Scientific notation tests
-	printf("%e\n", 12.234);
-	*/
+	ft_printf("%e\n", 12.234);
 
 	/*
 	// Unicode tests
