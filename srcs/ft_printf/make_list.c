@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2019/01/05 23:40:44 by abarnett         ###   ########.fr       */
+/*   Updated: 2019/01/06 00:36:55 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,7 @@
 **	colors, fd, etc..
 */
 
-/*
-static t_format		*init(void)
-{
-	t_format	*fmt;
-
-	fmt = (t_format *)ft_memalloc(sizeof(t_format));
-	fmt->flags = 0;
-	fmt->width = 0;
-	fmt->precision = -1;
-	fmt->length = 0;
-	fmt->conv = 0;
-	return (fmt);
-}
-*/
-static void			init(t_format *fmt)
+static void		init(t_format *fmt)
 {
 	fmt->flags = 0;
 	fmt->width = 0;
@@ -80,7 +66,7 @@ static void			init(t_format *fmt)
 ** flags = "cCsS%dDiuUboOxXpfFeE";
 */
 
-static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
+static char		*dispatch(int index, t_format *fmt_struct, va_list valist)
 {
 	static char	*(*p[20])();
 
@@ -116,30 +102,7 @@ static char			*dispatch(int index, t_format *fmt_struct, va_list valist)
 **	I've already calculated it now
 */
 
-/*
-static char			*parse(const char **format, va_list valist, size_t *len)
-{
-	t_format	*fmt_struct;
-	char		*ret;
-	int			index;
-
-	fmt_struct = init();
-	ret = 0;
-	get_flags(format, fmt_struct);
-	get_width_precis(format, fmt_struct);
-	get_length(format, fmt_struct);
-	index = get_conversion(format, fmt_struct);
-	if (index != -1)
-	{
-		ret = dispatch(index, fmt_struct, valist);
-		if (ret)
-			*len = (size_t)fmt_struct->width;
-	}
-	free(fmt_struct);
-	return (ret);
-}
-*/
-static char			*parse(const char **format, va_list valist, size_t *len)
+static char		*parse(const char **format, va_list valist, size_t *len)
 {
 	t_format	fmt_struct;
 	char		*ret;
