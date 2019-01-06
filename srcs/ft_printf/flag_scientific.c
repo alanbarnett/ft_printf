@@ -6,7 +6,7 @@
 /*   By: alan <alanbarnett328@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 18:47:36 by alan              #+#    #+#             */
-/*   Updated: 2019/01/05 18:53:36 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/05 19:05:06 by alan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char			*flag_scientific(t_format *fmt, va_list valist)
 	nb = get_nb(fmt->length, valist);
 	if (fmt->precision == -1)
 		fmt->precision = 6;
-	str = ft_ftoa(nb, fmt->precision);
+	str = ft_ftosn(nb, fmt->precision);
 	len = ft_strlen(str);
 	if (fmt->width > len)
 		str = addspaces(&str, fmt->width - len, fmt->flags & MINUS);
