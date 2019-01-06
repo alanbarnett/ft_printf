@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2019/01/05 19:12:28 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/06 00:16:24 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,9 @@
 #include <stdarg.h>
 #include <math.h>
 #include "libftprintf.h"
-
-void	ft_nbrcpy_p(long nb, int precision, char *str)
-{
-	if (precision > (int)ft_numlen(nb))
-	{
-		*(str + precision - 1) = '0';
-		ft_nbrcpy_p(nb, precision - 1, str);
-	}
-	else
-	{
-		if (nb >= 10)
-			ft_nbrcpy_p(nb/10, precision - 1, str);
-		*(str + precision - 1) = (nb % 10) + '0';
-	}
-}
+#include <string.h>
+#include <stdint.h>
+#include <time.h>
 
 int		main(void)
 {
@@ -373,9 +361,39 @@ int		main(void)
 	ft_printf("|%-4f|\n", 12.345000000);
 	*/
 
+	/*
+	// speedtest
+	clock_t time;
+	time = clock();
+	int i = 2147483647;
+	long l = 2147483647;
+	long long ll = 9223372036854775807;
+	char c = 0;
+	intmax_t im = 9223372036854775807;
+	while ((double)time/CLOCKS_PER_SEC < 15)
+	{
+		time = clock();
+		ft_printf("\n");
+		ft_printf("%%\n");
+		ft_printf("%d\n", 42);
+		ft_printf("%d%d\n", 42, 41);
+		ft_printf("%d%d%d\n", 42, 43, 44);
+		ft_printf("%ld\n", l);
+		ft_printf("%lld\n", ll);
+		ft_printf("%x %X %p %20.15d\n", 505, 505, &ll, 54321);
+		ft_printf("%-10d % d %+d %010d %hhd\n", 3, 3, 3, 1, c);
+		ft_printf("%jd %zd %u %o %#08x\n", im, (size_t)i, i, 40, 42);
+		ft_printf("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
+		ft_printf("%s%s%s\n", "test", "test", "test");
+		ft_printf("%C\n", 15000);
+	}
+	*/
+
+	/*
 	// Scientific notation tests
 	ft_printf("%e\n", 12.234);
 	ft_printf("%.2e\n", 42.42);
+	*/
 
 	/*
 	// Unicode tests
@@ -384,6 +402,9 @@ int		main(void)
 	ft_printf("%S\n", 0);
 	ft_printf("%C\n", 0);
 	ft_printf("%lc\n", L'\U0001f47d');
+	ft_printf("|%.4S|\n", L"我是一只猫。");
+	ft_printf("|%15.4S|\n", L"我是一只猫。");
+	ft_printf("|%4.15S|\n", L"我是一只猫。");
 	*/
 
 	/*
@@ -429,6 +450,21 @@ int		main(void)
 	printf("%p\n", str);
 	str = ft_strdup("Coucou les haricots !");
 	printf("%p\n", str);
+	*/
+	/*
+	// More pointer tests
+	ft_printf("%.0p, %.p\n", 0, 0);
+	ft_printf("%.5p\n", 0);
+	ft_printf("%9.2p\n", 1234);
+	ft_printf("%9.2p\n", 1234567);
+	ft_printf("%2.9p\n", 1234);
+	ft_printf("%2.9p\n", 1234567);
+	printf("%.0p, %.p\n", 0, 0);
+	printf("%.5p\n", 0);
+	printf("%9.2p\n", 1234);
+	printf("%9.2p\n", 1234567);
+	printf("%2.9p\n", 1234);
+	printf("%2.9p\n", 1234567);
 	*/
 	/*
 	// Pointer flag tests
@@ -616,16 +652,6 @@ int		main(void)
 	ft_printf("%hhd\n", 128);
 	ft_printf("%ld\n", 2147483648);
 	ft_printf("%lld\n", 9223372036854775807);
-	*/
-
-
-	/*
-	// New nbrcpy tests
-	char	*str;
-
-	str = ft_strinit(9, ' ');
-	ft_nbrcpy_p(1234, 9, str);
-	ft_printf("%s\n", str);
 	*/
 	return (0);
 }
