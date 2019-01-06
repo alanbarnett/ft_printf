@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2019/01/05 19:06:24 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/05 21:49:34 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ typedef union		u_double
 	long			l;
 }					t_double;
 
-typedef	struct	s_fp
+typedef	struct		s_fp
 {
-	long		integral;
-	long		fraction;
-	int			len_i;
-	int			trail_zeros;
-	int			lead_zeros;
-	int			len_f;
-}				t_fp;
+	long			integral;
+	long			fraction;
+	int				len_i;
+	int				trail_zeros;
+	int				lead_zeros;
+	int				len_f;
+}					t_fp;
 
-#define SIG_F (f.lead_zeros + f.len_f)
-#define SIG_I (f.len_i + f.trail_zeros)
+# define SIG_F (f.lead_zeros + f.len_f)
+# define SIG_I (f.len_i + f.trail_zeros)
 
 /*
 ** Section One
