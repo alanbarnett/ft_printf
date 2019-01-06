@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:56:25 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/31 05:58:30 by abarnett         ###   ########.fr       */
+/*   Updated: 2019/01/02 21:31:15 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ typedef union		u_double
 	long			l;
 }					t_double;
 
+typedef	struct	s_fp
+{
+	long		integral;
+	long		fraction;
+	int			len_i;
+	int			trail_zeros;
+	int			lead_zeros;
+	int			len_f;
+}				t_fp;
+
+#define SIG_F (f.lead_zeros + f.len_f)
+#define SIG_I (f.len_i + f.trail_zeros)
+
 /*
 ** Section One
 */
@@ -45,6 +58,7 @@ void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t				ft_strlen(const char *str);
+size_t				ft_wstrlen(const wchar_t *str);
 char				*ft_strdup(const char *s1);
 char				*ft_strndup(const char *s1, size_t len);
 char				*ft_strcpy(char *dst, const char *src);

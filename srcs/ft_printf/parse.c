@@ -6,64 +6,60 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 21:38:40 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/14 22:49:47 by abarnett         ###   ########.fr       */
+/*   Updated: 2019/01/02 21:41:17 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void				print_params(t_format fmt_struct)
-{
-	char	*convs;
-	char	*flags;
-	int		i;
-
-	convs = CONVS;
-	flags = "#0-+ ";
-	i = 0;
-	ft_putchar('%');
-	if (fmt_struct.flags)
-	{
-		while (i < 5)
-		{
-			if ((1 << i) & fmt_struct.flags)
-				ft_putchar(flags[i]);
-			++i;
-		}
-	}
-	if (fmt_struct.width)
-		ft_putnbr(fmt_struct.width);
-	if (fmt_struct.precision != -1)
-	{
-		ft_putchar('.');
-		ft_putnbr(fmt_struct.precision);
-	}
-	if (fmt_struct.length)
-		ft_putchar(fmt_struct.length);
-	ft_putchar(*(convs + fmt_struct.conv));
-	ft_putstr(":	");
-}
-
 /*
-**		di				ouUxX					c		s			p
+** This function (commented out) will print the parameters that were used to
+** call ft_printf. It should be used any time after the format struct is filled
+** (i.e. in a specific flag module, or in dispatch). I'm commenting it out
+** because 1) it isn't needed in the final version and 2) it's 28 lines and
+** doesn't pass norm.
 **
-**		int				unsigned int			int		char*		void*
-**	hh	char			unsigned char
-**	h	short int		unsigned short int
-**	l	long int		unsigned long int		wint_t	wint_t*
-**	ll	long long int	unsigned long long int
-**	j	intmax_t		uintmax_t
-**	z	size_t			size_t
+** void				print_params(t_format fmt_struct)
+** {
+** 	char	*convs;
+** 	char	*flags;
+** 	int		i;
+**
+** 	convs = CONVS;
+** 	flags = "#0-+ ";
+** 	i = 0;
+** 	ft_putchar('%');
+** 	if (fmt_struct.flags)
+** 	{
+** 		while (i < 5)
+** 		{
+** 			if ((1 << i) & fmt_struct.flags)
+** 				ft_putchar(flags[i]);
+** 			++i;
+** 		}
+** 	}
+** 	if (fmt_struct.width)
+** 		ft_putnbr(fmt_struct.width);
+** 	if (fmt_struct.precision != -1)
+** 	{
+** 		ft_putchar('.');
+** 		ft_putnbr(fmt_struct.precision);
+** 	}
+** 	if (fmt_struct.length)
+** 		ft_putchar(fmt_struct.length);
+** 	ft_putchar(*(convs + fmt_struct.conv));
+** 	ft_putstr(":	");
+** }
 */
 
 /*
 **	The position of the characters in the flags string represent
 **	the index of their function in the function pointer array.
 **	If you would like to add a new function with a new character,
-**		add your function to the srcs/ directory,
-**			add a prototype to the header file too,
+**		add your function to the srcs/ft_printf/ directory,
+**			add a prototype to the libftprintf header file too,
 **		add the character to the end of the list (found in the header file),
-**		increase the jump table index count (found in printf.c/dispatch),
+**		increase the jump table index count (found in printf.c:dispatch),
 **		add your function name to the jump table.
 */
 
