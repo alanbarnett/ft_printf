@@ -6,7 +6,7 @@
 /*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 21:30:54 by abarnett          #+#    #+#             */
-/*   Updated: 2018/12/25 03:44:46 by alan             ###   ########.fr       */
+/*   Updated: 2019/01/05 22:13:49 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,14 @@ char						*flag_pointer(t_format *fmt, va_list valist)
 	int					len;
 
 	nb = va_arg(valist, unsigned long long);
-	len = ft_unumlen_base(nb, 16);
-	fmt->precision = len + 2;
+	if (nb == 0 && fmt->precision == 0)
+		len = 0;
+	else
+		len = ft_unumlen_base(nb, 16);
+	if (fmt->precision == -1 || fmt->precision < len)
+		fmt->precision = len + 2;
+	else
+		fmt->precision += 2;
 	fmt->width = ft_max(fmt->width, fmt->precision);
 	str = ft_strinit(fmt->width, ' ');
 	if (fmt->flags & MINUS)
