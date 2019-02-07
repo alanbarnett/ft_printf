@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:26:02 by abarnett          #+#    #+#             */
-/*   Updated: 2019/01/06 00:36:55 by abarnett         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:03:07 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,29 @@ static void		init(t_format *fmt)
 
 static char		*dispatch(int index, t_format *fmt_struct, va_list valist)
 {
-	static char	*(*p[20])();
+	static char	*(*p[])() = {
+		[0] = flag_char,
+		[1] = flag_char,
+		[2] = flag_string,
+		[3] = flag_wstr,
+		[4] = flag_percent,
+		[5] = flag_int,
+		[6] = flag_int,
+		[7] = flag_int,
+		[8] = flag_uint,
+		[9] = flag_uint,
+		[10] = flag_bin,
+		[11] = flag_oct,
+		[12] = flag_oct,
+		[13] = flag_hex,
+		[14] = flag_hex,
+		[15] = flag_pointer,
+		[16] = flag_float,
+		[17] = flag_float,
+		[18] = flag_scientific,
+		[19] = flag_scientific,
+	};
 
-	p[0] = flag_char;
-	p[1] = flag_char;
-	p[2] = flag_string;
-	p[3] = flag_wstr;
-	p[4] = flag_percent;
-	p[5] = flag_int;
-	p[6] = flag_int;
-	p[7] = flag_int;
-	p[8] = flag_uint;
-	p[9] = flag_uint;
-	p[10] = flag_bin;
-	p[11] = flag_oct;
-	p[12] = flag_oct;
-	p[13] = flag_hex;
-	p[14] = flag_hex;
-	p[15] = flag_pointer;
-	p[16] = flag_float;
-	p[17] = flag_float;
-	p[18] = flag_scientific;
-	p[19] = flag_scientific;
 	return (p[index](fmt_struct, valist));
 }
 
@@ -111,7 +112,7 @@ static char		*parse(const char **format, va_list valist, size_t *len)
 	init(&fmt_struct);
 	ret = 0;
 	get_flags(format, &fmt_struct);
-	get_width_precis(format, &fmt_struct);
+	get_width_precis(format, &fmt_struct, valist);
 	get_length(format, &fmt_struct);
 	index = get_conversion(format, &fmt_struct);
 	if (index != -1)
