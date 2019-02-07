@@ -6,7 +6,7 @@
 /*   By: alan </var/spool/mail/alan>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 20:15:25 by alan              #+#    #+#             */
-/*   Updated: 2019/01/06 00:16:24 by abarnett         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:16:45 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 #include <stdarg.h>
 #include <math.h>
 #include "libftprintf.h"
-#include <string.h>
-#include <stdint.h>
-#include <time.h>
 
-int		main(void)
+int		main(int argc, char **argv)
 {
 	/*
 	int		i;
@@ -361,18 +358,17 @@ int		main(void)
 	ft_printf("|%-4f|\n", 12.345000000);
 	*/
 
+	if (argc == 3)
+		ft_printf("%*.*d", ft_atoi(argv[1]), ft_atoi(argv[2]), 10);
 	/*
 	// speedtest
-	clock_t time;
-	time = clock();
 	int i = 2147483647;
 	long l = 2147483647;
 	long long ll = 9223372036854775807;
 	char c = 0;
 	intmax_t im = 9223372036854775807;
-	while ((double)time/CLOCKS_PER_SEC < 15)
+	while (42)
 	{
-		time = clock();
 		ft_printf("\n");
 		ft_printf("%%\n");
 		ft_printf("%d\n", 42);
