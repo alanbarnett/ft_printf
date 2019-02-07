@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 21:38:40 by abarnett          #+#    #+#             */
-/*   Updated: 2019/01/02 21:41:17 by abarnett         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:28:47 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,31 +111,44 @@ void				get_length(const char **format, t_format *fmt_struct)
 
 /*
 **	This function uses atoi to grab the number for width and precision.
-**	it is important that we don't move by the length of the number for
-**	precision, because a '.' that isn't followed by a number has a precision
-**	of 0, and the numlen of 0 is 1, so it would move it unnecessarily.
+**	It checks if there is a star for both, and gets the number from the valist
+**	if there is a star in either place.
+**	it is important that we don't move the format string by the length of the
+**	number for precision, because a '.' that isn't followed by a number has a
+**	precision of 0, and the numlen of 0 is 1, so it would move it unnecessarily.
 **	instead we increase it while the character is a digit. this also prevents
 **	negative numbers from getting through (by not moving past the minus sign,
 **	even though atoi will do that anyway) in addition to the if statement below
 **	that checks if atoi was able to pull one.
 */
 
-void				get_width_precis(const char **format, t_format *fmt_struct)
+void				get_width_precis(const char **format, t_format *fmt_struct,
+						va_list valist)
 {
-	if (**format && ft_isdigit(**format))
+	if (**format)
 	{
-		fmt_struct->width = ft_atoi(*(char **)format);
-		while (*format && ft_isdigit(**format))
-			++(*format);
+		if (**format == '*' && ++(*format))
+			fmt_struct->width = va_arg(valist, int);
+		else if (ft_isdigit(**format))
+		{
+			fmt_struct->width = ft_atoi(*(char **)format);
+			while (*format && ft_isdigit(**format))
+				++(*format);
+		}
 	}
 	if (**format && **format == '.')
 	{
 		++(*format);
-		fmt_struct->precision = ft_atoi(*(char **)format);
-		while (*format && ft_isdigit(**format))
-			++(*format);
-		if (fmt_struct->precision < 0)
-			fmt_struct->precision = 0;
+		if (**format == '*' && ++(*format))
+			fmt_struct->precision = va_arg(valist, int);
+		else if (ft_isdigit(**format))
+		{
+			fmt_struct->precision = ft_atoi(*(char **)format);
+			while (*format && ft_isdigit(**format))
+				++(*format);
+			if (fmt_struct->precision < 0)
+				fmt_struct->precision = 0;
+		}
 	}
 }
 

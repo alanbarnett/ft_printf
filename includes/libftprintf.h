@@ -6,7 +6,7 @@
 /*   By: abarnett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:47:21 by abarnett          #+#    #+#             */
-/*   Updated: 2019/01/06 00:12:41 by abarnett         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:12:57 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ char				*flag_scientific(t_format *fmt, va_list valist);
 
 int					get_conversion(const char **format, t_format *fmt_struct);
 void				get_length(const char **format, t_format *fmt_struct);
-void				get_width_precis(const char **format, t_format *fmt_struct);
+void				get_width_precis(const char **format, t_format *fmt_struct,
+						va_list valist);
 void				get_flags(const char **format, t_format *fmt_struct);
 
 /*
